@@ -14,6 +14,7 @@ import { TodoListComponent } from './pages/todo-list/todo-list.component';
 import { GithubComponent } from './pages/github/github.component';
 import { GmailComponent } from './pages/gmail/gmail.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule, MatTable } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     MatToolbarModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
