@@ -15,6 +15,12 @@ import { GithubComponent } from './pages/github/github.component';
 import { GmailComponent } from './pages/gmail/gmail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTableModule, MatTable } from '@angular/material/table';
+import {MatSelectModule, MatSelect} from '@angular/material/select';
+import { TodoEditComponent } from './components/TodoList/todo-edit/todo-edit.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,8 @@ import { MatTableModule, MatTable } from '@angular/material/table';
     HomePageComponent,
     TodoListComponent,
     GithubComponent,
-    GmailComponent
+    GmailComponent,
+    TodoEditComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,11 @@ import { MatTableModule, MatTable } from '@angular/material/table';
     MatToolbarModule,
     MatIconModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule,
+    MatButtonModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
