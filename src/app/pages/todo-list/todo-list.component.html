@@ -1,1 +1,28 @@
-<p>todo-list works!</p>
+
+<ng-container *ngIf='todos.length !== 0'>
+  <table mat-table [dataSource]="todos" class="mat-elevation-z6" [style]="{'width': '95%'}">
+    <ng-container matColumnDef="theme" class='col-theme'>
+      <th mat-header-cell *matHeaderCellDef>Thème</th>
+      <td mat-cell *matCellDef="let todo" class='col-theme'>{{todo.theme}}</td>
+    </ng-container>
+    <ng-container matColumnDef="content" >
+      <th mat-header-cell *matHeaderCellDef class='col-content'>Todo</th>
+      <td mat-cell *matCellDef="let todo" class='col-content'>{{todo.content}}</td>
+    </ng-container>
+    <ng-container matColumnDef="controls">
+      <th mat-header-cell *matHeaderCellDef>Contrôles</th>
+      <td mat-cell *matCellDef="let todo"></td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+</ng-container>
+
+<ng-container *ngIf="todos.length === 0">
+  <p>Aucun todo dans la liste. Cliquez ici pour en ajouter un.</p>
+
+</ng-container>
