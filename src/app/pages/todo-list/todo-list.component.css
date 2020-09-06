@@ -1,7 +1,11 @@
 .col-theme {
-  width:10%;
+  width:15%;
 }
 
 .col-content {
-  width: 75%;
+  width: 60%;
+}
+
+.col-title {
+  width: 15%;
 }
