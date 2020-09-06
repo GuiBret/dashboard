@@ -1,0 +1,25 @@
+.example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .clickable {
+      cursor: pointer;
+  }
+
+  .sidenav {
+      
+      z-index: 10;
+  }
+
+  .toolbar {
+      min-height:5vh;
+      max-height:5vh;
+  }
+
+  .sidenav {
+      height:95vh;
+  }
