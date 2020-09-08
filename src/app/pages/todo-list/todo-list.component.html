@@ -1,4 +1,6 @@
 <h1 class="mat-h1">Todo List</h1>
+<button mat-button class="mat-raised-button" color="primary" (click)="saveTodoList()">Save todos</button>
+<hr>
 <ng-container *ngIf='todos.length !== 0'>
   <table mat-table [dataSource]="todos" class="mat-elevation-z6" [style]="{'width': '95%'}">
     <ng-container matColumnDef="theme" class='col-theme'>

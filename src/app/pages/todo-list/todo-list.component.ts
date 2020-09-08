@@ -4,6 +4,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { Subscription } from 'rxjs';
 import { TodoListService } from 'src/app/services/todo-list.service';
 import { Todo } from 'src/app/models/todo';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-todo-list',
@@ -19,7 +20,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
   displayedColumns = ['theme', 'title', 'content', 'controls'];
 
 
-  constructor(private titleService: Title, private todoSvc: TodoListService) { }
+  constructor(private titleService: Title,
+              private todoSvc: TodoListService,
+              private _snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -40,6 +43,18 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.todoListChanged$.unsubscribe();
+  }
+
+  saveTodoList() {
+    this.todoSvc.saveTodoList().subscribe((response: any) => {
+      if(response.status === 'OK') {
+        this._snackbar.open('Todo List saved succesfully.', '', {
+          duration: 2000
+        });
+      } else {
+
+      }
+    });
   }
 
 }

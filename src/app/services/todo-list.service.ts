@@ -29,7 +29,7 @@ export class TodoListService {
 
   fetchTodosAndThemes(): Observable<{todos: Array<Todo>, themes: Array<string>}> {
     return new Observable((observer) => {
-      console.log(this.todos);
+
       const dummyData = {
         todos: [...this.todos],
         themes: [...this.themes]
@@ -62,8 +62,17 @@ export class TodoListService {
       return currTodo;
     });
 
-    console.log('Meuh');
+
     this.todoListChanged.next([...this.todos]);
 
+  }
+
+  /**
+   * Dummy save for now
+   */
+  saveTodoList() {
+    return new Observable((observer) => {
+      observer.next({status: 'OK'});
+    })
   }
 }
