@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ɵConsole } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { HttpService } from 'src/app/services/http.service';
 import { Subscription } from 'rxjs';
@@ -17,17 +17,25 @@ export class TodoListComponent implements OnInit, OnDestroy {
   todos: Array<Todo> = [];
   themes: Array<string> = [];
   displayedColumns = ['theme', 'title', 'content', 'controls'];
+
+
   constructor(private titleService: Title, private todoSvc: TodoListService) { }
 
   ngOnInit(): void {
 
     this.titleService.setTitle('TodoList - List');
 
-    this.todoListChanged$ = this.todoSvc.fetchTodosAndThemes().subscribe((response: {todos: Array<Todo>, themes: Array<string> }) => {
+    // TODO : à enlever
+    this.todoSvc.fetchTodosAndThemes().subscribe((response: {todos: Array<Todo>, themes: Array<string> }) => {
 
       this.todos = response.todos;
       this.themes = response.themes;
     });
+
+    this.todoListChanged$ = this.todoSvc.todoListChanged.subscribe((newTodoList: Array<Todo>) => {
+
+      this.todos = newTodoList;
+    })
   }
 
   ngOnDestroy() {

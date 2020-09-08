@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Todo } from '../models/todo';
 
 @Injectable({
@@ -23,10 +23,13 @@ export class TodoListService {
 
   ];
   themes: Array<string> = ['Dummy 1', 'Dummy 2'];
+
+  todoListChanged = new Subject<Array<Todo>>();
   constructor(private http: HttpService) { }
 
   fetchTodosAndThemes(): Observable<{todos: Array<Todo>, themes: Array<string>}> {
     return new Observable((observer) => {
+      console.log(this.todos);
       const dummyData = {
         todos: [...this.todos],
         themes: [...this.themes]
@@ -45,6 +48,22 @@ export class TodoListService {
 
     });
 
+
+  }
+
+  editTodo(newTodo: Todo) {
+    const _id = newTodo._id;
+    this.todos = this.todos.map((currTodo: Todo) => {
+      if(currTodo._id === _id) {
+        console.log('Modif nv todo')
+        return newTodo;
+      }
+
+      return currTodo;
+    });
+
+    console.log('Meuh');
+    this.todoListChanged.next([...this.todos]);
 
   }
 }
