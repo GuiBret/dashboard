@@ -20,7 +20,8 @@ import { TodoEditComponent } from './components/TodoList/todo-edit/todo-edit.com
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { FormsModule } from '@angular/forms';
     MatSelectModule,
     MatButtonModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
