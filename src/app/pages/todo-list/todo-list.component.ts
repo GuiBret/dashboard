@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ɵConsole } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { HttpService } from 'src/app/services/http.service';
+
 import { Subscription } from 'rxjs';
 import { TodoListService } from 'src/app/services/todo-list.service';
 import { Todo } from 'src/app/models/todo';
@@ -17,7 +17,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   todoListChanged$: Subscription;
   todos: Array<Todo> = [];
   themes: Array<string> = [];
-  displayedColumns = ['theme', 'title', 'content', 'controls'];
+  displayedColumns = ['theme', 'title', 'content', 'status', 'controls'];
 
 
   constructor(private titleService: Title,
@@ -29,11 +29,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.titleService.setTitle('TodoList - List');
 
     // TODO : à enlever
-    this.todoSvc.fetchTodosAndThemes().subscribe((response: {todos: Array<Todo>, themes: Array<string> }) => {
-
-      this.todos = response.todos;
-      this.themes = response.themes;
-    });
+    this.todoSvc.fetchTodosAndThemes();
 
     this.todoListChanged$ = this.todoSvc.todoListChanged.subscribe((newTodoList: Array<Todo>) => {
 
