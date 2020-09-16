@@ -3,7 +3,11 @@
 }
 
 .col-content {
-  width: 60%;
+  width: 50%;
+}
+
+.col-status {
+  width: 10%;
 }
 
 .col-title {
