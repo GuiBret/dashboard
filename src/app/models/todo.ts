@@ -3,4 +3,5 @@ export interface Todo {
   theme: string;
   title: string;
   content: string;
+  status: boolean;
 }
