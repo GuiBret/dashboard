@@ -64,20 +64,7 @@ export class TodoListService {
   editTodo(newTodo: Todo) {
     const _id = newTodo._id;
 
-    this.http.editTodo(_id, newTodo).subscribe((response) => {
-      console.log(response);
-    });
-    // this.todos = this.todos.map((currTodo: Todo) => {
-    //   if(currTodo._id === _id) {
-
-    //     return newTodo;
-    //   }
-
-    //   return currTodo;
-    // });
-
-
-    // this.todoListChanged.next([...this.todos]);
+    return this.http.editTodo(_id, newTodo);
 
   }
 

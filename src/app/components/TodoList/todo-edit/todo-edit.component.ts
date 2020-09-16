@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoListService } from 'src/app/services/todo-list.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Todo } from 'src/app/models/todo';
 
 import { Title } from '@angular/platform-browser';
@@ -23,7 +23,7 @@ export class TodoEditComponent implements OnInit {
     __v: new FormControl('')
   })
 
-  constructor(private todoSvc: TodoListService, private route: ActivatedRoute, private titleSvc: Title) {
+  constructor(private todoSvc: TodoListService, private route: ActivatedRoute, private titleSvc: Title, private router: Router) {
     this.titleSvc.setTitle('Todo List - Edit a todo');
    }
 
@@ -38,8 +38,14 @@ export class TodoEditComponent implements OnInit {
   }
 
   onSubmitForm() {
-    console.log("Submitted")
-    this.todoSvc.editTodo(this.form.value);
+
+    this.todoSvc.editTodo(this.form.value).subscribe((response: any) => {
+      if(response.status === 'OK') {
+        this.todoSvc.displaySnackbar('Todo succesfully edited.');
+
+        this.router.navigate(['/todolist']);
+      }
+    });
   }
 
 }
