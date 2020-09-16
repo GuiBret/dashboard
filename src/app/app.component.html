@@ -11,13 +11,7 @@
   </mat-toolbar>
 
 <mat-sidenav-container class="sidenav" >
-  <!-- <mat-nav-list>
-    <a href="/">A</a>
-    <a href="/">B</a>
-    <a href="/">C</a>
-    <a href="/">D</a>
-    <a href="/">E</a>
-  </mat-nav-list> -->
+
     <mat-sidenav #sidenav color="primary" mode="side" [style]="{'width': '12vw'}" [opened]="opened">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -25,8 +19,8 @@
 
         </mat-expansion-panel-header>
 
-        <mat-action-row class='clickable'><span routerLink='/todolist'>Check the todo list</span></mat-action-row>
-        <mat-action-row class='clickable'>Add an element</mat-action-row>
+        <mat-action-row class='clickable'><span routerLink='/todolist'>List</span></mat-action-row>
+        <mat-action-row class='clickable' routerLink="/todolist/add">Add</mat-action-row>
 
 
       </mat-expansion-panel>

@@ -14,7 +14,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class TodoEditComponent implements OnInit {
   componentTitle: string = "Edit an element";
   currId: string = '';
+  editMode = false;
   currTodo: Todo;
+
+
   form = new FormGroup({
     title: new FormControl('', [Validators.required]),
     content: new FormControl('', [Validators.required]),
@@ -29,9 +32,14 @@ export class TodoEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.currId = params.id;
-      this.currTodo = this.todoSvc.getTodo(this.currId);
-      this.form.setValue(this.currTodo);
+
+      if(params.id) {
+        this.editMode = true;
+        this.currId = params.id;
+        this.currTodo = this.todoSvc.getTodo(this.currId);
+        this.form.setValue(this.currTodo);
+      }
+
       // this.
     });
 

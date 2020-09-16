@@ -14,6 +14,9 @@ const routes: Routes = [
   },
   {
     path: 'todolist/:id/edit', component:TodoEditComponent
+  },
+  {
+    path: 'todolist/add', component:TodoEditComponent
   }
 
 ];
