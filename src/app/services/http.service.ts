@@ -42,12 +42,12 @@ export class HttpService {
     const reqOpts = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods': 'GET, POST'
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
       })
     };
 
 
-    return this.http.post('http://localhost:3000/todos/' + idTodo + '/edit', {todo: todoData}, reqOpts);
+    return this.http.put('http://localhost:3000/todos/' + idTodo + '/edit', {todo: todoData}, reqOpts);
   }
 
   deleteTodoElement(idTodo: string) {
