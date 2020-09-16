@@ -19,7 +19,8 @@ export class TodoEditComponent implements OnInit {
     title: new FormControl('', [Validators.required]),
     content: new FormControl('', [Validators.required]),
     _id: new FormControl(''),
-    theme: new FormControl('')
+    status: new FormControl(false),
+    __v: new FormControl('')
   })
 
   constructor(private todoSvc: TodoListService, private route: ActivatedRoute, private titleSvc: Title) {
