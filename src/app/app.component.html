@@ -1,10 +1,16 @@
 <mat-toolbar color="primary" class="toolbar">
-  <mat-toolbar-row><span>Dashboard</span></mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="toggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Dashboard</span>
+  </mat-toolbar-row>
 
 
   </mat-toolbar>
 
-<mat-sidenav-container *ngIf="'true' === 'true'" class="sidenav" >
+<mat-sidenav-container class="sidenav" >
   <!-- <mat-nav-list>
     <a href="/">A</a>
     <a href="/">B</a>
@@ -12,7 +18,7 @@
     <a href="/">D</a>
     <a href="/">E</a>
   </mat-nav-list> -->
-    <mat-sidenav #sidenav color="primary" mode="side" fixed="true" [style]="{'width': '12vw'}" opened>
+    <mat-sidenav #sidenav color="primary" mode="side" [style]="{'width': '12vw'}" [opened]="opened">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>Todo List</mat-panel-title>
