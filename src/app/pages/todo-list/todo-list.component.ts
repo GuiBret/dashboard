@@ -53,4 +53,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
     });
   }
 
+  deleteTodo(idTodo: string) {
+    this.todoSvc.deleteTodo(idTodo);
+  }
+
 }

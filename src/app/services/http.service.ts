@@ -49,4 +49,14 @@ export class HttpService {
 
     return this.http.post('http://localhost:3000/todos/' + idTodo + '/edit', {todo: todoData}, reqOpts);
   }
+
+  deleteTodoElement(idTodo: string) {
+    const reqOpts = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods': 'GET, POST, DELETE'
+      })
+    };
+    return this.http.delete('http://localhost:3000/todos/' + idTodo, reqOpts);
+  }
 }

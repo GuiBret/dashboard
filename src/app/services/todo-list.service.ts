@@ -76,9 +76,25 @@ export class TodoListService {
 
   }
 
+  /**
+   * Displays a snackbar when requested
+   * @param message The message to be displayed
+   */
   displaySnackbar(message: string) {
     this.snackbar.open(message, null, {
       duration: 2000
+    });
+  }
+
+  deleteTodo(idTodo: string) {
+    this.http.deleteTodoElement(idTodo).subscribe((response: any) => {
+      if(response.status === 'OK') {
+        this.todos = response.newList;
+        this.todoListChanged.next([...this.todos]);
+        this.displaySnackbar('Todo succesfully deleted');
+      } else { // TODO : handle use cases
+        this.displaySnackbar('Todo not found');
+      }
     });
   }
 }
