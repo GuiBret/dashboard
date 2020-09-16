@@ -47,7 +47,7 @@ export class HttpService {
     };
 
 
-    return this.http.put('http://localhost:3000/todos/' + idTodo + '/edit', {todo: todoData}, reqOpts);
+    return this.http.put('http://localhost:3000/todos/' + idTodo, {todo: todoData}, reqOpts);
   }
 
   deleteTodoElement(idTodo: string) {
