@@ -25,6 +25,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCheckboxModule } from '@angular/material/checkbox';
 import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
 import { SpotifySearchComponent } from './components/Spotify/spotify-search/spotify-search.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,9 @@ import { SpotifySearchComponent } from './components/Spotify/spotify-search/spot
     MatInputModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
