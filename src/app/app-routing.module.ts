@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { TodoListComponent } from './pages/todo-list/todo-list.component';
 import { TodoEditComponent } from './components/TodoList/todo-edit/todo-edit.component';
+import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,9 @@ const routes: Routes = [
   },
   {
     path: 'todolist/add', component:TodoEditComponent
+  },
+  {
+    path: 'spotify', component: SpotifyHomeComponent
   }
 
 ];

@@ -23,6 +23,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCheckboxModule } from '@angular/material/checkbox';
+import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
+import { SpotifySearchComponent } from './components/Spotify/spotify-search/spotify-search.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import {MatCheckboxModule } from '@angular/material/checkbox';
     TodoListComponent,
     GithubComponent,
     GmailComponent,
-    TodoEditComponent
+    TodoEditComponent,
+    SpotifyHomeComponent,
+    SpotifySearchComponent
   ],
   imports: [
     BrowserModule,
