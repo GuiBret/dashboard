@@ -46,14 +46,26 @@ export class TodoEditComponent implements OnInit {
   }
 
   onSubmitForm() {
+    console.log(this.editMode);
+    if(this.editMode) {
+      this.todoSvc.editTodo(this.form.value).subscribe((response: any) => {
+        if(response.status === 'OK') {
+          this.todoSvc.displaySnackbar('Todo succesfully edited.');
 
-    this.todoSvc.editTodo(this.form.value).subscribe((response: any) => {
-      if(response.status === 'OK') {
-        this.todoSvc.displaySnackbar('Todo succesfully edited.');
+          this.router.navigate(['/todolist']);
+        }
+      });
 
-        this.router.navigate(['/todolist']);
-      }
-    });
+    } else {
+      this.todoSvc.addTodo(this.form.value).subscribe((response: any) => {
+        if(response.status === 'OK') {
+          this.todoSvc.displaySnackbar('Todo succesfully added.');
+
+          this.router.navigate(['/todolist']);
+        }
+      });
+    }
+
   }
 
 }

@@ -97,4 +97,8 @@ export class TodoListService {
       }
     });
   }
+
+  addTodo(newTodoData: Todo) {
+    return this.http.addNewTodo(newTodoData);
+  }
 }

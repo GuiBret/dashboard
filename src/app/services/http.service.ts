@@ -54,9 +54,23 @@ export class HttpService {
     const reqOpts = {
       headers: new HttpHeaders({
         'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods': 'GET, POST, DELETE'
+        'Access-Control-Allow-Methods': 'GET, POST, PUT,DELETE'
       })
     };
     return this.http.delete('http://localhost:3000/todos/' + idTodo, reqOpts);
+  }
+
+  addNewTodo(newTodoData: Todo) {
+    const reqOpts = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods': 'GET, POST, DELETE'
+      })
+    };
+    return this.http.post('http://localhost:3000/todos/', {todo: newTodoData}, reqOpts);
+  }
+
+  checkSpotifyStatus() {
+    return this.http.get('http://localhost:3000/spotify/precheck');
   }
 }
