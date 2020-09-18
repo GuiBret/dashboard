@@ -18,13 +18,19 @@ export class SpotifyHomeComponent implements OnInit {
   constructor(private http: HttpService, private spotifyService: SpotifyService) { }
 
   ngOnInit(): void {
-    this.http.checkSpotifyStatus().subscribe((response: any) => {
-      if(response.status === 'OK') {
-        this.spotifyOK = true;
-      } else {
-        this.spotifyAuthUrl = response.url;
-      }
-    });
+
+    if(!localStorage.getItem('spotifyToken')) {
+      this.spotifyAuthUrl = 'TODO: FIX';
+    } else {
+      this.spotifyOK = true;
+    }
+    // this.http.checkSpotifyStatus().subscribe((response: any) => {
+    //   if(response.status === 'OK') {
+    //     this.spotifyOK = true;
+    //   } else {
+    //     this.spotifyAuthUrl = response.url;
+    //   }
+    // });
 
     this.formControl.valueChanges.subscribe((newValue: string) => {
       if(newValue.length >= 3) {
