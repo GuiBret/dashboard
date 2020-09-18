@@ -13,12 +13,16 @@ export class SpotifyHomeComponent implements OnInit {
   options = [];
   currElement = {};
   formControl = new FormControl();
+  spotifyAuthUrl = '';
+  spotifyOK = false;
   constructor(private http: HttpService, private spotifyService: SpotifyService) { }
 
   ngOnInit(): void {
     this.http.checkSpotifyStatus().subscribe((response: any) => {
-      if(response.status !== 'OK') {
-        this.needsLogin = true;
+      if(response.status === 'OK') {
+        this.spotifyOK = true;
+      } else {
+        this.spotifyAuthUrl = response.url;
       }
     });
 

@@ -1,12 +1,20 @@
-<form class="example-form">
-  <mat-form-field class="full-width">
-    <input type="text" placeholder="Type something" matInput [formControl]="formControl" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete" placeholder="Type something">
-      <mat-option *ngFor="let option of options" [value]="currElement">
-        <img src="{{option.imageUrl}}" height="40px">
-        <span>{{option.name}}</span>
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+<ng-container *ngIf="spotifyOK">
+  <form class="example-form">
+    <mat-form-field class="full-width">
+      <input type="text" placeholder="Type something" matInput [formControl]="formControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" placeholder="Type something">
+        <mat-option *ngFor="let option of options" [value]="currElement">
+          <img src="{{option.imageUrl}}" height="40px">
+          <span>{{option.name}}</span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
 
-</form>
+  </form>
+
+</ng-container>
+
+<ng-container *ngIf="!spotifyOK">
+  You don't seem to be logged. Please click <a href="{{spotifyAuthUrl}}">here</a>.
+
+</ng-container>
