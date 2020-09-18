@@ -4,6 +4,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { TodoListComponent } from './pages/todo-list/todo-list.component';
 import { TodoEditComponent } from './components/TodoList/todo-edit/todo-edit.component';
 import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
+import { SpotifyStoreTokenComponent } from './pages/spotify-store-token/spotify-store-token.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
   {
     path: 'spotify', component: SpotifyHomeComponent
+  },
+  {
+    path: 'spotify/store-token/:token', component: SpotifyStoreTokenComponent
   }
 
 ];

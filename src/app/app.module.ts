@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TodoListComponent } from './pages/todo-list/todo-list.component';
 import { GithubComponent } from './pages/github/github.component';
 import { GmailComponent } from './pages/gmail/gmail.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTableModule, MatTable } from '@angular/material/table';
 import {MatSelectModule, MatSelect} from '@angular/material/select';
 import { TodoEditComponent } from './components/TodoList/todo-edit/todo-edit.component';
@@ -26,6 +26,8 @@ import {MatCheckboxModule } from '@angular/material/checkbox';
 import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
 import { SpotifySearchComponent } from './components/Spotify/spotify-search/spotify-search.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { SpotifyStoreTokenComponent } from './pages/spotify-store-token/spotify-store-token.component';
+import { SpotifyInterceptor } from './interceptors/spotify.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     GmailComponent,
     TodoEditComponent,
     SpotifyHomeComponent,
-    SpotifySearchComponent
+    SpotifySearchComponent,
+    SpotifyStoreTokenComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatAutocompleteModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: SpotifyInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
