@@ -45,5 +45,10 @@ export class SpotifyHomeComponent implements OnInit {
     this.options = response.data;
   }
 
+  displayName(element: any) {
+    console.log(this.currElement);
+    return element.name;
+  }
+
 
 }
