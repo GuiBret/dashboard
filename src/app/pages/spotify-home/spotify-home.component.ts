@@ -20,7 +20,15 @@ export class SpotifyHomeComponent implements OnInit {
   ngOnInit(): void {
 
     if(!localStorage.getItem('spotifyToken')) {
-      this.spotifyAuthUrl = 'TODO: FIX';
+
+        this.http.checkSpotifyStatus().subscribe((response: any) => {
+        if(response.status === 'OK') {
+          this.spotifyOK = true;
+        } else {
+          console.log(response)
+          this.spotifyAuthUrl = response.url;
+        }
+      });
     } else {
       this.spotifyOK = true;
     }

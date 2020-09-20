@@ -6,6 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class SpotifyInterceptor implements HttpInterceptor {
@@ -17,12 +18,14 @@ export class SpotifyInterceptor implements HttpInterceptor {
     if(request.url.includes('spotify')) {
       console.log(localStorage.getItem('spotifyToken'));
       if(localStorage.getItem('spotifyToken')) {
-
+        // const expDate = jwt_decode.
         request = request.clone({
           setHeaders: {
             'Authorization': 'Bearer ' + localStorage.getItem('spotifyToken')
           }
         });
+      } else {
+        // return false;
       }
     }
     return next.handle(request);
