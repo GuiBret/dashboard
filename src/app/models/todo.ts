@@ -1,7 +1,7 @@
 export interface Todo {
   _id: string;
-  theme: string;
   title: string;
   content: string;
   status: boolean;
+  __v: number;
 }
