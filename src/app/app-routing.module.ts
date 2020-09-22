@@ -6,6 +6,7 @@ import { TodoEditComponent } from './components/TodoList/todo-edit/todo-edit.com
 import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
 import { SpotifyStoreTokenComponent } from './pages/spotify-store-token/spotify-store-token.component';
 import { SpotifyTokenGuard } from './guards/spotify-token.guard';
+import { TodoDataResolverService } from './resolvers/todo-data-resolver.service';
 
 
 const routes: Routes = [
@@ -16,10 +17,14 @@ const routes: Routes = [
     path: 'todolist', component: TodoListComponent
   },
   {
-    path: 'todolist/:id/edit', component:TodoEditComponent
+    path: 'todolist/:id/edit', component:TodoEditComponent, resolve: {
+      todo: TodoDataResolverService
+    }
   },
   {
-    path: 'todolist/add', component:TodoEditComponent
+    path: 'todolist/add', component:TodoEditComponent, resolve: {
+      todo: TodoDataResolverService
+    }
   },
   {
     path: 'spotify', component: SpotifyHomeComponent, canActivate: [SpotifyTokenGuard]

@@ -9,23 +9,7 @@ import { NgForm } from '@angular/forms';
   providedIn: 'root'
 })
 export class TodoListService {
-  todos: Array<Todo> = [
-    {
-      _id: null,
-      title: "My title 1",
-      theme: "Thème 1",
-      content: "Contenu 1",
-      status: true
-    },
-    {
-      _id: null,
-      title: 'My title 2',
-      theme: "Thème 2",
-      content: "Contenu 2",
-      status: false
-    },
-
-  ];
+  todos: Array<Todo> = [];
   themes: Array<string> = ['Dummy 1', 'Dummy 2'];
 
   todoListChanged = new Subject<Array<Todo>>();
@@ -43,8 +27,8 @@ export class TodoListService {
   }
 
   getTodo(id: string) {
+
     return this.todos.find((elem) => {
-      console.log(elem._id);
       return elem._id === id;
 
     });

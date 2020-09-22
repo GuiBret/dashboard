@@ -32,8 +32,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.todoSvc.fetchTodosAndThemes();
 
     this.todoListChanged$ = this.todoSvc.todoListChanged.subscribe((newTodoList: Array<Todo>) => {
-
       this.todos = newTodoList;
+
     })
   }
 

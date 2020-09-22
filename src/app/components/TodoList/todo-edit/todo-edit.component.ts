@@ -31,14 +31,15 @@ export class TodoEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) => {
+    this.route.data.subscribe((data: {todo: Todo}) => {
 
-      if(params.id) {
+      if(data.todo._id) {
         this.editMode = true;
-        this.currId = params.id;
-        this.currTodo = this.todoSvc.getTodo(this.currId);
-        this.form.setValue(this.currTodo);
       }
+      this.currId = data.todo._id;
+      this.currTodo = data.todo;
+      this.form.setValue(this.currTodo);
+      // }
 
       // this.
     });
@@ -46,7 +47,6 @@ export class TodoEditComponent implements OnInit {
   }
 
   onSubmitForm() {
-    console.log(this.editMode);
     if(this.editMode) {
       this.todoSvc.editTodo(this.form.value).subscribe((response: any) => {
         if(response.status === 'OK') {

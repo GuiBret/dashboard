@@ -21,7 +21,7 @@ export class HttpService {
     };
 
 
-    return this.http.get('http://localhost:3000/todos', reqOpts);
+    return this.http.get<Array<Todo>>('http://localhost:3000/todos', reqOpts);
 
   }
 
