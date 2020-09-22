@@ -25,7 +25,6 @@ export class SpotifyHomeComponent implements OnInit {
         if(response.status === 'OK') {
           this.spotifyOK = true;
         } else {
-          console.log(response)
           this.spotifyAuthUrl = response.url;
         }
       });
@@ -60,7 +59,7 @@ export class SpotifyHomeComponent implements OnInit {
   }
 
   displayName(element: any) {
-    console.log(this.currElement);
+
     return element.name;
   }
 

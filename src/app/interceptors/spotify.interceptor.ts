@@ -16,7 +16,6 @@ export class SpotifyInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
     if(request.url.includes('spotify')) {
-      console.log(localStorage.getItem('spotifyToken'));
       if(localStorage.getItem('spotifyToken')) {
         // const expDate = jwt_decode.
         request = request.clone({
