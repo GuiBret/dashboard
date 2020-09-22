@@ -11,10 +11,11 @@ export class SpotifyStoreTokenComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
-      if(params.token) {
+      if(params.token && params.refresh) {
         localStorage.setItem('spotifyToken', params.token);
+        localStorage.setItem('spotifyRefresh', params.refresh);
 
-        this.router.navigate(['..']);
+        this.router.navigate(['spotify']);
       }
 
     })
