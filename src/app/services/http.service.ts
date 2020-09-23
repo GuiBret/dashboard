@@ -73,4 +73,8 @@ export class HttpService {
   checkSpotifyStatus() {
     return this.http.get('http://localhost:3000/spotify/precheck');
   }
+
+  refreshSpotifyToken(refreshToken: string) {
+    return this.http.get('http://localhost:3000/spotify/refresh-token/' + refreshToken);
+  }
 }
