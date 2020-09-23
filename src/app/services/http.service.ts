@@ -77,4 +77,8 @@ export class HttpService {
   refreshSpotifyToken(refreshToken: string) {
     return this.http.get('http://localhost:3000/spotify/refresh-token/' + refreshToken);
   }
+
+  getSpotifyAuthUrl() {
+    return this.http.get('http://localhost:3000/spotify/get-url');
+  }
 }

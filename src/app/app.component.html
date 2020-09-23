@@ -61,7 +61,8 @@
 
         </mat-expansion-panel-header>
 
-        <mat-action-row class='clickable' routerLink="/spotify">Home</mat-action-row>
+        <mat-action-row class='clickable' (click)="triggerLoginProcedure()" *ngIf="!isLoggedOnSpotify">Click here to login</mat-action-row>
+        <mat-action-row class='clickable' routerLink="/spotify" *ngIf="isLoggedOnSpotify">Home</mat-action-row>
 
       </mat-expansion-panel>
     </mat-sidenav>

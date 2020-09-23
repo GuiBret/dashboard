@@ -22,12 +22,12 @@ export class SpotifyHomeComponent implements OnInit {
     if(!localStorage.getItem('spotifyToken')) {
 
         this.http.checkSpotifyStatus().subscribe((response: any) => {
-        if(response.status === 'OK') {
-          this.spotifyOK = true;
-        } else {
-          this.spotifyAuthUrl = response.url;
-        }
-      });
+          if(response.status === 'OK') {
+            this.spotifyOK = true;
+          } else {
+            this.spotifyAuthUrl = response.url;
+          }
+        });
     } else {
       this.spotifyOK = true;
     }

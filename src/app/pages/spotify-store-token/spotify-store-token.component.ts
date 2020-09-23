@@ -15,8 +15,8 @@ export class SpotifyStoreTokenComponent implements OnInit {
         localStorage.setItem('spotifyToken', params.token);
         localStorage.setItem('spotifyRefresh', params.refresh);
         localStorage.setItem('spotifyExp', (new Date().getTime() + (3600 * 1000)).toString());
-
-        this.router.navigate(['spotify']);
+        // alert('Nav to spotify');
+        this.router.navigate(['spotify/logged']);
       }
 
     })
