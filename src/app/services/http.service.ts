@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Todo } from '../models/todo';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class HttpService {
     };
 
 
-    return this.http.get<Array<Todo>>('http://localhost:3000/todos', reqOpts);
+    return this.http.get<Array<Todo>>(environment.serverRoot + '/todos', reqOpts);
 
   }
 
@@ -35,7 +35,7 @@ export class HttpService {
     };
 
 
-    return this.http.post('http://localhost:3000/todos', {todos: todoList}, reqOpts);
+    return this.http.post(environment.serverRoot + '/todos', {todos: todoList}, reqOpts);
   }
 
   editTodo(idTodo: string, todoData: Todo) {
@@ -47,7 +47,7 @@ export class HttpService {
     };
 
 
-    return this.http.put('http://localhost:3000/todos/' + idTodo, {todo: todoData}, reqOpts);
+    return this.http.put(environment.serverRoot + '/todos/' + idTodo, {todo: todoData}, reqOpts);
   }
 
   deleteTodoElement(idTodo: string) {
@@ -57,7 +57,7 @@ export class HttpService {
         'Access-Control-Allow-Methods': 'GET, POST, PUT,DELETE'
       })
     };
-    return this.http.delete('http://localhost:3000/todos/' + idTodo, reqOpts);
+    return this.http.delete(environment.serverRoot + '/todos/' + idTodo, reqOpts);
   }
 
   addNewTodo(newTodoData: Todo) {
@@ -67,18 +67,18 @@ export class HttpService {
         'Access-Control-Allow-Methods': 'GET, POST, DELETE'
       })
     };
-    return this.http.post('http://localhost:3000/todos/', {todo: newTodoData}, reqOpts);
+    return this.http.post(environment.serverRoot + '/todos/', {todo: newTodoData}, reqOpts);
   }
 
   checkSpotifyStatus() {
-    return this.http.get('http://localhost:3000/spotify/precheck');
+    return this.http.get(environment.serverRoot + '/spotify/precheck');
   }
 
   refreshSpotifyToken(refreshToken: string) {
-    return this.http.get('http://localhost:3000/spotify/refresh-token/' + refreshToken);
+    return this.http.get(environment.serverRoot + '/spotify/refresh-token/' + refreshToken);
   }
 
   getSpotifyAuthUrl() {
-    return this.http.get('http://localhost:3000/spotify/get-url');
+    return this.http.get(environment.serverRoot + '/spotify/get-url');
   }
 }
