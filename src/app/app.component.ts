@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'dashboard';
   isLoggedOnSpotify = false;
   isSmallScreen = false;
+  color = 'black';
   constructor(private bpObserver: BreakpointObserver, private spotifySvc: SpotifyService, private http: HttpService, private router: Router) {
     this.isSmallScreen = bpObserver.isMatched('(max-width: 599px)');
 
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
 
         if(val.url.includes('/spotify/logged')) {
           this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
+          this.router.navigate(['spotify'])
         }
       }
     });
