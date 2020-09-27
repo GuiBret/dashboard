@@ -19,5 +19,6 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
-  }
+  },
+  "exclude": ["src/test.ts", "src/environments/**", "e2e/**"]
 }
