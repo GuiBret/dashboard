@@ -21,23 +21,11 @@ export class SpotifyHomeComponent implements OnInit {
 
     if(!localStorage.getItem('spotifyToken')) {
 
-        this.http.checkSpotifyStatus().subscribe((response: any) => {
-          if(response.status === 'OK') {
-            this.spotifyOK = true;
-          } else {
-            this.spotifyAuthUrl = response.url;
-          }
-        });
+        this.http.checkSpotifyStatus().subscribe(this.handleSpotifyStatus.bind(this));
     } else {
       this.spotifyOK = true;
     }
-    // this.http.checkSpotifyStatus().subscribe((response: any) => {
-    //   if(response.status === 'OK') {
-    //     this.spotifyOK = true;
-    //   } else {
-    //     this.spotifyAuthUrl = response.url;
-    //   }
-    // });
+
 
     this.formControl.valueChanges.subscribe((newValue: string) => {
       if(newValue.length >= 3) {
@@ -46,6 +34,14 @@ export class SpotifyHomeComponent implements OnInit {
         this.options = [];
       }
     })
+  }
+
+  handleSpotifyStatus(response: any) {
+    if(response.status === 'OK') {
+      this.spotifyOK = true;
+    } else {
+      this.spotifyAuthUrl = response.url;
+    }
   }
 
   ngOnDestroy() {
