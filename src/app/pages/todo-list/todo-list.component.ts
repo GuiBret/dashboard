@@ -14,12 +14,33 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class TodoListComponent implements OnInit, OnDestroy {
 
 
+  /**
+   * Subscription linked to todoSvc.todoListChanged, passes the new todo list
+   */
   todoListChanged$: Subscription;
+
+  /**
+   * The current todo-list
+   */
   todos: Array<Todo> = [];
+
+  /**
+   * The current themes (not used yet)
+   */
   themes: Array<string> = [];
+
+  /**
+   * Used by ng-material, defines the columns which are displayed in the table
+   */
   displayedColumns = ['theme', 'title', 'content', 'status', 'controls'];
 
 
+  /**
+   *
+   * @param titleService The title service, used to define the title
+   * @param todoSvc The TodoService, used to perform operations
+   * @param _snackbar The snackbar
+   */
   constructor(private titleService: Title,
               private todoSvc: TodoListService,
               private _snackbar: MatSnackBar) { }
@@ -37,10 +58,16 @@ export class TodoListComponent implements OnInit, OnDestroy {
     })
   }
 
+  /**
+   * On destroy, cleanup function
+   */
   ngOnDestroy() {
     this.todoListChanged$.unsubscribe();
   }
 
+  /**
+   * Saves the todo-list, if OK, displays a snackbar
+   */
   saveTodoList() {
     this.todoSvc.saveTodoList().subscribe((response: any) => {
       if(response.status === 'OK') {
@@ -53,6 +80,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Deletes a todo with id idTodo
+   * @param idTodo The todo's id to delete
+   */
   deleteTodo(idTodo: string) {
     this.todoSvc.deleteTodo(idTodo);
   }

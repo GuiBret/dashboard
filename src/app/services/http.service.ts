@@ -12,6 +12,9 @@ export class HttpService {
 
   }
 
+  /**
+   * Calls SERVER_ROOT/todos, fetches the whole todo-list from Mongo
+   */
   getTodoList() {
     const reqOpts = {
       headers: new HttpHeaders({
@@ -25,6 +28,10 @@ export class HttpService {
 
   }
 
+  /**
+   * Saves the current todo-list
+   * @param todoList The todo-list which will be save
+   */
   saveTodoList(todoList: Array<Todo>) {
 
     const reqOpts = {
@@ -38,6 +45,11 @@ export class HttpService {
     return this.http.post(environment.serverRoot + '/todos', {todos: todoList}, reqOpts);
   }
 
+  /**
+   * Calls the server which will search idTodo and replace its content by todoData
+   * @param idTodo The ID of the todo to edit
+   * @param todoData The content of the todo to edit
+   */
   editTodo(idTodo: string, todoData: Todo) {
     const reqOpts = {
       headers: new HttpHeaders({
@@ -50,6 +62,10 @@ export class HttpService {
     return this.http.put(environment.serverRoot + '/todos/' + idTodo, {todo: todoData}, reqOpts);
   }
 
+  /**
+   * Calls the server which will delete the todo with the id idTodo
+   * @param idTodo The id of the todo to delete
+   */
   deleteTodoElement(idTodo: string) {
     const reqOpts = {
       headers: new HttpHeaders({
@@ -70,10 +86,19 @@ export class HttpService {
     return this.http.post(environment.serverRoot + '/todos/', {todo: newTodoData}, reqOpts);
   }
 
+  /**
+   * Calls the server to perform a precheck of Spotify (if the clientID and clientSecret are present)
+   * If not, return error
+   * If token missing, returns the Spotify login url
+   */
   checkSpotifyStatus() {
     return this.http.get(environment.serverRoot + '/spotify/precheck');
   }
 
+  /**
+   * Calls the server, which will call Spotify's API to regenerate a token
+   * @param refreshToken The refresh token
+   */
   refreshSpotifyToken(refreshToken: string) {
     return this.http.get(environment.serverRoot + '/spotify/refresh-token/' + refreshToken);
   }
