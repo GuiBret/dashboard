@@ -63,5 +63,9 @@ export class SpotifyHomeComponent implements OnInit {
     return element.name;
   }
 
+  playElement(uri: string) {
+    this.spotifyService.playElement(uri);
+  }
+
 
 }

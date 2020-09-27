@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class SpotifyService {
   }
 
   fetchAutocomplete(query: string) {
-    return this.http.get('http://localhost:3000/spotify/autocomp/' + query);
+    return this.http.get(environment.serverRoot + '/spotify/autocomp/' + query);
+  }
+
+  playElement(uri: string) {
+
+    this.http.put('https://api.spotify.com/v1/me/player/play', {context_uri: uri}).subscribe(() => {});
   }
 }
