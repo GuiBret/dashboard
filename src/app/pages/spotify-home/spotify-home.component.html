@@ -1,22 +1,10 @@
-<ng-container *ngIf="spotifyOK">
-  <form class="example-form">
-    <mat-form-field class="full-width">
-      <input type="text" placeholder="Type something" matInput [formControl]="formControl" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete" placeholder="Type something" [displayWith]="displayName">
-        <mat-option *ngFor="let option of options" [value]="option" >
-          <img src="{{option.imageUrl}}" height="40px">
-          <span>{{option.name}}</span>
 
-          <button mat-raised-button color="primary" (click)="playElement(option.uri)">Play</button>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-
-  </form>
-
-</ng-container>
 
 <ng-container *ngIf="!spotifyOK">
   You don't seem to be logged. Please click <a href="{{spotifyAuthUrl}}">here</a>.
 
+</ng-container>
+
+<ng-container *ngIf="spotifyOK">
+  <app-spotify-search></app-spotify-search>
 </ng-container>

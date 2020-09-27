@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { FormControl } from '@angular/forms';
 import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-spotify-home',
@@ -10,12 +11,14 @@ import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
 })
 export class SpotifyHomeComponent implements OnInit {
   needsLogin = false;
-  options = [];
-  currElement = {};
-  formControl = new FormControl();
+
+
+
   spotifyAuthUrl = '';
   spotifyOK = false;
-  constructor(private http: HttpService, private spotifyService: SpotifyService) { }
+  constructor(private titleSvc: Title, private http: HttpService, private spotifyService: SpotifyService) {
+    this.titleSvc.setTitle('Spotify - Home')
+  }
 
   ngOnInit(): void {
 
@@ -27,13 +30,7 @@ export class SpotifyHomeComponent implements OnInit {
     }
 
 
-    this.formControl.valueChanges.subscribe((newValue: string) => {
-      if(newValue.length >= 3) {
-        this.spotifyService.fetchAutocomplete(newValue).subscribe(this.populateOptions.bind(this));
-      } else {
-        this.options = [];
-      }
-    })
+
   }
 
   handleSpotifyStatus(response: any) {
@@ -45,23 +42,10 @@ export class SpotifyHomeComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.currElement = {};
-    this.options = [];
+
   }
 
-  populateOptions(response: any) {
 
-    this.options = response.data;
-  }
-
-  displayName(element: any) {
-
-    return element.name;
-  }
-
-  playElement(uri: string) {
-    this.spotifyService.playElement(uri);
-  }
 
 
 }
