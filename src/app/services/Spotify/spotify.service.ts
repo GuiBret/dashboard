@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Observable, Subscription, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyService {
+
+  private playbackChangedSource = new Subject();
+
+
+  onPlaybackChanged = this.playbackChangedSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +30,8 @@ export class SpotifyService {
 
   playElement(uri: string) {
 
-    this.http.put('https://api.spotify.com/v1/me/player/play', {context_uri: uri}).subscribe(() => {});
+    this.http.put('https://api.spotify.com/v1/me/player/play', {context_uri: uri}).subscribe(() => {
+      this.playbackChangedSource.next();
+    });
   }
 }

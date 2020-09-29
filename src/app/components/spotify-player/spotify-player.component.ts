@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyPlayerService } from 'src/app/services/spotify/spotify-player.service';
 import { Subscription, Observable } from 'rxjs';
+import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
 
 @Component({
   selector: 'app-spotify-player',
@@ -16,13 +17,27 @@ export class SpotifyPlayerComponent implements OnInit {
     imageUrl: ''
   };
 
+  playbackChanged : Subscription;
+
   currPlayerStatus = false;
-  constructor(private spotifyPlayerSvc: SpotifyPlayerService) { }
+  constructor(private spotifySvc: SpotifyService, private spotifyPlayerSvc: SpotifyPlayerService) { }
 
   ngOnInit(): void {
     this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
       this.song = song;
-    })
+    });
+
+    this.playbackChanged = this.spotifySvc.onPlaybackChanged.subscribe(this.getPlaybackInfo.bind(this));
+  }
+
+  getPlaybackInfo() {
+    setTimeout(() => {
+
+      this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
+        console.log('Playback changed');
+        this.song = song;
+      });
+    }, 500);
   }
 
   /**
@@ -49,11 +64,7 @@ export class SpotifyPlayerComponent implements OnInit {
    */
   goToPreviousSong() {
     this.spotifyPlayerSvc.goToPreviousSong().subscribe(() => {
-      setTimeout(() => {
-        this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
-          this.song = song;
-        })
-      }, 500)
+      this.getPlaybackInfo();
 
     });
   }
@@ -61,13 +72,8 @@ export class SpotifyPlayerComponent implements OnInit {
    * Calls the endpoint to go to the next song, then gets the info on the current playback after 500ms (bc of asynchronity)
    */
   goToNextSong() {
-    this.spotifyPlayerSvc.goToPreviousSong().subscribe(() => {
-      setTimeout(() => {
-        this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
-          this.song = song;
-        })
-
-      }, 500)
+    this.spotifyPlayerSvc.goToNextSong().subscribe(() => {
+      this.getPlaybackInfo();
 
     });
   }
