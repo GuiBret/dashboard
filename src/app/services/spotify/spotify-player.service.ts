@@ -3,21 +3,37 @@ import { HttpService } from '../http.service';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
+/**
+ * The service that handles all playback actions with Spotify
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyPlayerService {
 
+
   constructor(private http: HttpClient) { }
 
+  /**
+   * Pauses the playback
+   * @param with_device The device ID that we want to perform the request with
+   */
   pauseSong(with_device: string = '') {
     return this.http.put('https://api.spotify.com/v1/me/player/pause', {});
   }
 
+  /**
+   * Plays the playback
+   * @param with_device The device ID that we want to perform the request with
+   */
   playSong(with_device: string = '') {
     return this.http.put('https://api.spotify.com/v1/me/player/play', {});
   }
 
+  /**
+   * Goes to the next song
+   * @param with_device The device ID that we want to perform the request with
+   */
   goToNextSong(with_device: string = '') {
     return this.http.post('https://api.spotify.com/v1/me/player/next', {});
   }

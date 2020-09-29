@@ -66,6 +66,24 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#onPlaybackChanged">onPlaybackChanged</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#playbackChangedSource">playbackChangedSource</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -107,7 +125,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/services/Spotify/spotify.service.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/Spotify/spotify.service.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -172,8 +190,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="17"
-                            class="link-to-prism">src/app/services/Spotify/spotify.service.ts:17</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/app/services/Spotify/spotify.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -217,8 +235,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="21"
-                            class="link-to-prism">src/app/services/Spotify/spotify.service.ts:21</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/app/services/Spotify/spotify.service.ts:27</a></div>
                 </td>
             </tr>
 
@@ -287,8 +305,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/app/services/Spotify/spotify.service.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/app/services/Spotify/spotify.service.ts:31</a></div>
                 </td>
             </tr>
 
@@ -336,6 +354,65 @@
         </tbody>
     </table>
 </section>
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="onPlaybackChanged"></a>
+                        <span class="name">
+                            <b>
+                            onPlaybackChanged</b>
+                            <a href="#onPlaybackChanged"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>this.playbackChangedSource.asObservable()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/Spotify/spotify.service.ts:14</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="playbackChangedSource"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            playbackChangedSource</b>
+                            <a href="#playbackChangedSource"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Subject()</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/Spotify/spotify.service.ts:11</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
 
     </div>
 
@@ -344,11 +421,17 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
 import { environment } from &#x27;src/environments/environment&#x27;;
+import { Observable, Subscription, Subject } from &#x27;rxjs&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
 export class SpotifyService {
+
+  private playbackChangedSource &#x3D; new Subject();
+
+
+  onPlaybackChanged &#x3D; this.playbackChangedSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -367,7 +450,9 @@ export class SpotifyService {
 
   playElement(uri: string) {
 
-    this.http.put(&#x27;https://api.spotify.com/v1/me/player/play&#x27;, {context_uri: uri}).subscribe(() &#x3D;&gt; {});
+    this.http.put(&#x27;https://api.spotify.com/v1/me/player/play&#x27;, {context_uri: uri}).subscribe(() &#x3D;&gt; {
+      this.playbackChangedSource.next();
+    });
   }
 }
 </code></pre>

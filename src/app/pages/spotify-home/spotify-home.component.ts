@@ -4,6 +4,10 @@ import { FormControl } from '@angular/forms';
 import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
 import { Title } from '@angular/platform-browser';
 
+
+/**
+ * The homepage of Spotify
+ */
 @Component({
   selector: 'app-spotify-home',
   templateUrl: './spotify-home.component.html',
@@ -15,11 +19,17 @@ export class SpotifyHomeComponent implements OnInit {
 
 
   spotifyAuthUrl = '';
+  /**
+   * Boolean indicating if we can make some requests
+   */
   spotifyOK = false;
   constructor(private titleSvc: Title, private http: HttpService, private spotifyService: SpotifyService) {
     this.titleSvc.setTitle('Spotify - Home')
   }
 
+  /**
+   * On init, check Spotify's statud
+   */
   ngOnInit(): void {
 
     if(!localStorage.getItem('spotifyToken')) {

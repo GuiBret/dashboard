@@ -64,6 +64,13 @@
     <code>src/app/pages/todo-list/todo-list.component.ts</code>
 </p>
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>The page containing the todo-list</p>
+
+    </p>
 
 
     <p class="comment">
@@ -189,7 +196,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -295,8 +302,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="87"
-                            class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:87</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:94</a></div>
                 </td>
             </tr>
 
@@ -372,8 +379,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="64"
-                            class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:64</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:71</a></div>
                 </td>
             </tr>
 
@@ -413,14 +420,16 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="48"
-                            class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:48</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:55</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>On init, sets the title and fetches the todos</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -452,8 +461,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:71</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="78"
+                            class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:78</a></div>
                 </td>
             </tr>
 
@@ -502,7 +511,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:35</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:39</a></div>
                             </td>
                         </tr>
 
@@ -540,7 +549,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -573,7 +582,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -611,7 +620,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/todo-list/todo-list.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -638,6 +647,10 @@ import { TodoListService } from &#x27;src/app/services/todo-list.service&#x27;;
 import { Todo } from &#x27;src/app/models/todo&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
 
+
+/**
+ * The page containing the todo-list
+ */
 @Component({
   selector: &#x27;app-todo-list&#x27;,
   templateUrl: &#x27;./todo-list.component.html&#x27;,
@@ -677,6 +690,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
               private todoSvc: TodoListService,
               private _snackbar: MatSnackBar) { }
 
+  /**
+   * On init, sets the title and fetches the todos
+   */
   ngOnInit(): void {
 
     this.titleService.setTitle(&#x27;TodoList - List&#x27;);
@@ -827,7 +843,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><h1 class="mat-h1">Todo List</h1><button mat-button class="mat-raised-button" color="accent" routerLink="/todolist/add">Add a todo</button><button mat-button class="mat-raised-button" color="primary" (click)="saveTodoList()">Save todos</button><hr><ng-container *ngIf=\'todos.length !== 0\'>  <table mat-table [dataSource]="todos" class="mat-elevation-z6" [style]="{\'width\': \'95%\'}">    <ng-container matColumnDef="theme" class=\'col-theme\'>      <th mat-header-cell *matHeaderCellDef>        Theme      </th>      <td mat-cell *matCellDef="let todo" class=\'col-theme\'>        {{todo.theme}}      </td>    </ng-container>    <ng-container matColumnDef="title" >      <th mat-header-cell *matHeaderCellDef class=\'col-title\'>Title</th>      <td mat-cell *matCellDef="let todo" class=\'col-title\'>{{todo.title}}</td>    </ng-container>    <ng-container matColumnDef="content" >      <th mat-header-cell *matHeaderCellDef class=\'col-content\'>Content</th>      <td mat-cell *matCellDef="let todo" class=\'col-content\'>{{todo.content}}</td>    </ng-container>    <ng-container matColumnDef="status" >      <th mat-header-cell *matHeaderCellDef class=\'col-status\'>Status</th>      <td mat-cell *matCellDef="let todo" class="col-status">        <mat-checkbox></mat-checkbox>      </td>    </ng-container>    <ng-container matColumnDef="controls">      <th mat-header-cell *matHeaderCellDef>Controls</th>      <td mat-cell *matCellDef="let todo">        <button mat-button routerLink="{{todo._id}}/edit" color="primary">EDIT</button>        <button mat-button (click)="deleteTodo(todo._id)"color="accent">DELETE</button>      </td>    </ng-container>    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>  </table></ng-container><ng-container *ngIf="todos.length === 0">  <p>No todos found. Please click "Add a todo" to add one.</p></ng-container><router-outlet></router-outlet></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'GithubComponent', 'selector': 'app-github'},{'name': 'GmailComponent', 'selector': 'app-gmail'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'SpotifyHomeComponent', 'selector': 'app-spotify-home'},{'name': 'SpotifySearchComponent', 'selector': 'app-spotify-search'},{'name': 'SpotifyStoreTokenComponent', 'selector': 'app-spotify-store-token'},{'name': 'SpotifyUserInfoComponent', 'selector': 'app-spotify-user-info'},{'name': 'TodoEditComponent', 'selector': 'app-todo-edit'},{'name': 'TodoListComponent', 'selector': 'app-todo-list'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'GithubComponent', 'selector': 'app-github'},{'name': 'GmailComponent', 'selector': 'app-gmail'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'SpotifyHomeComponent', 'selector': 'app-spotify-home'},{'name': 'SpotifyPlayerComponent', 'selector': 'app-spotify-player'},{'name': 'SpotifySearchComponent', 'selector': 'app-spotify-search'},{'name': 'SpotifyStoreTokenComponent', 'selector': 'app-spotify-store-token'},{'name': 'SpotifyUserInfoComponent', 'selector': 'app-spotify-user-info'},{'name': 'TodoEditComponent', 'selector': 'app-todo-edit'},{'name': 'TodoListComponent', 'selector': 'app-todo-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'TodoListComponent'};
 </script>

@@ -6,6 +6,10 @@ import { TodoListService } from 'src/app/services/todo-list.service';
 import { Todo } from 'src/app/models/todo';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
+/**
+ * The page containing the todo-list
+ */
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
@@ -45,6 +49,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
               private todoSvc: TodoListService,
               private _snackbar: MatSnackBar) { }
 
+  /**
+   * On init, sets the title and fetches the todos
+   */
   ngOnInit(): void {
 
     this.titleService.setTitle('TodoList - List');

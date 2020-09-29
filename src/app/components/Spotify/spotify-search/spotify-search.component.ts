@@ -9,9 +9,18 @@ import { FormControl } from '@angular/forms';
 })
 export class SpotifySearchComponent implements OnInit, OnDestroy {
 
+
   formControl = new FormControl();
   constructor(private spotifyService: SpotifyService) { }
+
+  /**
+   * The element of the autocomplete input
+   */
   currElement = {name: ""};
+
+  /**
+   * The options for the autocomplete input
+   */
   options = [];
   ngOnInit(): void {
     // Triggers autocomplete if str.length >= 3
@@ -28,6 +37,7 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
     this.currElement = {name: ""};
     this.options = [];
   }
+
 
   populateOptions(response: any) {
 
