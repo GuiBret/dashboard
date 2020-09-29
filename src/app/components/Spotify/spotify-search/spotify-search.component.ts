@@ -35,8 +35,10 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
   }
 
   displayName(element: any) {
+    if(element) {
 
-    return element.name;
+      return element.name;
+    }
   }
 
   playElement(uri: string) {
