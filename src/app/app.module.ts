@@ -19,15 +19,19 @@ import {MatSelectModule, MatSelect} from '@angular/material/select';
 import { TodoEditComponent } from './components/TodoList/todo-edit/todo-edit.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatSliderModule} from '@angular/material/slider';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCardModule } from '@angular/material/card';
 import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
 import { SpotifySearchComponent } from './components/Spotify/spotify-search/spotify-search.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SpotifyStoreTokenComponent } from './pages/spotify-store-token/spotify-store-token.component';
 import { SpotifyInterceptor } from './interceptors/spotify.interceptor';
+import { SpotifyUserInfoComponent } from './pages/spotify-user-info/spotify-user-info.component';
+import { SpotifyPlayerComponent } from './components/spotify-player/spotify-player.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,9 @@ import { SpotifyInterceptor } from './interceptors/spotify.interceptor';
     TodoEditComponent,
     SpotifyHomeComponent,
     SpotifySearchComponent,
-    SpotifyStoreTokenComponent
+    SpotifyStoreTokenComponent,
+    SpotifyUserInfoComponent,
+    SpotifyPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,9 @@ import { SpotifyInterceptor } from './interceptors/spotify.interceptor';
     MatSelectModule,
     MatButtonModule,
     FormsModule,
+    MatCardModule,
     MatInputModule,
+    MatSliderModule,
     ReactiveFormsModule,
     MatSnackBarModule,
     MatCheckboxModule,
