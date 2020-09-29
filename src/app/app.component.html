@@ -69,4 +69,9 @@
 
     <router-outlet></router-outlet>
 
+    <ng-container *ngIf="isLoggedOnSpotify">
+      <app-spotify-player></app-spotify-player>
+
+    </ng-container>
 </mat-sidenav-container>
+

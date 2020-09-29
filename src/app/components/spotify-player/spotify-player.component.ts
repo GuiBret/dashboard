@@ -1,0 +1,79 @@
+import { Component, OnInit } from '@angular/core';
+import { SpotifyPlayerService } from 'src/app/services/spotify/spotify-player.service';
+import { Subscription, Observable } from 'rxjs';
+
+@Component({
+  selector: 'app-spotify-player',
+  templateUrl: './spotify-player.component.html',
+  styleUrls: ['./spotify-player.component.css']
+})
+export class SpotifyPlayerComponent implements OnInit {
+
+  song: any = {
+    title: 'My song',
+    artist: 'My artist',
+    album: 'My album',
+    imageUrl: ''
+  };
+
+  currPlayerStatus = false;
+  constructor(private spotifyPlayerSvc: SpotifyPlayerService) { }
+
+  ngOnInit(): void {
+    this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
+      this.song = song;
+    })
+  }
+
+  /**
+   * Plays / pauses the playback, then reverses the player status
+   */
+  onClickPlayPause() {
+
+    let obs : Observable<any>;
+    // If the current status is "Play", we'll pause the playback
+    if(!this.currPlayerStatus) {
+      obs = this.spotifyPlayerSvc.pauseSong();
+
+    } else {
+      obs = this.spotifyPlayerSvc.playSong();
+    }
+
+    obs.subscribe((response) => {
+      this.currPlayerStatus = !this.currPlayerStatus;
+    })
+  }
+
+  /**
+   * Calls the endpoint to go to the previous song, then gets the info on the current playback after 500ms (bc of asynchronity)
+   */
+  goToPreviousSong() {
+    this.spotifyPlayerSvc.goToPreviousSong().subscribe(() => {
+      setTimeout(() => {
+        this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
+          this.song = song;
+        })
+      }, 500)
+
+    });
+  }
+  /**
+   * Calls the endpoint to go to the next song, then gets the info on the current playback after 500ms (bc of asynchronity)
+   */
+  goToNextSong() {
+    this.spotifyPlayerSvc.goToPreviousSong().subscribe(() => {
+      setTimeout(() => {
+        this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
+          this.song = song;
+        })
+
+      }, 500)
+
+    });
+  }
+
+  getAvailableDevices() {
+    this.spotifyPlayerSvc.getAvailableDevices();
+  }
+
+}

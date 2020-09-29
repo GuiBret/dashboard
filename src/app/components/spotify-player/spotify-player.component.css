@@ -1,0 +1,30 @@
+#spotify_player_content {
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+}
+
+#song_title_container {
+  display:flex;
+  flex-direction: column;
+}
+
+#song_img_container {
+  margin-right:0.5vw;
+}
+
+#song_container {
+  display:flex;
+  flex-direction:row;
+
+}
+
+#controls {
+  display:flex;
+  align-items: center;
+}
+
+#volume_and_change_device {
+  display:flex;
+  flex-direction:column;
+}
