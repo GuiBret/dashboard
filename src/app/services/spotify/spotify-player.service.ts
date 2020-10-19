@@ -62,5 +62,10 @@ export class SpotifyPlayerService {
 
   }
 
+  setVolume(value: number) {
+    this.http.put('https://api.spotify.com/v1/me/player/volume?volume_percent=' + value, {}).subscribe(() => {});
+
+  }
+
 
 }

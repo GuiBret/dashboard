@@ -18,6 +18,7 @@ export class SpotifyPlayerComponent implements OnInit {
   };
 
   playbackChanged : Subscription;
+  volume: number = 20;
 
   currPlayerStatus = false;
   constructor(private spotifySvc: SpotifyService, private spotifyPlayerSvc: SpotifyPlayerService) { }
@@ -80,6 +81,10 @@ export class SpotifyPlayerComponent implements OnInit {
 
   getAvailableDevices() {
     this.spotifyPlayerSvc.getAvailableDevices();
+  }
+
+  setVolume() {
+    this.spotifyPlayerSvc.setVolume(this.volume);
   }
 
 }

@@ -34,7 +34,7 @@
       </div>
 
       <div id="volume_and_change_device">
-        <mat-slider min="0" max="100" step="1" value="20"></mat-slider>
+        <mat-slider min="0" max="100" step="1" value="volume"  [(ngModel)]="volume" (change)="setVolume()"></mat-slider>
         <!-- <mat-select></mat-select> -->
       </div>
 
