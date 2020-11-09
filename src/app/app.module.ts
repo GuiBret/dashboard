@@ -31,7 +31,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { SpotifyStoreTokenComponent } from './pages/spotify-store-token/spotify-store-token.component';
 import { SpotifyInterceptor } from './interceptors/spotify.interceptor';
 import { SpotifyUserInfoComponent } from './pages/spotify-user-info/spotify-user-info.component';
-import { SpotifyPlayerComponent } from './components/spotify-player/spotify-player.component';
+import { SpotifyPlayerComponent } from './components/Spotify/spotify-player/spotify-player.component';
 
 @NgModule({
   declarations: [
