@@ -26,15 +26,6 @@ const routes: Routes = [
       todo: TodoDataResolverService
     }
   },
-  {
-    path: 'spotify', component: SpotifyHomeComponent, canActivate: [SpotifyTokenGuard]
-  },
-  {
-    path: 'spotify/logged', component: SpotifyHomeComponent, canActivate: [SpotifyTokenGuard]
-  },
-  {
-    path: 'spotify/store-token/:token/:refresh', component: SpotifyStoreTokenComponent
-  }
 
 ];
 
