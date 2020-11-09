@@ -32,6 +32,7 @@ import { SpotifyStoreTokenComponent } from './pages/spotify-store-token/spotify-
 import { SpotifyInterceptor } from './interceptors/spotify.interceptor';
 import { SpotifyUserInfoComponent } from './pages/spotify-user-info/spotify-user-info.component';
 import { SpotifyPlayerComponent } from './components/Spotify/spotify-player/spotify-player.component';
+import { SpotifyRoutingModule } from './components/Spotify/spotify.routing';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { SpotifyPlayerComponent } from './components/Spotify/spotify-player/spot
     MatSnackBarModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SpotifyRoutingModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
