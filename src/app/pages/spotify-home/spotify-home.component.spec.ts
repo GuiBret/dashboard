@@ -1,14 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 
 import { SpotifyHomeComponent } from './spotify-home.component';
 
 describe('SpotifyHomeComponent', () => {
   let component: SpotifyHomeComponent;
   let fixture: ComponentFixture<SpotifyHomeComponent>;
+  let httpClientStub: Partial<HttpClient>;
 
+  httpClientStub = {
+    get: jasmine.createSpy().and.returnValue(new Observable())
+  }
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpotifyHomeComponent ]
+      declarations: [ SpotifyHomeComponent ],
+      providers: [
+        {useValue: httpClientStub, provide: HttpClient}
+      ]
     })
     .compileComponents();
   });
