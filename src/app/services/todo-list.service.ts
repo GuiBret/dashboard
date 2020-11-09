@@ -38,7 +38,7 @@ export class TodoListService {
 
   fetchTodoList() {
     return this.http.getTodoList().subscribe((response: any) => {
-      if(status === 'OK') {
+      if (status === 'OK') {
 
         this.todoListChanged.next(response.todos);
       }
