@@ -43,7 +43,7 @@ describe('TodoListService', () => {
       status: false,
       __v: 1234
     },
-  ]
+  ];
 
   matSnackbarStub = {
     open: jasmine.createSpy('snackbarOpen')

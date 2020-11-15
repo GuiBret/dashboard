@@ -76,15 +76,18 @@ export class TodoListComponent implements OnInit, OnDestroy {
    * Saves the todo-list, if OK, displays a snackbar
    */
   saveTodoList() {
-    this.todoSvc.saveTodoList().subscribe((response: any) => {
-      if(response.status === 'OK') {
-        this._snackbar.open('Todo List saved succesfully.', '', {
-          duration: 2000
-        });
-      } else {
 
-      }
-    });
+    this.todoSvc.saveTodoList().subscribe(this.onTodoListSaved.bind(this));
+  }
+
+  onTodoListSaved(response: { status: string}) {
+    if(response.status === 'OK') {
+      this._snackbar.open('Todo List saved succesfully.', '', {
+        duration: 2000
+      });
+    } else {
+
+    }
   }
 
   /**
