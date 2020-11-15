@@ -35,7 +35,7 @@ export class SpotifyPlayerComponent implements OnInit {
     setTimeout(() => {
 
       this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
-        console.log('Playback changed');
+
         this.song = song;
       });
     }, 500);
