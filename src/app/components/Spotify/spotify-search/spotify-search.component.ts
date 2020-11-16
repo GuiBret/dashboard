@@ -24,13 +24,15 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
   options = [];
   ngOnInit(): void {
     // Triggers autocomplete if str.length >= 3
-    this.formControl.valueChanges.subscribe((newValue: string) => {
-      if(newValue.length >= 3) {
-        this.spotifyService.fetchAutocomplete(newValue).subscribe(this.populateOptions.bind(this));
-      } else {
-        this.options = [];
-      }
-    });
+    this.formControl.valueChanges.subscribe(this.onSearchTextChanged.bind(this));
+  }
+
+  onSearchTextChanged(newValue : string) {
+    if(newValue.length >= 3) {
+      this.spotifyService.fetchAutocomplete(newValue).subscribe(this.populateOptions.bind(this));
+    } else {
+      this.options = [];
+    }
   }
 
   ngOnDestroy() {

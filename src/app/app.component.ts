@@ -17,24 +17,23 @@ export class AppComponent implements OnInit {
   constructor(private bpObserver: BreakpointObserver, private spotifySvc: SpotifyService, private http: HttpService, private router: Router) {
     this.isSmallScreen = bpObserver.isMatched('(max-width: 599px)');
 
-    this.router.events.subscribe((val: any) => {
-
-      if(val instanceof NavigationEnd) {
-
-        if(val.url.includes('/spotify/logged')) {
-          this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
-          this.router.navigate(['spotify'])
-        }
-      }
-    });
+    this.router.events.subscribe(this.onRouterEventReceived.bind(this));
   }
 
   ngOnInit() {
 
+  }
 
+  onRouterEventReceived(val: any) {
+    console.log('Instance of navigationend');
+    console.log(val instanceof NavigationEnd);
 
-
-
+    if(val instanceof NavigationEnd) {
+      if(val.url.includes('/spotify/logged')) {
+        this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
+        this.router.navigate(['spotify'])
+      }
+    }
   }
 
   toggleSidenav() {

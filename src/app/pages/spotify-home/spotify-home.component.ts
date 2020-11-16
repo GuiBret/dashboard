@@ -43,10 +43,11 @@ export class SpotifyHomeComponent implements OnInit {
 
   }
 
-  handleSpotifyStatus(response: any) {
+  handleSpotifyStatus(response: {status: string, url?: string}) {
     if(response.status === 'OK') {
       this.spotifyOK = true;
     } else {
+      this.spotifyOK = false;
       this.spotifyAuthUrl = response.url;
     }
   }

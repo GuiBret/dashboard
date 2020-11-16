@@ -20,7 +20,7 @@ export class SpotifyPlayerComponent implements OnInit {
   playbackChanged : Subscription;
   volume: number = 20;
 
-  currPlayerStatus = false;
+  currPlayerStatus = true;
   constructor(private spotifySvc: SpotifyService, private spotifyPlayerSvc: SpotifyPlayerService) { }
 
   ngOnInit(): void {
@@ -48,7 +48,7 @@ export class SpotifyPlayerComponent implements OnInit {
 
     let obs : Observable<any>;
     // If the current status is "Play", we'll pause the playback
-    if(!this.currPlayerStatus) {
+    if(this.currPlayerStatus) {
       obs = this.spotifyPlayerSvc.pauseSong();
 
     } else {
@@ -64,19 +64,20 @@ export class SpotifyPlayerComponent implements OnInit {
    * Calls the endpoint to go to the previous song, then gets the info on the current playback after 500ms (bc of asynchronity)
    */
   goToPreviousSong() {
-    this.spotifyPlayerSvc.goToPreviousSong().subscribe(() => {
-      this.getPlaybackInfo();
+    this.spotifyPlayerSvc.goToPreviousSong().subscribe(this.getPlaybackInfo.bind(this));
+  }
 
-    });
+  /**
+   * When "Next song" or "Previous song" is triggered, we fetch the playback's info
+   */
+  onPreviousOrNextSongTriggered() {
+    this.getPlaybackInfo();
   }
   /**
    * Calls the endpoint to go to the next song, then gets the info on the current playback after 500ms (bc of asynchronity)
    */
   goToNextSong() {
-    this.spotifyPlayerSvc.goToNextSong().subscribe(() => {
-      this.getPlaybackInfo();
-
-    });
+    this.spotifyPlayerSvc.goToNextSong().subscribe(this.getPlaybackInfo.bind(this));
   }
 
   getAvailableDevices() {

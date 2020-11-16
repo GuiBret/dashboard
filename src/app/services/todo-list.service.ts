@@ -37,17 +37,18 @@ export class TodoListService {
   }
 
   fetchTodoList() {
-    return this.http.getTodoList().subscribe((response: any) => {
-      if (status === 'OK') {
+    return this.http.getTodoList().subscribe(this.onTodoListFetched.bind(this));
+  }
 
-        this.todoListChanged.next(response.todos);
-      }
-    })
+  onTodoListFetched(response: {status: string, todos?: Array<Todo>}) {
+    if (response.status === 'OK') {
+
+      this.todoListChanged.next(response.todos);
+    }
   }
 
   editTodo(newTodo: Todo) {
     const _id = newTodo._id;
-
     return this.http.editTodo(_id, newTodo);
 
   }
@@ -71,15 +72,17 @@ export class TodoListService {
   }
 
   deleteTodo(idTodo: string) {
-    this.http.deleteTodoElement(idTodo).subscribe((response: any) => {
-      if(response.status === 'OK') {
-        this.todos = response.newList;
-        this.todoListChanged.next([...this.todos]);
-        this.displaySnackbar('Todo succesfully deleted');
-      } else { // TODO : handle use cases
-        this.displaySnackbar('Todo not found');
-      }
-    });
+    this.http.deleteTodoElement(idTodo).subscribe(this.onTodoElementDeleted.bind(this));
+  }
+
+  onTodoElementDeleted(response:  {status: string, newList?: Array<Todo>}) {
+    if(response.status === 'OK') {
+      this.todos = response.newList;
+      this.todoListChanged.next([...this.todos]);
+      this.displaySnackbar('Todo succesfully deleted');
+    } else { // TODO : handle use cases
+      this.displaySnackbar('Todo not found');
+    }
   }
 
   addTodo(newTodoData: Todo) {

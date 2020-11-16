@@ -31,4 +31,24 @@ describe('SpotifyHomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('Handle spotify status', () => {
+    it('should set spotifyOK to true', () => {
+      component.spotifyAuthUrl = '';
+      component.spotifyOK = false;
+      component.handleSpotifyStatus({status: 'OK'});
+
+      expect(component.spotifyOK).toEqual(true);
+    });
+
+    it('should define spotifyAuthUrl', () => {
+
+      component.spotifyAuthUrl = '';
+      component.spotifyOK = true;
+      component.handleSpotifyStatus({status: 'KO', url: 'https://myurl'});
+
+      expect(component.spotifyOK).toEqual(false);
+      expect(component.spotifyAuthUrl).toEqual('https://myurl');
+    });
+  })
 });
