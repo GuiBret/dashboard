@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
+import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
 import { TodoEditComponent } from './components/todo-edit/todo-edit.component';
@@ -18,6 +20,8 @@ import { TodoListRoutingModule } from './todo-list.routing';
     MatTableModule,
     MatFormFieldModule,
     SharedModule,
+    MatInputModule,
+    MatButtonModule,
     TodoListRoutingModule
   ],
   providers: [
