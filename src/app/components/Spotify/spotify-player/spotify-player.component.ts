@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyPlayerService } from 'src/app/services/spotify/spotify-player.service';
 import { Subscription, Observable } from 'rxjs';
 import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
+import { Song } from 'src/app/models/song';
 
 @Component({
   selector: 'app-spotify-player',
@@ -10,7 +11,7 @@ import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
 })
 export class SpotifyPlayerComponent implements OnInit {
 
-  song: any = {
+  song: Song = {
     title: 'My song',
     artist: 'My artist',
     album: 'My album',
@@ -24,20 +25,23 @@ export class SpotifyPlayerComponent implements OnInit {
   constructor(private spotifySvc: SpotifyService, private spotifyPlayerSvc: SpotifyPlayerService) { }
 
   ngOnInit(): void {
-    this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
-      this.song = song;
-    });
+    this.spotifyPlayerSvc.getInfoOnPlayback().subscribe(this.setCurrentSong.bind(this));
 
     this.playbackChanged = this.spotifySvc.onPlaybackChanged.subscribe(this.getPlaybackInfo.bind(this));
+  }
+
+  /**
+   * Defines a new song, callback of onPlaybackInfoReceived
+   * @param song The song which will be displayed in the player
+   */
+  setCurrentSong(song: Song) {
+    this.song = song;
   }
 
   getPlaybackInfo() {
     setTimeout(() => {
 
-      this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
-
-        this.song = song;
-      });
+      this.spotifyPlayerSvc.getInfoOnPlayback().subscribe(this.setCurrentSong.bind(this));
     }, 500);
   }
 

@@ -155,6 +155,8 @@ describe('SpotifyPlayerService', () => {
       });
 
       expect(playbackInfo).toEqual(undefined);
-    })
-  })
+    });
+  });
+
+
 });

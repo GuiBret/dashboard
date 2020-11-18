@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
+import { Song } from 'src/app/models/song';
 import { SpotifyPlayerService } from 'src/app/services/spotify/spotify-player.service';
 
 import { SpotifyPlayerComponent } from './spotify-player.component';
@@ -68,11 +69,51 @@ describe('SpotifyPlayerComponent', () => {
 
   describe('On click play pause', () => {
     it('should have subscribed to pauseSong since we are currently playing', () => {
+
+      mockPlaySong.calls.reset();
+      mockPauseSong.calls.reset();
+
       component.currPlayerStatus = true;
       component.onClickPlayPause();
 
       // expect(mockPauseSong).toHaveBeenCalled();
+      expect(mockPauseSong).toHaveBeenCalled();
+    });
+
+    it('should have subscribed to playSong since we are currently on pause', () => {
+
+      mockPlaySong.calls.reset();
+      mockPauseSong.calls.reset();
+
+      component.currPlayerStatus = false;
+      component.onClickPlayPause();
+
+      // expect(mockPauseSong).toHaveBeenCalled();
       expect(mockPlaySong).toHaveBeenCalled();
+    });
+  });
+
+
+  describe('On previous or next song triggered', () => {
+    it('should have tried to retrieve the playback info from the server', () => {
+      spyOn(component, 'getPlaybackInfo');
+      component.onPreviousOrNextSongTriggered();
+
+      expect(component.getPlaybackInfo).toHaveBeenCalled();
+    });
+  });
+
+  describe('Set current song', () => {
+    it('should have defined the provided song as component.song', () => {
+      const mockSong: Song = {
+        title: 'My title',
+        artist: 'My artist',
+        album: 'My album',
+        imageUrl: '',
+      }
+      component.setCurrentSong(mockSong);
+
+      expect(component.song).toEqual(mockSong);
     })
   })
 });
