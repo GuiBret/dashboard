@@ -10,12 +10,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
-import { SpotifyInterceptor } from 'src/app/interceptors/spotify.interceptor';
-import { SpotifyHomeComponent } from 'src/app/pages/spotify-home/spotify-home.component';
-import { SpotifyStoreTokenComponent } from 'src/app/pages/spotify-store-token/spotify-store-token.component';
+import { SpotifyInterceptor } from './interceptors/spotify.interceptor';
+import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
+import { SpotifyStoreTokenComponent } from './pages/spotify-store-token/spotify-store-token.component';
 import { SpotifyUserInfoComponent } from 'src/app/pages/spotify-user-info/spotify-user-info.component';
-import { SpotifyPlayerComponent } from './spotify-player/spotify-player.component';
-import { SpotifySearchComponent } from './spotify-search/spotify-search.component';
+import { SpotifyPlayerComponent } from './components/spotify-player/spotify-player.component';
+import { SpotifySearchComponent } from './components/spotify-search/spotify-search.component';
 import { SpotifyRoutingModule } from './spotify.routing';
 
 @NgModule({

@@ -9,29 +9,25 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MatIconModule } from '@angular/material/icon';
-import { TodoListComponent } from './pages/todo-list/todo-list.component';
 import { GithubComponent } from './pages/github/github.component';
 import { GmailComponent } from './pages/gmail/gmail.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTableModule, MatTable } from '@angular/material/table';
 import {MatSelectModule, MatSelect} from '@angular/material/select';
-import { TodoEditComponent } from './components/TodoList/todo-edit/todo-edit.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SpotifyModule } from './components/Spotify/spotify.module';
+import { SpotifyModule } from './Spotify/spotify.module';
+import { TodoListModule } from './TodoList/todo-list.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    TodoListComponent,
     GithubComponent,
     GmailComponent,
-    TodoEditComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -50,7 +46,8 @@ import { SpotifyModule } from './components/Spotify/spotify.module';
     MatSnackBarModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    SpotifyModule
+    SpotifyModule,
+    TodoListModule
   ],
 
   bootstrap: [AppComponent]
