@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from '@angular/router';
-import { SpotifyTokenGuard } from 'src/app/guards/spotify-token.guard';
-import { SpotifyHomeComponent } from 'src/app/pages/spotify-home/spotify-home.component';
-import { SpotifyStoreTokenComponent } from 'src/app/pages/spotify-store-token/spotify-store-token.component';
+import { SpotifyTokenGuard } from './guards/spotify-token.guard';
+import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
+import { SpotifyStoreTokenComponent } from './pages/spotify-store-token/spotify-store-token.component';
 
 const routes: Routes = [
   {

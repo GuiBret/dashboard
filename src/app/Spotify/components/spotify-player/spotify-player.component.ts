@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyPlayerService } from 'src/app/services/spotify/spotify-player.service';
+import { SpotifyPlayerService } from '../../services/spotify-player.service';
 import { Subscription, Observable } from 'rxjs';
-import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
-import { Song } from 'src/app/models/song';
+import { SpotifyService } from '../../services/spotify.service';
+import { Song } from 'src/app/Spotify/services/song';
 
 @Component({
   selector: 'app-spotify-player',

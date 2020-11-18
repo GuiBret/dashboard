@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from './http.service';
-import { Observable, Subject } from 'rxjs';
+import { HttpService } from '../../services/http.service';
+import {  Subject } from 'rxjs';
 import { Todo } from '../models/todo';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgForm } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'

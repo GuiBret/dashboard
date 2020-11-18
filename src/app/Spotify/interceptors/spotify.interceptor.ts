@@ -6,7 +6,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HttpService } from '../services/http.service';
+import { HttpService } from '../../services/http.service';
 
 /**
  * Checks if the token is still valid, if not, will request a refresh token

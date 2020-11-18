@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-import { Song } from 'src/app/models/song';
-import { SpotifyPlayerService } from 'src/app/services/spotify/spotify-player.service';
+import { Song } from 'src/app/Spotify/services/song';
+import { SpotifyPlayerService } from '../../services/spotify-player.service';
 
 import { SpotifyPlayerComponent } from './spotify-player.component';
 

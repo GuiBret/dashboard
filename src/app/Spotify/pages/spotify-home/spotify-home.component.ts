@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
-import { FormControl } from '@angular/forms';
-import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
+import { SpotifyService } from '../../services/spotify.service';
 import { Title } from '@angular/platform-browser';
 
 
