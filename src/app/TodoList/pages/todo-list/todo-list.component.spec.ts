@@ -4,8 +4,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subject } from 'rxjs';
 import { observeOn } from 'rxjs/operators';
-import { Todo } from 'src/app/models/todo';
-import { TodoListService } from 'src/app/services/todo-list.service';
+import { Todo } from '../../models/todo';
+import { TodoListService } from '../../services/todo-list.service';
 
 import { TodoListComponent } from './todo-list.component';
 

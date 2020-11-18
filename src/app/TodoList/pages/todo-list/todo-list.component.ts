@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, ɵConsole } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs';
-import { TodoListService } from 'src/app/services/todo-list.service';
-import { Todo } from 'src/app/models/todo';
+import { TodoListService } from '../../services/todo-list.service';
+import { Todo } from '../../models/todo';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
