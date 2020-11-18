@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Todo } from '../models/todo';
+import { Todo } from '../TodoList/models/todo';
 import { environment } from '../../environments/environment';
 
 @Injectable({

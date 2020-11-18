@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { SpotifyService } from './services/Spotify/spotify.service';
+import { SpotifyService } from './Spotify/services/spotify.service';
 import { HttpService } from './services/http.service';
 import { Router, NavigationEnd } from '@angular/router';
 @Component({

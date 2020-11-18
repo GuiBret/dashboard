@@ -9,6 +9,9 @@ import { TodoListService } from './services/todo-list.service';
     TodoEditComponent,
   ],
   imports: [
+
+  ],
+  providers: [
     TodoListService
   ]
 

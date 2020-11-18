@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
+import { SpotifyService } from '../../services/spotify.service';
 import { FormControl } from '@angular/forms';
 
 @Component({
