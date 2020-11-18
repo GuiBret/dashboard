@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TodoListService } from 'src/app/services/todo-list.service';
+import { TodoListService } from '../../services/todo-list.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Todo } from 'src/app/models/todo';
+import { Todo } from 'src/app/TodoList/models/todo';
 
 import { Title } from '@angular/platform-browser';
 import { FormGroup, FormControl, Validators } from '@angular/forms';

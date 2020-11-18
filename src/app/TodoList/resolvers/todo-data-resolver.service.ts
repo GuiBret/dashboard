@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Todo } from '../models/todo';
 import { TodoListService } from '../services/todo-list.service';
-import { HttpService } from '../services/http.service';
+import { HttpService } from '../../services/http.service';
 import { map } from 'rxjs/operators';
 /**
  * Resolver for a todo's data, used when entering todolist/:id/edit or todolist/add without context

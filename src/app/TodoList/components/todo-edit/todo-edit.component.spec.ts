@@ -4,8 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Todo } from 'src/app/models/todo';
-import { TodoListService } from 'src/app/services/todo-list.service';
+import { Todo } from 'src/app/TodoList/models/todo';
+import { TodoListService } from '../../services/todo-list.service';
 
 import { TodoEditComponent } from './todo-edit.component';
 

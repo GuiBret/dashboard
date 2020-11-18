@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subject } from 'rxjs';
 import { Todo } from '../models/todo';
-import { HttpService } from './http.service';
+import { HttpService } from '../../services/http.service';
 
 import { TodoListService } from './todo-list.service';
 
