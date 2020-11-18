@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { SpotifyService } from './services/Spotify/spotify.service';
 import { HttpService } from './services/http.service';
@@ -8,33 +8,32 @@ import { Router, NavigationEnd } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
   opened = true;
   title = 'dashboard';
   isLoggedOnSpotify = false;
   isSmallScreen = false;
   color = 'black';
   constructor(private bpObserver: BreakpointObserver, private spotifySvc: SpotifyService, private http: HttpService, private router: Router) {
-    this.isSmallScreen = bpObserver.isMatched('(max-width: 599px)');
 
-    this.router.events.subscribe((val: any) => {
-
-      if(val instanceof NavigationEnd) {
-
-        if(val.url.includes('/spotify/logged')) {
-          this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
-          this.router.navigate(['spotify'])
-        }
-      }
-    });
+    this.router.events.subscribe(this.onRouterEventReceived.bind(this));
   }
 
-  ngOnInit() {
 
 
+  ngAfterViewInit() {
+    this.isSmallScreen = this.bpObserver.isMatched('(max-width: 599px)');
+  }
+
+  onRouterEventReceived(val: any) {
 
 
-
+    if(val instanceof NavigationEnd) {
+      if(val.url.includes('/spotify/logged')) {
+        this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
+        this.router.navigate(['spotify'])
+      }
+    }
   }
 
   toggleSidenav() {

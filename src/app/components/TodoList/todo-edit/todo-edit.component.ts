@@ -31,41 +31,53 @@ export class TodoEditComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.route.data.subscribe((data: {todo: Todo}) => {
+    this.route.data.subscribe(this.handleRoute.bind(this));
 
-      if(data.todo._id) {
+  }
+
+  handleRoute(data: {todo: Todo }) {
+
+      if(data.todo._id != null) {
         this.editMode = true;
       }
+
+
       this.currId = data.todo._id;
       this.currTodo = data.todo;
       this.form.setValue(this.currTodo);
-      // }
-
-      // this.
-    });
-
   }
 
   onSubmitForm() {
     if(this.editMode) {
-      this.todoSvc.editTodo(this.form.value).subscribe((response: any) => {
-        if(response.status === 'OK') {
-          this.todoSvc.displaySnackbar('Todo succesfully edited.');
-
-          this.router.navigate(['/todolist']);
-        }
-      });
+      this.todoSvc.editTodo(this.form.value).subscribe(this.onTodoEdited.bind(this));
 
     } else {
-      this.todoSvc.addTodo(this.form.value).subscribe((response: any) => {
-        if(response.status === 'OK') {
-          this.todoSvc.displaySnackbar('Todo succesfully added.');
-
-          this.router.navigate(['/todolist']);
-        }
-      });
+      this.todoSvc.addTodo(this.form.value).subscribe(this.onTodoAdded.bind(this));
     }
 
+  }
+  /**
+   *
+   * @param response Contains OK or KO, depending on server response
+   */
+  onTodoEdited(response: {status: string}) {
+    if(response.status === 'OK') {
+      this.todoSvc.displaySnackbar('Todo succesfully edited.');
+
+      this.router.navigate(['/todolist']);
+    }
+  }
+
+  /**
+   *
+   * @param response Contains OK or KO, depending on server response
+   */
+  onTodoAdded(response: {status: string}) {
+    if (response.status === 'OK') {
+      this.todoSvc.displaySnackbar('Todo succesfully added.');
+
+      this.router.navigate(['/todolist']);
+    }
   }
 
 }

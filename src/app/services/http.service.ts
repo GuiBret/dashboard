@@ -102,7 +102,9 @@ export class HttpService {
   refreshSpotifyToken(refreshToken: string) {
     return this.http.get(environment.serverRoot + '/spotify/refresh-token/' + refreshToken);
   }
-
+  /**
+   * Calls the server to retrieve Spotify's auth url
+   */
   getSpotifyAuthUrl() {
     return this.http.get(environment.serverRoot + '/spotify/get-url');
   }

@@ -43,19 +43,22 @@ export class SpotifyPlayerService {
   }
 
   getInfoOnPlayback() {
-    return this.http.get('https://api.spotify.com/v1/me/player/currently-playing', {observe: 'response'}).pipe(map((response: any) => {
-      if(response.status === 200) {
-        const item = response.body.item;
+    return this.http.get('https://api.spotify.com/v1/me/player/currently-playing', {observe: 'response'})
+                    .pipe(map(this.onInfoOnPlaybackReceived.bind(this)));
+  }
 
-        return {
-          title: item.name,
-          artist: item.artists[0].name,
-          album: item.album.name,
-          imageUrl: item.album.images[item.album.images.length - 1].url
-        };
+  onInfoOnPlaybackReceived(response: {status: number, body?: any}) {
+    if(response.status === 200) {
+      const item = response.body.item;
+      console.log(response);
+      return {
+        title: item.name,
+        artist: item.artists[0].name,
+        album: item.album.name,
+        imageUrl: item.album.images[item.album.images.length - 1].url
+      };
 
-      }
-    }));
+    }
   }
 
   getAvailableDevices() {
@@ -66,6 +69,8 @@ export class SpotifyPlayerService {
     this.http.put('https://api.spotify.com/v1/me/player/volume?volume_percent=' + value, {}).subscribe(() => {});
 
   }
+
+
 
 
 }

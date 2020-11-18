@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyPlayerService } from 'src/app/services/spotify/spotify-player.service';
 import { Subscription, Observable } from 'rxjs';
 import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
+import { Song } from 'src/app/models/song';
 
 @Component({
   selector: 'app-spotify-player',
@@ -10,7 +11,7 @@ import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
 })
 export class SpotifyPlayerComponent implements OnInit {
 
-  song: any = {
+  song: Song = {
     title: 'My song',
     artist: 'My artist',
     album: 'My album',
@@ -20,24 +21,27 @@ export class SpotifyPlayerComponent implements OnInit {
   playbackChanged : Subscription;
   volume: number = 20;
 
-  currPlayerStatus = false;
+  currPlayerStatus = true;
   constructor(private spotifySvc: SpotifyService, private spotifyPlayerSvc: SpotifyPlayerService) { }
 
   ngOnInit(): void {
-    this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
-      this.song = song;
-    });
+    this.spotifyPlayerSvc.getInfoOnPlayback().subscribe(this.setCurrentSong.bind(this));
 
     this.playbackChanged = this.spotifySvc.onPlaybackChanged.subscribe(this.getPlaybackInfo.bind(this));
+  }
+
+  /**
+   * Defines a new song, callback of onPlaybackInfoReceived
+   * @param song The song which will be displayed in the player
+   */
+  setCurrentSong(song: Song) {
+    this.song = song;
   }
 
   getPlaybackInfo() {
     setTimeout(() => {
 
-      this.spotifyPlayerSvc.getInfoOnPlayback().subscribe((song: any) => {
-        console.log('Playback changed');
-        this.song = song;
-      });
+      this.spotifyPlayerSvc.getInfoOnPlayback().subscribe(this.setCurrentSong.bind(this));
     }, 500);
   }
 
@@ -48,7 +52,7 @@ export class SpotifyPlayerComponent implements OnInit {
 
     let obs : Observable<any>;
     // If the current status is "Play", we'll pause the playback
-    if(!this.currPlayerStatus) {
+    if(this.currPlayerStatus) {
       obs = this.spotifyPlayerSvc.pauseSong();
 
     } else {
@@ -64,19 +68,20 @@ export class SpotifyPlayerComponent implements OnInit {
    * Calls the endpoint to go to the previous song, then gets the info on the current playback after 500ms (bc of asynchronity)
    */
   goToPreviousSong() {
-    this.spotifyPlayerSvc.goToPreviousSong().subscribe(() => {
-      this.getPlaybackInfo();
+    this.spotifyPlayerSvc.goToPreviousSong().subscribe(this.getPlaybackInfo.bind(this));
+  }
 
-    });
+  /**
+   * When "Next song" or "Previous song" is triggered, we fetch the playback's info
+   */
+  onPreviousOrNextSongTriggered() {
+    this.getPlaybackInfo();
   }
   /**
    * Calls the endpoint to go to the next song, then gets the info on the current playback after 500ms (bc of asynchronity)
    */
   goToNextSong() {
-    this.spotifyPlayerSvc.goToNextSong().subscribe(() => {
-      this.getPlaybackInfo();
-
-    });
+    this.spotifyPlayerSvc.goToNextSong().subscribe(this.getPlaybackInfo.bind(this));
   }
 
   getAvailableDevices() {
