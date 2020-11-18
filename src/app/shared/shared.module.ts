@@ -10,7 +10,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     FormsModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     FormsModule,
