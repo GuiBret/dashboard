@@ -21,6 +21,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SpotifyModule } from './Spotify/spotify.module';
 import { TodoListModule } from './TodoList/todo-list.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { TodoListModule } from './TodoList/todo-list.module';
     MatCheckboxModule,
     ReactiveFormsModule,
     SpotifyModule,
-    TodoListModule
+    TodoListModule,
+    SharedModule
   ],
 
   bootstrap: [AppComponent]
