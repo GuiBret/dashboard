@@ -18,7 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { SpotifyModule } from './Spotify/spotify.module';
 import { TodoListModule } from './TodoList/todo-list.module';
 import { SharedModule } from './shared/shared.module';
@@ -45,11 +45,10 @@ import { SharedModule } from './shared/shared.module';
     MatInputModule,
     MatIconModule,
     MatSnackBarModule,
-    MatCheckboxModule,
     ReactiveFormsModule,
     SpotifyModule,
     TodoListModule,
-    SharedModule
+    SharedModule,
   ],
 
   bootstrap: [AppComponent]
