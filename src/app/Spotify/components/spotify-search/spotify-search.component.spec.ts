@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { componentFactoryName } from '@angular/compiler';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
-import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
+import { SpotifyService } from '../../services/spotify.service';
 
 import { SpotifySearchComponent } from './spotify-search.component';
 
@@ -83,5 +82,25 @@ describe('SpotifySearchComponent', () => {
 
       expect(name).toEqual('My name');
     });
+  });
+
+  describe('On checkbox clicked', () => {
+    it('should have rechecked all checkboxes if they are all unchecked', () => {
+      component.formGroupOptions.setValue({
+        albums: true, songs: false, artists: false
+      });
+      component.onOptionsChanged({albums: false, songs: false, artists: false});
+
+      expect(component.formGroupOptions.value).toEqual({albums: true, songs: true, artists: true});
+    })
+  });
+
+  it('should not have done anything since at least one checkbox is checked', () => {
+    component.formGroupOptions.setValue({
+      albums: true, songs: false, artists: false
+    });
+    component.onOptionsChanged({albums: false, songs: false, artists: true});
+
+    expect(component.formGroupOptions.value).toEqual({albums: true, songs: false, artists: false});
   })
 });
