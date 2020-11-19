@@ -3,7 +3,7 @@ import { componentFactoryName } from '@angular/compiler';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
-import { SpotifyService } from 'src/app/services/Spotify/spotify.service';
+import { SpotifyService } from '../../services/spotify.service';
 
 import { SpotifySearchComponent } from './spotify-search.component';
 
