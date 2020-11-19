@@ -79,7 +79,7 @@ describe('HttpService', () => {
       getSpy.calls.reset();
       service.getTodoList();
 
-      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/refresh-token/mycustomtoken', jasmine.any(Object));
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/todos', jasmine.any(Object));
 
 
     });
@@ -107,7 +107,7 @@ describe('HttpService', () => {
     it('should have sent a DELETE request to the server to delete a todo', () => {
       service.deleteTodoElement('1');
 
-      expect(httpClientStub.delete).toHaveBeenCalledWith(environment.serverRoot + '/todo/1', jasmine.any(Object));
+      expect(httpClientStub.delete).toHaveBeenCalledWith(environment.serverRoot + '/todos/1', jasmine.any(Object));
     });
   })
 });
