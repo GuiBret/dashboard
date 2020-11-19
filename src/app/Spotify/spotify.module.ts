@@ -17,6 +17,7 @@ import { SpotifyUserInfoComponent } from 'src/app/pages/spotify-user-info/spotif
 import { SpotifyPlayerComponent } from './components/spotify-player/spotify-player.component';
 import { SpotifySearchComponent } from './components/spotify-search/spotify-search.component';
 import { SpotifyRoutingModule } from './spotify.routing';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SpotifyRoutingModule } from './spotify.routing';
     MatCardModule,
     MatAutocompleteModule,
     MatButtonModule,
+    SharedModule
   ],
   exports: [
     SpotifyHomeComponent,
