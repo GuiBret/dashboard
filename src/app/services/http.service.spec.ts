@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Todo } from '../models/todo';
+import { Todo } from '../TodoList/models/todo';
 
 import { HttpService } from './http.service';
 
