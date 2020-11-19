@@ -65,9 +65,11 @@ describe('SpotifySearchComponent', () => {
 
     it('should have called fetchAutocomplete since the string is longer than 3 characters', () => {
       mockFetchAutocomp.calls.reset();
+
+      component.formGroupOptions.setValue({artists: false, albums: true, songs: false});
       component.onSearchTextChanged('abcd');
 
-      expect(spotifySvcStub.fetchAutocomplete).toHaveBeenCalledWith('abcd');
+      expect(spotifySvcStub.fetchAutocomplete).toHaveBeenCalledWith('abcd', {artists: false, albums: true, songs: false});
 
     });
   });
