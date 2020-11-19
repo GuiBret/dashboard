@@ -14,7 +14,7 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
   formGroupOptions = new FormGroup({
     albums: new FormControl(false),
     songs: new FormControl(false),
-    artists: new FormControl(false),
+    artists: new FormControl(true),
   });
   constructor(private spotifyService: SpotifyService) { }
 
