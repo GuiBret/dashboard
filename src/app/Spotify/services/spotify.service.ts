@@ -24,8 +24,22 @@ export class SpotifyService {
     return localStorage.getItem('spotifyToken') != null && parseInt(localStorage.getItem('spotifyExp')) > (new Date().getTime());
   }
 
-  fetchAutocomplete(query: string) {
-    return this.http.get(environment.serverRoot + '/spotify/autocomp/' + query);
+  fetchAutocomplete(query: string, filterParams: {albums: boolean, songs: boolean, artists: boolean}) {
+    // TODO : rewrite that
+    let params = [];
+    if(filterParams.albums) {
+      params.push('album');
+    }
+
+    if(filterParams.artists) {
+      params.push('artist');
+    }
+
+    if(filterParams.songs) {
+      params.push('track');
+    }
+
+    return this.http.get(environment.serverRoot + '/spotify/autocomp/' + query + '?type=' + params.join(','));
   }
 
   playElement(uri: string) {

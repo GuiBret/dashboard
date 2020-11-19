@@ -35,7 +35,7 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
 
   onSearchTextChanged(newValue : string) {
     if(newValue.length >= 3) {
-      this.spotifyService.fetchAutocomplete(newValue).subscribe(this.populateOptions.bind(this));
+      this.spotifyService.fetchAutocomplete(newValue, this.formGroupOptions.value).subscribe(this.populateOptions.bind(this));
     } else {
       this.options = [];
     }

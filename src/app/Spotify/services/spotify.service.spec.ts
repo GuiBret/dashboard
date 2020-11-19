@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { SpotifyService } from './spotify.service';
 
@@ -8,8 +9,9 @@ describe('SpotifyService', () => {
   let service: SpotifyService;
   let httpClientStub: Partial<HttpClient>;
 
+  const getSpyObj = jasmine.createSpy().and.returnValue(new Observable());
   httpClientStub = {
-    get: jasmine.createSpy().and.returnValue(new Observable())
+    get: getSpyObj
   };
 
   beforeEach(() => {
@@ -24,6 +26,30 @@ describe('SpotifyService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  describe('Make autocomplete', () => {
+    it('should pass all cases', () => {
+      getSpyObj.calls.reset();
+      service.fetchAutocomplete('test', {albums: true, songs: false, artists: false});
+
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=album');
+
+      getSpyObj.calls.reset();
+      service.fetchAutocomplete('test', {albums: true, songs: true, artists: false});
+
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=track');
+
+      getSpyObj.calls.reset();
+      service.fetchAutocomplete('test', {albums: true, songs: false, artists: true});
+
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=artist');
+
+      getSpyObj.calls.reset();
+      service.fetchAutocomplete('test', {albums: true, songs: false, artists: true});
+
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=album,track');
+    })
+  })
 
 
 
