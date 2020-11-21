@@ -59,8 +59,8 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  playElement(uri: string) {
-    this.spotifyService.playElement(uri);
+  playElement(selectedOption: {uri: string, type: string}) {
+    this.spotifyService.playElement(selectedOption.uri, selectedOption.type);
   }
 
   onOptionsChanged(newFormValue: {albums: boolean, artists: boolean, songs: boolean}) {
