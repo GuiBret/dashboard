@@ -37,17 +37,17 @@ describe('SpotifyService', () => {
       getSpyObj.calls.reset();
       service.fetchAutocomplete('test', {albums: true, songs: true, artists: false});
 
-      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=track');
-
-      getSpyObj.calls.reset();
-      service.fetchAutocomplete('test', {albums: true, songs: false, artists: true});
-
-      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=artist');
-
-      getSpyObj.calls.reset();
-      service.fetchAutocomplete('test', {albums: true, songs: false, artists: true});
-
       expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=album,track');
+
+      getSpyObj.calls.reset();
+      service.fetchAutocomplete('test', {albums: true, songs: false, artists: true});
+
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=album,artist');
+
+      getSpyObj.calls.reset();
+      service.fetchAutocomplete('test', {albums: true, songs: true, artists: true});
+
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=album,artist,track');
     })
   })
 
