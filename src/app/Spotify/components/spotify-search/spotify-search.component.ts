@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-spotify-search',
@@ -11,6 +11,11 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
 
 
   formControl = new FormControl();
+  formGroupOptions = new FormGroup({
+    albums: new FormControl(false),
+    songs: new FormControl(false),
+    artists: new FormControl(true),
+  });
   constructor(private spotifyService: SpotifyService) { }
 
   /**
@@ -25,11 +30,12 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Triggers autocomplete if str.length >= 3
     this.formControl.valueChanges.subscribe(this.onSearchTextChanged.bind(this));
+    this.formGroupOptions.valueChanges.subscribe(this.onOptionsChanged.bind(this));
   }
 
   onSearchTextChanged(newValue : string) {
     if(newValue.length >= 3) {
-      this.spotifyService.fetchAutocomplete(newValue).subscribe(this.populateOptions.bind(this));
+      this.spotifyService.fetchAutocomplete(newValue, this.formGroupOptions.value).subscribe(this.populateOptions.bind(this));
     } else {
       this.options = [];
     }
@@ -53,8 +59,19 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  playElement(uri: string) {
-    this.spotifyService.playElement(uri);
+  playElement(selectedOption: {uri: string, type: string}) {
+    this.spotifyService.playElement(selectedOption.uri, selectedOption.type);
+  }
+
+  onOptionsChanged(newFormValue: {albums: boolean, artists: boolean, songs: boolean}) {
+    if(!newFormValue.albums && !newFormValue.artists && !newFormValue.songs) {
+
+      this.formGroupOptions.setValue({
+        albums: true,
+        songs: true,
+        artists: true
+      })
+    }
   }
 
 }

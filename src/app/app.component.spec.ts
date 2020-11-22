@@ -6,7 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { AppComponent } from './app.component';
 import { HttpService } from './services/http.service';
-import { SpotifyService } from './services/Spotify/spotify.service';
+import { SpotifyService } from './Spotify/services/spotify.service';
 
 describe('AppComponent', () => {
 
