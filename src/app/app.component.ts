@@ -23,6 +23,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.isSmallScreen = this.bpObserver.isMatched('(max-width: 599px)');
+    this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
   }
 
   onRouterEventReceived(val: any) {
