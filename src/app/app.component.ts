@@ -46,4 +46,10 @@ export class AppComponent implements AfterViewInit {
       window.location.href = response.url;
     })
   }
+
+  triggerGmailLoginProcedure() {
+    this.http.getGmailAuthUrl().subscribe((response: any) => {
+      window.location.href = response.url;
+    })
+  }
 }

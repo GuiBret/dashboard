@@ -108,4 +108,8 @@ export class HttpService {
   getSpotifyAuthUrl() {
     return this.http.get(environment.serverRoot + '/spotify/get-url');
   }
+
+  getGmailAuthUrl() {
+    return this.http.get(environment.serverRoot + 'gmail/get-url');
+  }
 }
