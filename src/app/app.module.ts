@@ -10,7 +10,6 @@ import { MatToolbarModule, MatToolbar } from '@angular/material/toolbar';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { GithubComponent } from './pages/github/github.component';
-import { GmailComponent } from './pages/gmail/gmail.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import {MatSelectModule } from '@angular/material/select';
@@ -22,13 +21,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { SpotifyModule } from './Spotify/spotify.module';
 import { TodoListModule } from './TodoList/todo-list.module';
 import { SharedModule } from './shared/shared.module';
+import { GmailModule } from './gmail/gmail.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     GithubComponent,
-    GmailComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -49,6 +49,8 @@ import { SharedModule } from './shared/shared.module';
     SpotifyModule,
     TodoListModule,
     SharedModule,
+    GmailModule
+
   ],
 
   bootstrap: [AppComponent]
