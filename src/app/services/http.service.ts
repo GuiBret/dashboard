@@ -110,6 +110,37 @@ export class HttpService {
   }
 
   getGmailAuthUrl() {
-    return this.http.get(environment.serverRoot + 'gmail/get-url');
+    const reqOpts = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT,DELETE'
+      })
+    };
+
+    return this.http.get(environment.serverRoot + '/gmail/get-url', reqOpts);
+  }
+
+  getEmailList() {
+
+    const reqOpts = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
+      })
+    };
+
+
+    return this.http.get("https://gmail.googleapis.com/gmail/v1/users/me/messages?max_results=50", reqOpts);
+  }
+
+  getIndividualEmailInfo(emailId: string) {
+    const reqOpts = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
+      })
+    };
+
+
+    return this.http.get("https://gmail.googleapis.com/gmail/v1/users/me/messages/" + emailId, reqOpts);
+
   }
 }
