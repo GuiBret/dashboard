@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { GmailComponent } from './gmail.component';
 import { GmailRoutingModule } from './gmail.routing';
-import { GmailStoreTokenComponent } from './gmailstoretoken/gmailstoretoken.component';
+import { GmailStoreTokenComponent } from './components/gmailstoretoken/gmailstoretoken.component';
+import { GmailEmailListComponent } from './components/gmail-email-list/gmail-email-list.component';
 
 
 @NgModule({
   declarations: [
     GmailComponent,
-    GmailStoreTokenComponent
+    GmailStoreTokenComponent,
+    GmailEmailListComponent
   ],
   imports: [
     GmailRoutingModule

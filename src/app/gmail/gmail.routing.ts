@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from '@angular/router';
 import { GmailComponent } from './gmail.component';
-import { GmailStoreTokenComponent } from './gmailstoretoken/gmailstoretoken.component';
+import { GmailStoreTokenComponent } from './components/gmailstoretoken/gmailstoretoken.component';
 
 
 const routes: Routes = [
