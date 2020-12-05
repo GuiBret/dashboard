@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule, MatCheckboxRequiredValidator } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
@@ -13,14 +14,16 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule
   ],
   exports: [
     FormsModule,
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule
   ]
 })
 export class SharedModule {}
