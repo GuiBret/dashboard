@@ -46,7 +46,7 @@ export class SpotifyInterceptor implements HttpInterceptor {
                 }
               });
 
-              next.handle(request);
+              return next.handle(request);
             })
           })
 
