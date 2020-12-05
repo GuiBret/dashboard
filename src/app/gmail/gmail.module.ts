@@ -3,6 +3,7 @@ import { GmailComponent } from './gmail.component';
 import { GmailRoutingModule } from './gmail.routing';
 import { GmailStoreTokenComponent } from './components/gmailstoretoken/gmailstoretoken.component';
 import { GmailEmailListComponent } from './components/gmail-email-list/gmail-email-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { GmailEmailListComponent } from './components/gmail-email-list/gmail-ema
     GmailEmailListComponent
   ],
   imports: [
-    GmailRoutingModule
+    GmailRoutingModule,
+    SharedModule
   ],
   exports: [
 
