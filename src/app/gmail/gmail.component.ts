@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-gmail',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GmailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpService) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('gmailToken')) {
+      this.http.getEmailList().subscribe((emailList) => {
+        console.log(emailList);
+      })
+    }
   }
 
 }
