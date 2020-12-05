@@ -11,7 +11,7 @@ export class GmailStoreTokenComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log('Coucou')
+
     this.route.params.subscribe((params: any) => {
       localStorage.setItem('gmailToken', params.token);
       localStorage.setItem('gmailExp', params.expires);
