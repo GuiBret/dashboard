@@ -44,7 +44,6 @@ import { SharedModule } from '../shared/shared.module';
     SpotifyHomeComponent,
     SpotifySearchComponent,
     SpotifyStoreTokenComponent,
-    SpotifyUserInfoComponent,
     SpotifyPlayerComponent
   ],
   providers: [{
