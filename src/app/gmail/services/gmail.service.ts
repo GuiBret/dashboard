@@ -12,6 +12,7 @@ import { GmailEmail } from '../interfaces/gmail-email.interface';
 })
 export class GmailService {
 
+  private cachedMessages: Object = {};
   private newEmailListPosted: Subject<any> = new Subject();
   public onNewEmailListPosted = this.newEmailListPosted.asObservable();
 
@@ -36,6 +37,9 @@ export class GmailService {
           let sender = emailInfo.payload.headers.filter((currHeader: {name: string, value: string}) => {
             return currHeader.name === 'From';
           })[0].value;
+
+          this.cachedMessages[emailInfo.id] = emailInfo;
+          // We push the message in messages to use it in GmailEmailComponent
           messages.push({
             id: emailInfo.id,
             internalDate: emailInfo.internalDate,
@@ -46,6 +50,7 @@ export class GmailService {
 
           });
 
+          console.log(this.cachedMessages);
         })
       });
     });
