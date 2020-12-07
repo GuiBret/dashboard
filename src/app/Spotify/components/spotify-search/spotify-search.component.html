@@ -1,0 +1,24 @@
+<div class="example-form">
+  <div class="checkboxes" [formGroup]="formGroupOptions">
+    <mat-checkbox  formControlName="artists" name="artists">Artists</mat-checkbox>
+    <mat-checkbox  formControlName="songs" name="songs">Songs</mat-checkbox>
+    <mat-checkbox  formControlName="albums" name="albums">Albums</mat-checkbox>
+  </div>
+
+  <mat-form-field class="full-width">
+
+    <input type="text" placeholder="Type something" matInput [formControl]="formControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" placeholder="Type something" [displayWith]="displayName">
+      <mat-option *ngFor="let option of options" [value]="option" >
+        <img src="{{option.imageUrl}}" height="40px">
+        <span>{{option.name}}</span>
+
+        <button mat-raised-button color="primary" (click)="playElement(option)">Play</button>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+
+</div>
+
+

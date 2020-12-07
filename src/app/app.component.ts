@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { SpotifyService } from './services/Spotify/spotify.service';
+import { SpotifyService } from './Spotify/services/spotify.service';
 import { HttpService } from './services/http.service';
 import { Router, NavigationEnd } from '@angular/router';
 @Component({
@@ -23,6 +23,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.isSmallScreen = this.bpObserver.isMatched('(max-width: 599px)');
+    this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
   }
 
   onRouterEventReceived(val: any) {

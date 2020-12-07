@@ -1,0 +1,16 @@
+.full-width {
+  width:90%;
+}
+
+::ng-deep .mat-option-text {
+  display:flex !important;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkboxes {
+  width: 90%;
+  display:flex;
+  flex-direction:row;
+  justify-content: space-evenly;
+}
