@@ -1,3 +1,24 @@
+:host {
+  max-height:90vh;
+  display:block;
+}
+
+table {
+  height:90vh;
+  display:block;
+  overflow-y:scroll;
+}
+
+.mat-header-row {
+  position: sticky;
+  top: 0;
+}
+
 .unread {
   font-weight:bolder;
 }
+
+tr:hover {
+  cursor:pointer;
+}
+
