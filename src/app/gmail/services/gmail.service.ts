@@ -50,7 +50,6 @@ export class GmailService {
 
           });
 
-          console.log(this.cachedMessages);
         })
       });
     });
