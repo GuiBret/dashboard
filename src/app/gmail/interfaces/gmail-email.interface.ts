@@ -8,6 +8,14 @@ export class GmailEmail {
         name:string,
         value: string
       }
+    ],
+    parts: [
+      {
+        mimeType: string,
+        body: {
+          data: string
+        }
+      }
     ]
   };
   snippet: string;
