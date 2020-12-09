@@ -10,6 +10,6 @@
 
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let myRowData; columns: displayedColumns" [ngClass]="{'unread': !myRowData.isRead}"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: displayedColumns" [ngClass]="{'unread': !myRowData.isRead}" routerLink="/gmail/read-email/{{myRowData.id}}"></tr>
 
 </table>
