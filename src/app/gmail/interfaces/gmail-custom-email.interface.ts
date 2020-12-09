@@ -4,4 +4,6 @@ export class GmailCustomEmail {
   isRead: boolean;
   from: string;
   internalDate: number;
+  subject: string;
+  htmlContent: string;
 }
