@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GmailComponent } from './gmail.component';
 import { GmailStoreTokenComponent } from './components/gmailstoretoken/gmailstoretoken.component';
 import { ReadEmailComponent } from './pages/read-email/read-email.component';
+import { GetEmailResolver } from './resolvers/email-data.resolver';
 
 
 const routes: Routes = [
@@ -10,7 +11,10 @@ const routes: Routes = [
     path: 'gmail', component: GmailComponent
   },
   {
-    path: 'gmail/read-email/:emailid', component: ReadEmailComponent
+    path: 'gmail/read-email/:emailid', component: ReadEmailComponent,
+    resolve: {
+      emailContent: GetEmailResolver
+    }
   },
   {
     path: 'gmail/store-token/:token/:expires', component: GmailStoreTokenComponent
@@ -20,10 +24,14 @@ const routes: Routes = [
 @NgModule({
 
   imports: [
-    RouterModule.forChild(routes)
+
+    RouterModule.forChild(routes),
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    GetEmailResolver
   ]
 
 })
