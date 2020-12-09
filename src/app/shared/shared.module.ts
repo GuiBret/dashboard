@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     FormsModule,
@@ -23,7 +25,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule {}
