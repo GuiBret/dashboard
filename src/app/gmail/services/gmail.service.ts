@@ -29,6 +29,7 @@ export class GmailService {
 
     let messages: Array<GmailCustomEmail> = [];
 
+
     // TODO: Rewrite & flatten that
     this.http.getEmailList().subscribe((response: {messages: Array<{id: string, threadId: string}>}) => {
       response.messages.forEach((message: {id: string, threadId: string}) => {
@@ -94,5 +95,9 @@ export class GmailService {
       subject: subject,
       htmlContent: htmlContent
     };
+  }
+
+  containsEmailWithId(emailId: string) : boolean {
+    return this.cachedMessages[emailId] != null;
   }
 }
