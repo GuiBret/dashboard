@@ -43,8 +43,13 @@
 
 </ng-container>
 
-<ng-container *ngIf="todos.length === 0">
+<ng-container *ngIf="requestMade && todos.length === 0">
   <p>No todos found. Please click "Add a todo" to add one.</p>
+
+</ng-container>
+
+<ng-container *ngIf="!requestMade">
+  <mat-spinner></mat-spinner>
 
 </ng-container>
 

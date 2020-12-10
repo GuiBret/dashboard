@@ -23,6 +23,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
    */
   todoListChanged$: Subscription;
 
+  requestMade = false;
+
   /**
    * The current todo-list
    */
@@ -59,7 +61,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
     // TODO : à enlever
     this.todoSvc.fetchTodosAndThemes();
 
+    // TODO: Handle error
     this.todoListChanged$ = this.todoSvc.todoListChanged.subscribe((newTodoList: Array<Todo>) => {
+
+      this.requestMade = true;
       this.todos = newTodoList;
 
     })
@@ -70,6 +75,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy() {
     this.todoListChanged$.unsubscribe();
+    this.requestMade = false;
   }
 
   /**
