@@ -30,6 +30,7 @@ export class SpotifyPlayerComponent implements OnInit {
     this.playbackChanged = this.spotifySvc.onPlaybackChanged.subscribe(this.getPlaybackInfo.bind(this));
 
 
+    // TODO: Find another way to handle that
     setInterval(() => {
       this.getPlaybackInfo();
     }, 30000);
