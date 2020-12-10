@@ -15,8 +15,7 @@ export class GmailStoreTokenComponent implements OnInit {
     this.route.params.subscribe((params: any) => {
       localStorage.setItem('gmailToken', params.token);
       localStorage.setItem('gmailExp', params.expires);
-
-      this.router.navigate(['gmail']);
+      this.router.navigate(['gmail/logged']);
     });
   }
 

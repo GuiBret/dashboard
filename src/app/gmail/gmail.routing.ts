@@ -11,6 +11,9 @@ const routes: Routes = [
     path: 'gmail', component: GmailComponent
   },
   {
+    path: 'gmail/logged', component: GmailComponent
+  },
+  {
     path: 'gmail/read-email/:emailid', component: ReadEmailComponent,
     resolve: {
       emailContent: GetEmailResolver

@@ -22,6 +22,10 @@ export class GmailService {
 
   }
 
+  checkGmailStatus() {
+    return localStorage.getItem('gmailToken') != null && parseInt(localStorage.getItem('gmailExp')) > (new Date().getTime());
+  }
+
   /**
    * Retrieves the email id list, then makes another call per email to get content
    */
