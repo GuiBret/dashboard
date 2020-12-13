@@ -6,6 +6,7 @@ import { GmailEmailListComponent } from './components/gmail-email-list/gmail-ema
 import { SharedModule } from '../shared/shared.module';
 import { ReadEmailComponent } from './pages/read-email/read-email.component';
 import { EmailContainerComponent } from './components/email-container/email-container.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EmailContainerComponent } from './components/email-container/email-cont
   ],
   imports: [
     GmailRoutingModule,
-    SharedModule
+    SharedModule,
+    MatPaginatorModule
   ],
   exports: [
 

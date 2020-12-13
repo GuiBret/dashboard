@@ -18,8 +18,14 @@ export class GmailService {
   private newEmailListPosted: Subject<any> = new Subject();
   public onNewEmailListPosted = this.newEmailListPosted.asObservable();
 
+  private nextPageToken = '';
+
   constructor(private http: HttpService) {
 
+  }
+
+  get pageToken()  {
+    return this.nextPageToken;
   }
 
   checkGmailStatus() {
@@ -29,13 +35,15 @@ export class GmailService {
   /**
    * Retrieves the email id list, then makes another call per email to get content
    */
-  fetchEmailList() {
+  fetchEmailList(limit = 50, token = null) {
 
     let messages: Array<GmailCustomEmail> = [];
-
+    console.log(this.nextPageToken);
 
     // TODO: Rewrite & flatten that
-    this.http.getEmailList().subscribe((response: {messages: Array<{id: string, threadId: string}>}) => {
+    this.http.getEmailList(limit, token).subscribe((response: {messages: Array<{id: string, threadId: string}>, nextPageToken: string}) => {
+
+      this.nextPageToken = response.nextPageToken;
       response.messages.forEach((message: {id: string, threadId: string}) => {
 
         this.http.getIndividualEmailInfo(message.id).subscribe((emailInfo: GmailEmail) => {

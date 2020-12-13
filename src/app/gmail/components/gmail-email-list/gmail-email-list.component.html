@@ -15,11 +15,11 @@
     <tr mat-row *matRowDef="let myRowData; columns: displayedColumns" [ngClass]="{'unread': !myRowData.isRead}" routerLink="/gmail/read-email/{{myRowData.id}}"></tr>
 
   </table>
-
-
 </ng-container>
+<mat-paginator [ngClass]="{'hidden': isLoading}" [length]="999999" [pageSizeOptions]="[50, 100, 200]" (page)="loadNewList($event)"></mat-paginator>
 
 <ng-container *ngIf="emailList.length === 0">
+  <div id="mock-container"></div>
   <div id="spinner-container">
     <mat-spinner></mat-spinner>
   </div>

@@ -4,10 +4,11 @@
 }
 
 table {
-  height:90vh;
+  height:70vh;
   display:block;
   overflow-y:scroll;
 }
+
 
 .mat-header-row {
   position: sticky;
@@ -28,4 +29,8 @@ tr:hover {
   height: 90vh;
   justify-content: space-around;
   align-items:center;
+}
+
+.hidden {
+  display: none;
 }

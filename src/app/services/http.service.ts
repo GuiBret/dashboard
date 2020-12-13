@@ -120,16 +120,22 @@ export class HttpService {
     return this.http.get(environment.serverRoot + '/gmail/get-url', reqOpts);
   }
 
-  getEmailList() {
+  getEmailList(limit: number, token: string) {
 
+    const params = new URLSearchParams();
+
+    params.append('max_results', limit.toString());
     const reqOpts = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
       })
     };
 
+    if(token) {
+      params.append('pageToken', token);
+    }
 
-    return this.http.get("https://gmail.googleapis.com/gmail/v1/users/me/messages?max_results=50", reqOpts);
+    return this.http.get(`https://gmail.googleapis.com/gmail/v1/users/me/messages?` + params.toString(), reqOpts);
   }
 
   getIndividualEmailInfo(emailId: string) {
