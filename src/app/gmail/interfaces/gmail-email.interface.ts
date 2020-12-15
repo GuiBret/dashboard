@@ -9,6 +9,10 @@ export class GmailEmail {
         value: string
       }
     ],
+    body: {
+      size: number,
+      data: string
+    },
     parts: [
       {
         mimeType: string,
