@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { GmailCustomEmail } from '../../interfaces/gmail-custom-email.interface';
 import { GmailEmail } from '../../interfaces/gmail-email.interface';
@@ -6,7 +7,21 @@ import { GmailService } from '../../services/gmail.service';
 @Component({
   selector: 'app-email-list',
   templateUrl: './gmail-email-list.component.html',
-  styleUrls: ['./gmail-email-list.component.css']
+  styleUrls: ['./gmail-email-list.component.css'],
+  animations: [
+    trigger('emailElem', [
+      transition('void => *', [
+        style({
+          transform: 'translateY(50px)',
+          opacity: '0'
+        }),
+        animate(250, style({
+          transform: 'translateY(0)',
+          opacity: '1'
+        }))
+      ])
+    ])
+  ]
 })
 export class GmailEmailListComponent implements OnInit {
 
