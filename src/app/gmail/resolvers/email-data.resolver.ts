@@ -30,23 +30,20 @@ export class GetEmailResolver implements Resolve<any> {
 
       });
 
+      if(this.gmailService.containsEmailWithId(emailId)) {
+        return this.gmailService.getCachedEmail(emailId);
+      }
+
+      this.httpService.getIndividualEmailInfo(emailId).subscribe((emailInfo: GmailEmail) => {
+        const filteredEmail = this.gmailService.filterEmailInfo(emailInfo);
+        console.log(filteredEmail);
+        return {emailContent: filteredEmail};
+
+      });
+
 
     })
 
-    // TODO: Make request if the email is not cached (unlikely for now)
-
-    if(this.gmailService.containsEmailWithId(emailId)) {
-      return this.gmailService.getCachedEmail(emailId);
-
-
-    }
-
-    this.httpService.getIndividualEmailInfo(emailId).subscribe((emailInfo: GmailEmail) => {
-      const filteredEmail = this.gmailService.filterEmailInfo(emailInfo);
-      console.log(filteredEmail);
-      return {emailContent: filteredEmail};
-
-    });
 
 
 
