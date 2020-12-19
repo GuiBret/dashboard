@@ -49,7 +49,7 @@ export class SpotifyPlayerService {
   onInfoOnPlaybackReceived(response: {status: number, body?: any}) {
     if(response.status === 200) {
       const item = response.body.item;
-      console.log(response);
+
       return {
         title: item.name,
         artist: item.artists[0].name,
