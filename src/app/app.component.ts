@@ -9,7 +9,7 @@ import { GmailService } from './gmail/services/gmail.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
   opened = true;
   title = 'dashboard';
   isLoggedOnSpotify = false;
@@ -21,15 +21,19 @@ export class AppComponent implements AfterViewInit {
     this.router.events.subscribe(this.onRouterEventReceived.bind(this));
   }
 
+  ngOnInit() {
+    this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
+    this.isLoggedOnGmail = this.gmailSvc.checkGmailStatus();
+  }
+
 
 
   ngAfterViewInit() {
     this.isSmallScreen = this.bpObserver.isMatched('(max-width: 599px)');
-    this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
+
   }
 
   onRouterEventReceived(val: any) {
-
 
     if(val instanceof NavigationEnd) {
       if(val.url.includes('/spotify/logged')) {

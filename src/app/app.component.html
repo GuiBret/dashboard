@@ -55,7 +55,7 @@
         </mat-expansion-panel-header>
 
         <mat-action-row class='clickable' (click)="triggerGmailLoginProcedure()" *ngIf="!isLoggedOnGmail">Click here to login</mat-action-row>
-        <mat-action-row class='clickable' (click)="triggerGmailLoginProcedure()" *ngIf="isLoggedOnGmail">Home</mat-action-row>
+        <mat-action-row class='clickable' routerLink="/gmail" *ngIf="isLoggedOnGmail">Home</mat-action-row>
 
       </mat-expansion-panel>
       <mat-expansion-panel>
