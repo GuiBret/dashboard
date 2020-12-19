@@ -56,7 +56,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/Spotify/spotify.service.ts</code>
+            <code>src/app/Spotify/services/spotify.service.ts</code>
         </p>
 
 
@@ -125,7 +125,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/Spotify/spotify.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/Spotify/services/spotify.service.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -191,7 +191,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="23"
-                            class="link-to-prism">src/app/services/Spotify/spotify.service.ts:23</a></div>
+                            class="link-to-prism">src/app/Spotify/services/spotify.service.ts:23</a></div>
                 </td>
             </tr>
 
@@ -228,7 +228,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>fetchAutocomplete(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>fetchAutocomplete(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, filterParams: literal type)</code>
                 </td>
             </tr>
 
@@ -236,7 +236,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">src/app/services/Spotify/spotify.service.ts:27</a></div>
+                            class="link-to-prism">src/app/Spotify/services/spotify.service.ts:27</a></div>
                 </td>
             </tr>
 
@@ -259,6 +259,18 @@
                                     <td>query</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>filterParams</td>
+                                    <td>
+                                            <code>literal type</code>
                                     </td>
 
                                     <td>
@@ -298,15 +310,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>playElement(uri: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>playElement(uri: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="31"
-                            class="link-to-prism">src/app/services/Spotify/spotify.service.ts:31</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/Spotify/services/spotify.service.ts:46</a></div>
                 </td>
             </tr>
 
@@ -327,6 +339,18 @@
                             <tbody>
                                 <tr>
                                     <td>uri</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>type</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
@@ -378,7 +402,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/services/Spotify/spotify.service.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/Spotify/services/spotify.service.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -405,7 +429,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/Spotify/spotify.service.ts:11</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/Spotify/services/spotify.service.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -444,13 +468,37 @@ export class SpotifyService {
     return localStorage.getItem(&#x27;spotifyToken&#x27;) !&#x3D; null &amp;&amp; parseInt(localStorage.getItem(&#x27;spotifyExp&#x27;)) &gt; (new Date().getTime());
   }
 
-  fetchAutocomplete(query: string) {
-    return this.http.get(environment.serverRoot + &#x27;/spotify/autocomp/&#x27; + query);
+  fetchAutocomplete(query: string, filterParams: {albums: boolean, songs: boolean, artists: boolean}) {
+    // TODO : rewrite that
+    let params &#x3D; [];
+    if(filterParams.albums) {
+      params.push(&#x27;album&#x27;);
+    }
+
+    if(filterParams.artists) {
+      params.push(&#x27;artist&#x27;);
+    }
+
+    if(filterParams.songs) {
+      params.push(&#x27;track&#x27;);
+    }
+
+    // TODO: Rewrite that properly
+    return this.http.get(environment.serverRoot + &#x27;/spotify/autocomp/&#x27; + query + &#x27;?type&#x3D;&#x27; + params.join(&#x27;,&#x27;));
   }
 
-  playElement(uri: string) {
+  playElement(uri: string, type: string) {
 
-    this.http.put(&#x27;https://api.spotify.com/v1/me/player/play&#x27;, {context_uri: uri}).subscribe(() &#x3D;&gt; {
+    // Will change depending on if we try to play a track or an album / an artist
+    let form: {uris?: Array&lt;string&gt;, context_uri?: string} &#x3D; {};
+
+    if(type &#x3D;&#x3D;&#x3D; &#x27;track&#x27;) {
+      form.uris &#x3D; [uri];
+    } else {
+      form.context_uri &#x3D; uri;
+    }
+
+    this.http.put(&#x27;https://api.spotify.com/v1/me/player/play&#x27;, form).subscribe(() &#x3D;&gt; {
       this.playbackChangedSource.next();
     });
   }

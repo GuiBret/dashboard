@@ -27,20 +27,15 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content guard">
+               <div class="content component">
                    <div class="content-data">
 
 
 
 
-
-
-
-
-
 <ol class="breadcrumb">
-    <li>Guards</li>
-    <li>TodoDataResolverService</li>
+  <li>Components</li>
+  <li>GmailStoreTokenComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -50,33 +45,79 @@
         <li >
             <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
         </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
 </ul>
 
 <div class="tab-content">
-        <div class="tab-pane fade active in" id="c-info">
-            <p class="comment">
-            <h3>File</h3>
-            </p>
-            <p class="comment">
-                <code>src/app/TodoList/resolvers/todo-data-resolver.service.ts</code>
-            </p>
-
-                <p class="comment">
-                <h3>Description</h3>
-                </p>
-                <p class="comment">
-                    <p>Resolver for a todo&#39;s data, used when entering todolist/:id/edit or todolist/add without context
-if todolist/add :
-    we create a new empty todo
-if todolist/:id/edit :
-    we check if we have some todo data in the service, if not, we&#39;ll call the server which will fetch the list and get what we need</p>
-
-                </p>
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/gmail/components/gmailstoretoken/gmailstoretoken.component.ts</code>
+</p>
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
 
-                <section>
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-gmailstoretoken</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./gmailstoretoken.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./gmailstoretoken.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -90,7 +131,7 @@ if todolist/:id/edit :
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#resolve">resolve</a>
+                                <a href="#ngOnInit">ngOnInit</a>
                             </li>
                         </ul>
                     </td>
@@ -104,18 +145,18 @@ if todolist/:id/edit :
     </table>
 </section>
 
-                <section>
+    <section>
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(todoSvc: <a href="../injectables/TodoListService.html">TodoListService</a>, http: <a href="../injectables/HttpService.html">HttpService</a>)</code>
+<code>constructor(route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/TodoList/resolvers/todo-data-resolver.service.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/gmail/components/gmailstoretoken/gmailstoretoken.component.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -129,41 +170,32 @@ if todolist/:id/edit :
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>todoSvc</td>
+                                                        <td>route</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/TodoListService.html" target="_self" >TodoListService</a></code>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
-                                                        <td>
-                                                                <code><p>The todo service, used to check if there is some todo data in it</p>
-</code>
-                                                        </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>http</td>
+                                                        <td>router</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/HttpService.html" target="_self" >HttpService</a></code>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
-                                                        <td>
-                                                                <code><p>The HTTP service, used to get the todo data if it is missing from the service</p>
-</code>
-                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -174,7 +206,11 @@ if todolist/:id/edit :
         </table>
 </section>
 
-                <section>
+
+
+
+
+    <section>
     
     <h3 id="methods">
         Methods
@@ -183,26 +219,26 @@ if todolist/:id/edit :
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="resolve"></a>
+                    <a name="ngOnInit"></a>
                     <span class="name">
                         <b>
-                            resolve
+                            ngOnInit
                         </b>
-                        <a href="#resolve"><span class="icon ion-ios-link"></span></a>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>resolve(route: <a href="https://angular.io/api/router/ActivatedRouteSnapshot" target="_blank">ActivatedRouteSnapshot</a>, state: <a href="https://angular.io/api/router/RouterStateSnapshot" target="_blank">RouterStateSnapshot</a>)</code>
+<code>ngOnInit()</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/app/TodoList/resolvers/todo-data-resolver.service.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">src/app/gmail/components/gmailstoretoken/gmailstoretoken.component.ts:13</a></div>
                 </td>
             </tr>
 
@@ -211,108 +247,91 @@ if todolist/:id/edit :
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>route</td>
-                                    <td>
-                                                <code><a href="https://angular.io/api/router/ActivatedRouteSnapshot" target="_blank" >ActivatedRouteSnapshot</a></code>
-                                    </td>
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>state</td>
-                                    <td>
-                                                <code><a href="https://angular.io/api/router/RouterStateSnapshot" target="_blank" >RouterStateSnapshot</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/Todo.html" target="_self" >Todo |  | Promise</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
 </section>
-        </div>
+
+</div>
 
 
-        <div class="tab-pane fade  tab-source-code" id="c-source">
-            <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from &#x27;@angular/router&#x27;;
-import { Todo } from &#x27;../models/todo&#x27;;
-import { TodoListService } from &#x27;../services/todo-list.service&#x27;;
-import { HttpService } from &#x27;../../services/http.service&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
-/**
- * Resolver for a todo&#x27;s data, used when entering todolist/:id/edit or todolist/add without context
- * if todolist/add :
- *    we create a new empty todo
- * if todolist/:id/edit :
- *    we check if we have some todo data in the service, if not, we&#x27;ll call the server which will fetch the list and get what we need
- */
-@Injectable({
-  providedIn: &#x27;root&#x27;
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+
+@Component({
+  selector: &#x27;app-gmailstoretoken&#x27;,
+  templateUrl: &#x27;./gmailstoretoken.component.html&#x27;,
+  styleUrls: [&#x27;./gmailstoretoken.component.css&#x27;]
 })
+export class GmailStoreTokenComponent implements OnInit {
 
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
-export class TodoDataResolverService implements Resolve&lt;Todo&gt; {
+  ngOnInit(): void {
 
-  /**
-   *
-   * @param todoSvc The todo service, used to check if there is some todo data in it
-   * @param http The HTTP service, used to get the todo data if it is missing from the service
-   */
-  constructor(private todoSvc: TodoListService, private http: HttpService) { }
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Todo | import(&quot;rxjs&quot;).Observable&lt;Todo&gt; | Promise&lt;Todo&gt; {
-    const todoId &#x3D; route.paramMap.get(&#x27;id&#x27;);
-
-    if(!todoId) {
-      return {_id: null, title: &#x27;&#x27;, content: &#x27;&#x27;, status: false, __v: 0};
-    }
-    if(this.todoSvc.todos.length !&#x3D;&#x3D; 0) {
-
-      return this.todoSvc.getTodo(todoId);
-    } else {
-      return this.http.getTodoList().pipe(map((data: Array&lt;Todo&gt;) &#x3D;&gt; {
-        let todo: Todo &#x3D; data.find((currTodo) &#x3D;&gt; currTodo._id &#x3D;&#x3D;&#x3D; todoId);
-        return todo;
-      }));
-    }
+    this.route.params.subscribe((params: any) &#x3D;&gt; {
+      localStorage.setItem(&#x27;gmailToken&#x27;, params.token);
+      localStorage.setItem(&#x27;gmailExp&#x27;, params.expires);
+      this.router.navigate([&#x27;gmail/logged&#x27;]);
+    });
   }
+
 }
 </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./gmailstoretoken.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
         </div>
+    </div>
+
+    
 </div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EmailContainerComponent', 'selector': 'app-email-container'},{'name': 'GithubComponent', 'selector': 'app-github'},{'name': 'GmailComponent', 'selector': 'app-gmail'},{'name': 'GmailEmailListComponent', 'selector': 'app-email-list'},{'name': 'GmailStoreTokenComponent', 'selector': 'app-gmailstoretoken'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'ReadEmailComponent', 'selector': 'app-read-email'},{'name': 'SpotifyHomeComponent', 'selector': 'app-spotify-home'},{'name': 'SpotifyPlayerComponent', 'selector': 'app-spotify-player'},{'name': 'SpotifySearchComponent', 'selector': 'app-spotify-search'},{'name': 'SpotifyStoreTokenComponent', 'selector': 'app-spotify-store-token'},{'name': 'TodoEditComponent', 'selector': 'app-todo-edit'},{'name': 'TodoListComponent', 'selector': 'app-todo-list'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'GmailStoreTokenComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
 
 
 
@@ -339,8 +358,8 @@ export class TodoDataResolverService implements Resolve&lt;Todo&gt; {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'guard';
-            var COMPODOC_CURRENT_PAGE_URL = 'TodoDataResolverService.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'GmailStoreTokenComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

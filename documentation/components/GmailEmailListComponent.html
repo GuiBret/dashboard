@@ -35,7 +35,7 @@
 
 <ol class="breadcrumb">
   <li>Components</li>
-  <li>SpotifyHomeComponent</li>
+  <li>GmailEmailListComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -61,16 +61,9 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/Spotify/pages/spotify-home/spotify-home.component.ts</code>
+    <code>src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts</code>
 </p>
 
-    <p class="comment">
-        <h3>Description</h3>
-    </p>
-    <p class="comment">
-        <p>The homepage of Spotify</p>
-
-    </p>
 
 
     <p class="comment">
@@ -98,19 +91,19 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-spotify-home</code></td>
+                <td class="col-md-9"><code>app-email-list</code></td>
             </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./spotify-home.component.css</code></td>
+                <td class="col-md-9"><code>./gmail-email-list.component.css</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./spotify-home.component.html</code></td>
+                <td class="col-md-9"><code>./gmail-email-list.component.html</code></td>
             </tr>
 
 
@@ -137,13 +130,23 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#needsLogin">needsLogin</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#currPageIndex">currPageIndex</a>
                             </li>
                             <li>
-                                <a href="#spotifyAuthUrl">spotifyAuthUrl</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#currPageSize">currPageSize</a>
                             </li>
                             <li>
-                                <a href="#spotifyOK">spotifyOK</a>
+                                    <span class="modifier">Public</span>
+                                <a href="#displayedColumns">displayedColumns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#emailList">emailList</a>
+                            </li>
+                            <li>
+                                <a href="#isLoading">isLoading</a>
                             </li>
                         </ul>
                     </td>
@@ -158,7 +161,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#handleSpotifyStatus">handleSpotifyStatus</a>
+                                <a href="#loadNewList">loadNewList</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy">ngOnDestroy</a>
@@ -184,12 +187,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(titleSvc: <a href="https://angular.io/api/platform-browser/Title" target="_blank">Title</a>, http: <a href="../injectables/HttpService.html">HttpService</a>, spotifyService: <a href="../injectables/SpotifyService.html">SpotifyService</a>)</code>
+<code>constructor(gmailService: <a href="../injectables/GmailService.html">GmailService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/Spotify/pages/spotify-home/spotify-home.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts:34</a></div>
                             </td>
                         </tr>
 
@@ -207,34 +210,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>titleSvc</td>
+                                                        <td>gmailService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="https://angular.io/api/platform-browser/Title" target="_blank" >Title</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>http</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/HttpService.html" target="_self" >HttpService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>spotifyService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/SpotifyService.html" target="_self" >SpotifyService</a></code>
+                                                                        <code><a href="../injectables/GmailService.html" target="_self" >GmailService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -264,26 +243,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="handleSpotifyStatus"></a>
+                    <a name="loadNewList"></a>
                     <span class="name">
                         <b>
-                            handleSpotifyStatus
+                            loadNewList
                         </b>
-                        <a href="#handleSpotifyStatus"><span class="icon ion-ios-link"></span></a>
+                        <a href="#loadNewList"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>handleSpotifyStatus(response: literal type)</code>
+<code>loadNewList(event: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="45"
-                            class="link-to-prism">src/app/Spotify/pages/spotify-home/spotify-home.component.ts:45</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="51"
+                            class="link-to-prism">src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts:51</a></div>
                 </td>
             </tr>
 
@@ -303,9 +282,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>response</td>
+                                    <td>event</td>
                                     <td>
-                                            <code>literal type</code>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
                                     </td>
 
                                     <td>
@@ -352,8 +331,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">src/app/Spotify/pages/spotify-home/spotify-home.component.ts:54</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts:47</a></div>
                 </td>
             </tr>
 
@@ -391,16 +370,14 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/app/Spotify/pages/spotify-home/spotify-home.component.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts:38</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-description"><p>On init, check Spotify&#39;s statud</p>
-</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -420,22 +397,29 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="needsLogin"></a>
+                        <a name="currPageIndex"></a>
                         <span class="name">
                             <b>
-                            needsLogin</b>
-                            <a href="#needsLogin"><span class="icon ion-ios-link"></span></a>
+                                <span class="modifier">Private</span>
+                            currPageIndex</b>
+                            <a href="#currPageIndex"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>1</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/Spotify/pages/spotify-home/spotify-home.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -446,28 +430,29 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="spotifyAuthUrl"></a>
+                        <a name="currPageSize"></a>
                         <span class="name">
                             <b>
-                            spotifyAuthUrl</b>
-                            <a href="#spotifyAuthUrl"><span class="icon ion-ios-link"></span></a>
+                                <span class="modifier">Private</span>
+                            currPageSize</b>
+                            <a href="#currPageSize"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>&#x27;&#x27;</code>
+                            <i>Default value : </i><code>50</code>
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/Spotify/pages/spotify-home/spotify-home.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -478,11 +463,77 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="spotifyOK"></a>
+                        <a name="displayedColumns"></a>
                         <span class="name">
                             <b>
-                            spotifyOK</b>
-                            <a href="#spotifyOK"><span class="icon ion-ios-link"></span></a>
+                                <span class="modifier">Public</span>
+                            displayedColumns</b>
+                            <a href="#displayedColumns"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Array&lt;string&gt;</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[&#x27;from&#x27;, &#x27;snippet&#x27;]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="emailList"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            emailList</b>
+                            <a href="#emailList"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../classes/GmailCustomEmail.html" target="_self" >Array&lt;GmailCustomEmail&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isLoading"></a>
+                        <span class="name">
+                            <b>
+                            isLoading</b>
+                            <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -493,16 +544,10 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/Spotify/pages/spotify-home/spotify-home.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/gmail/components/gmail-email-list/gmail-email-list.component.ts:34</a></div>
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Boolean indicating if we can make some requests</p>
-</div>
-                    </td>
-                </tr>
 
             </tbody>
         </table>
@@ -512,65 +557,62 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import { HttpService } from &#x27;src/app/services/http.service&#x27;;
-import { SpotifyService } from &#x27;../../services/spotify.service&#x27;;
-import { Title } from &#x27;@angular/platform-browser&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { animate, style, transition, trigger } from &#x27;@angular/animations&#x27;;
+import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { GmailCustomEmail } from &#x27;../../interfaces/gmail-custom-email.interface&#x27;;
+import { GmailEmail } from &#x27;../../interfaces/gmail-email.interface&#x27;;
+import { GmailService } from &#x27;../../services/gmail.service&#x27;;
 
-
-/**
- * The homepage of Spotify
- */
 @Component({
-  selector: &#x27;app-spotify-home&#x27;,
-  templateUrl: &#x27;./spotify-home.component.html&#x27;,
-  styleUrls: [&#x27;./spotify-home.component.css&#x27;]
+  selector: &#x27;app-email-list&#x27;,
+  templateUrl: &#x27;./gmail-email-list.component.html&#x27;,
+  styleUrls: [&#x27;./gmail-email-list.component.css&#x27;],
+  animations: [
+    trigger(&#x27;emailElem&#x27;, [
+      transition(&#x27;void &#x3D;&gt; *&#x27;, [
+        style({
+          transform: &#x27;translateY(50px)&#x27;,
+          opacity: &#x27;0&#x27;
+        }),
+        animate(250, style({
+          transform: &#x27;translateY(0)&#x27;,
+          opacity: &#x27;1&#x27;
+        }))
+      ])
+    ])
+  ]
 })
-export class SpotifyHomeComponent implements OnInit {
-  needsLogin &#x3D; false;
+export class GmailEmailListComponent implements OnInit {
 
+  public emailList: Array&lt;GmailCustomEmail&gt; &#x3D; [];
+  public displayedColumns: Array&lt;string&gt; &#x3D; [&#x27;from&#x27;, &#x27;snippet&#x27;];
 
+  private currPageSize &#x3D; 50;
+  private currPageIndex &#x3D; 1;
 
-  spotifyAuthUrl &#x3D; &#x27;&#x27;;
-  /**
-   * Boolean indicating if we can make some requests
-   */
-  spotifyOK &#x3D; false;
-  constructor(private titleSvc: Title, private http: HttpService, private spotifyService: SpotifyService) {
-    this.titleSvc.setTitle(&#x27;Spotify - Home&#x27;)
-  }
+  isLoading &#x3D; false;
 
-  /**
-   * On init, check Spotify&#x27;s statud
-   */
+  constructor(private gmailService: GmailService) { }
+
   ngOnInit(): void {
 
-    if(!localStorage.getItem(&#x27;spotifyToken&#x27;)) {
-
-        this.http.checkSpotifyStatus().subscribe(this.handleSpotifyStatus.bind(this));
-    } else {
-      this.spotifyOK &#x3D; true;
-    }
-
-
-
-  }
-
-  handleSpotifyStatus(response: {status: string, url?: string}) {
-    if(response.status &#x3D;&#x3D;&#x3D; &#x27;OK&#x27;) {
-      this.spotifyOK &#x3D; true;
-    } else {
-      this.spotifyOK &#x3D; false;
-      this.spotifyAuthUrl &#x3D; response.url;
-    }
+    this.isLoading &#x3D; true;
+    this.gmailService.onNewEmailListPosted.subscribe((newEmailList: Array&lt;GmailCustomEmail&gt;) &#x3D;&gt; {
+      this.isLoading &#x3D; false;
+      this.emailList &#x3D; newEmailList;
+    })
   }
 
   ngOnDestroy() {
-
+    this.emailList &#x3D; [];
   }
 
+  loadNewList(event: any) {
+    this.emailList &#x3D; [];
+    this.isLoading &#x3D; true;
+    this.gmailService.fetchEmailList(event.pageSize, this.gmailService.pageToken);
 
-
+  }
 
 }
 </code></pre>
@@ -578,30 +620,74 @@ export class SpotifyHomeComponent implements OnInit {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">
+&lt;ng-container *ngIf&#x3D;&quot;emailList.length !&#x3D;&#x3D; 0&quot;&gt;
+  &lt;table mat-table [dataSource]&#x3D;&quot;emailList&quot;&gt;
+    &lt;ng-container matColumnDef&#x3D;&quot;from&quot;&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt; Sender &lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let email&quot;&gt;{{ email.from | slice:0:20 }}&lt;/td&gt;
+    &lt;/ng-container&gt;
+    &lt;ng-container matColumnDef&#x3D;&quot;snippet&quot;&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt; Content &lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let email&quot; [innerHTML]&#x3D;&quot;email.snippet&quot;&gt; {{ email.snippet }}&lt;/td&gt;
+    &lt;/ng-container&gt;
 
-&lt;ng-container *ngIf&#x3D;&quot;!spotifyOK&quot;&gt;
-  You don&#x27;t seem to be logged. Please click &lt;a href&#x3D;&quot;{{spotifyAuthUrl}}&quot;&gt;here&lt;/a&gt;.
 
+    &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayedColumns&quot;&gt;&lt;/tr&gt;
+    &lt;tr [@emailElem] mat-row *matRowDef&#x3D;&quot;let myRowData; columns: displayedColumns&quot; [ngClass]&#x3D;&quot;{&#x27;unread&#x27;: !myRowData.isRead}&quot; routerLink&#x3D;&quot;/gmail/read-email/{{myRowData.id}}&quot;&gt;&lt;/tr&gt;
+
+  &lt;/table&gt;
 &lt;/ng-container&gt;
+&lt;mat-paginator [ngClass]&#x3D;&quot;{&#x27;hidden&#x27;: isLoading}&quot; [length]&#x3D;&quot;999999&quot; [pageSizeOptions]&#x3D;&quot;[50, 100, 200]&quot; (page)&#x3D;&quot;loadNewList($event)&quot;&gt;&lt;/mat-paginator&gt;
 
-&lt;ng-container *ngIf&#x3D;&quot;spotifyOK&quot;&gt;
-  &lt;app-spotify-search&gt;&lt;/app-spotify-search&gt;
+&lt;ng-container *ngIf&#x3D;&quot;emailList.length &#x3D;&#x3D;&#x3D; 0&quot;&gt;
+  &lt;div id&#x3D;&quot;mock-container&quot;&gt;&lt;/div&gt;
+  &lt;div id&#x3D;&quot;spinner-container&quot;&gt;
+    &lt;mat-spinner&gt;&lt;/mat-spinner&gt;
+  &lt;/div&gt;
+
 &lt;/ng-container&gt;
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
-                    <code>./spotify-home.component.css</code>
+                    <code>./gmail-email-list.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.full-width {
-  width:90%;
+                <pre class="line-numbers"><code class="language-scss">:host {
+  max-height:90vh;
+  display:block;
 }
 
-::ng-deep .mat-option-text {
-  display:flex !important;
-  justify-content: space-between;
-  align-items: center;
+table {
+  height:70vh;
+  display:block;
+  overflow-y:scroll;
+}
+
+
+.mat-header-row {
+  position: sticky;
+  top: 0;
+}
+
+.unread {
+  font-weight:bolder;
+}
+
+tr:hover {
+  cursor:pointer;
+}
+
+#spinner-container {
+  display:flex;
+  width:100%;
+  height: 90vh;
+  justify-content: space-around;
+  align-items:center;
+}
+
+.hidden {
+  display: none;
 }
 </code></pre>
     </div>
@@ -631,10 +717,10 @@ export class SpotifyHomeComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="!spotifyOK">  You don\'t seem to be logged. Please click <a href="{{spotifyAuthUrl}}">here</a>.</ng-container><ng-container *ngIf="spotifyOK">  <app-spotify-search></app-spotify-search></ng-container></div>'
+        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="emailList.length !== 0">  <table mat-table [dataSource]="emailList">    <ng-container matColumnDef="from">      <th mat-header-cell *matHeaderCellDef> Sender </th>      <td mat-cell *matCellDef="let email">{{ email.from | slice:0:20 }}</td>    </ng-container>    <ng-container matColumnDef="snippet">      <th mat-header-cell *matHeaderCellDef> Content </th>      <td mat-cell *matCellDef="let email" [innerHTML]="email.snippet"> {{ email.snippet }}</td>    </ng-container>    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>    <tr [@emailElem] mat-row *matRowDef="let myRowData; columns: displayedColumns" [ngClass]="{\'unread\': !myRowData.isRead}" routerLink="/gmail/read-email/{{myRowData.id}}"></tr>  </table></ng-container><mat-paginator [ngClass]="{\'hidden\': isLoading}" [length]="999999" [pageSizeOptions]="[50, 100, 200]" (page)="loadNewList($event)"></mat-paginator><ng-container *ngIf="emailList.length === 0">  <div id="mock-container"></div>  <div id="spinner-container">    <mat-spinner></mat-spinner>  </div></ng-container></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EmailContainerComponent', 'selector': 'app-email-container'},{'name': 'GithubComponent', 'selector': 'app-github'},{'name': 'GmailComponent', 'selector': 'app-gmail'},{'name': 'GmailEmailListComponent', 'selector': 'app-email-list'},{'name': 'GmailStoreTokenComponent', 'selector': 'app-gmailstoretoken'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'ReadEmailComponent', 'selector': 'app-read-email'},{'name': 'SpotifyHomeComponent', 'selector': 'app-spotify-home'},{'name': 'SpotifyPlayerComponent', 'selector': 'app-spotify-player'},{'name': 'SpotifySearchComponent', 'selector': 'app-spotify-search'},{'name': 'SpotifyStoreTokenComponent', 'selector': 'app-spotify-store-token'},{'name': 'TodoEditComponent', 'selector': 'app-todo-edit'},{'name': 'TodoListComponent', 'selector': 'app-todo-list'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'SpotifyHomeComponent'};
+    var ACTUAL_COMPONENT = {'name': 'GmailEmailListComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -669,7 +755,7 @@ export class SpotifyHomeComponent implements OnInit {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'SpotifyHomeComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'GmailEmailListComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

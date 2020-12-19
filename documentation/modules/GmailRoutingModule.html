@@ -34,7 +34,7 @@
 
 <ol class="breadcrumb">
     <li>Modules</li>
-    <li>AppRoutingModule</li>
+    <li>GmailRoutingModule</li>
 </ol>
 
 
@@ -54,7 +54,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/app-routing.module.ts</code>
+            <code>src/app/gmail/gmail.routing.ts</code>
         </p>
 
 
@@ -70,22 +70,48 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
-import { HomePageComponent } from &#x27;./pages/home-page/home-page.component&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &quot;@angular/core&quot;;
+import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import { GmailComponent } from &#x27;./gmail.component&#x27;;
+import { GmailStoreTokenComponent } from &#x27;./components/gmailstoretoken/gmailstoretoken.component&#x27;;
+import { ReadEmailComponent } from &#x27;./pages/read-email/read-email.component&#x27;;
+import { GetEmailResolver } from &#x27;./resolvers/email-data.resolver&#x27;;
 
 
 const routes: Routes &#x3D; [
   {
-    path: &#x27;&#x27;, component: HomePageComponent
+    path: &#x27;gmail&#x27;, component: GmailComponent
+  },
+  {
+    path: &#x27;gmail/logged&#x27;, component: GmailComponent
+  },
+  {
+    path: &#x27;gmail/read-email/:emailid&#x27;, component: ReadEmailComponent,
+    resolve: {
+      emailContent: GetEmailResolver
+    }
+  },
+  {
+    path: &#x27;gmail/store-token/:token/:expires&#x27;, component: GmailStoreTokenComponent
   }
-];
+]
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+
+  imports: [
+
+    RouterModule.forChild(routes),
+  ],
+  exports: [
+    RouterModule
+  ],
+  providers: [
+    GetEmailResolver
+  ]
+
 })
-export class AppRoutingModule { }
+
+export class GmailRoutingModule {}
 </code></pre>
     </div>
 </div>
@@ -121,7 +147,7 @@ export class AppRoutingModule { }
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppRoutingModule.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'GmailRoutingModule.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -40,7 +40,7 @@
 
 <ol class="breadcrumb">
     <li>Guards</li>
-    <li>TodoDataResolverService</li>
+    <li>GetEmailResolver</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -58,20 +58,9 @@
             <h3>File</h3>
             </p>
             <p class="comment">
-                <code>src/app/TodoList/resolvers/todo-data-resolver.service.ts</code>
+                <code>src/app/gmail/resolvers/email-data.resolver.ts</code>
             </p>
 
-                <p class="comment">
-                <h3>Description</h3>
-                </p>
-                <p class="comment">
-                    <p>Resolver for a todo&#39;s data, used when entering todolist/:id/edit or todolist/add without context
-if todolist/add :
-    we create a new empty todo
-if todolist/:id/edit :
-    we check if we have some todo data in the service, if not, we&#39;ll call the server which will fetch the list and get what we need</p>
-
-                </p>
 
 
 
@@ -110,12 +99,12 @@ if todolist/:id/edit :
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(todoSvc: <a href="../injectables/TodoListService.html">TodoListService</a>, http: <a href="../injectables/HttpService.html">HttpService</a>)</code>
+<code>constructor(gmailService: <a href="../injectables/GmailService.html">GmailService</a>, httpService: <a href="../injectables/HttpService.html">HttpService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/TodoList/resolvers/todo-data-resolver.service.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/gmail/resolvers/email-data.resolver.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -129,28 +118,23 @@ if todolist/:id/edit :
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
-                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>todoSvc</td>
+                                                        <td>gmailService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/TodoListService.html" target="_self" >TodoListService</a></code>
+                                                                        <code><a href="../injectables/GmailService.html" target="_self" >GmailService</a></code>
                                                         </td>
                                                   
                                                     <td>
                                                             No
                                                     </td>
                                                     
-                                                        <td>
-                                                                <code><p>The todo service, used to check if there is some todo data in it</p>
-</code>
-                                                        </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>http</td>
+                                                        <td>httpService</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/HttpService.html" target="_self" >HttpService</a></code>
@@ -160,10 +144,18 @@ if todolist/:id/edit :
                                                             No
                                                     </td>
                                                     
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
                                                         <td>
-                                                                <code><p>The HTTP service, used to get the todo data if it is missing from the service</p>
-</code>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
                                                         </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -194,15 +186,15 @@ if todolist/:id/edit :
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>resolve(route: <a href="https://angular.io/api/router/ActivatedRouteSnapshot" target="_blank">ActivatedRouteSnapshot</a>, state: <a href="https://angular.io/api/router/RouterStateSnapshot" target="_blank">RouterStateSnapshot</a>)</code>
+<code>resolve(route: <a href="https://angular.io/api/router/ActivatedRouteSnapshot" target="_blank">ActivatedRouteSnapshot</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">src/app/TodoList/resolvers/todo-data-resolver.service.ts:28</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="14"
+                            class="link-to-prism">src/app/gmail/resolvers/email-data.resolver.ts:14</a></div>
                 </td>
             </tr>
 
@@ -233,25 +225,13 @@ if todolist/:id/edit :
 
 
                                 </tr>
-                                <tr>
-                                    <td>state</td>
-                                    <td>
-                                                <code><a href="https://angular.io/api/router/RouterStateSnapshot" target="_blank" >RouterStateSnapshot</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
                             </tbody>
                         </table>
                     </div>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/Todo.html" target="_self" >Todo |  | Promise</a></code>
+                        <b>Returns : </b>        <code><a href="../classes/GmailCustomEmail.html" target="_self" >Observable&lt;GmailCustomEmail&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -266,49 +246,57 @@ if todolist/:id/edit :
 
 
         <div class="tab-pane fade  tab-source-code" id="c-source">
-            <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from &#x27;@angular/router&#x27;;
-import { Todo } from &#x27;../models/todo&#x27;;
-import { TodoListService } from &#x27;../services/todo-list.service&#x27;;
-import { HttpService } from &#x27;../../services/http.service&#x27;;
-import { map } from &#x27;rxjs/operators&#x27;;
-/**
- * Resolver for a todo&#x27;s data, used when entering todolist/:id/edit or todolist/add without context
- * if todolist/add :
- *    we create a new empty todo
- * if todolist/:id/edit :
- *    we check if we have some todo data in the service, if not, we&#x27;ll call the server which will fetch the list and get what we need
- */
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
+            <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &quot;@angular/core&quot;;
+import { ActivatedRoute, ActivatedRouteSnapshot, Resolve } from &#x27;@angular/router&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { filter } from &#x27;rxjs/operators&#x27;;
+import { HttpService } from &#x27;src/app/services/http.service&#x27;;
+import { GmailCustomEmail } from &#x27;../interfaces/gmail-custom-email.interface&#x27;;
+import { GmailEmail } from &#x27;../interfaces/gmail-email.interface&#x27;;
+import { GmailService } from &#x27;../services/gmail.service&#x27;;
+
+@Injectable()
+export class GetEmailResolver implements Resolve&lt;any&gt; {
+  constructor(private gmailService: GmailService, private httpService: HttpService, private route: ActivatedRoute) {}
+
+  resolve(route: ActivatedRouteSnapshot) : Observable&lt;GmailCustomEmail&gt; {
+    const emailId &#x3D; route.paramMap.get(&#x27;emailid&#x27;);
+
+    return new Observable((observer) &#x3D;&gt; {
+
+      if(this.gmailService.containsEmailWithId(emailId)) {
+        observer.next(this.gmailService.getCachedEmail(emailId));
+        observer.complete();
+
+      }
+
+      this.httpService.getIndividualEmailInfo(emailId).subscribe((emailInfo: GmailEmail) &#x3D;&gt; {
+        const filteredEmail &#x3D; this.gmailService.filterEmailInfo(emailInfo);
+
+        observer.next(filteredEmail);
+        observer.complete();
+
+      });
+
+      if(this.gmailService.containsEmailWithId(emailId)) {
+        return this.gmailService.getCachedEmail(emailId);
+      }
+
+      this.httpService.getIndividualEmailInfo(emailId).subscribe((emailInfo: GmailEmail) &#x3D;&gt; {
+        const filteredEmail &#x3D; this.gmailService.filterEmailInfo(emailInfo);
+        console.log(filteredEmail);
+        return {emailContent: filteredEmail};
+
+      });
 
 
-export class TodoDataResolverService implements Resolve&lt;Todo&gt; {
+    })
 
-  /**
-   *
-   * @param todoSvc The todo service, used to check if there is some todo data in it
-   * @param http The HTTP service, used to get the todo data if it is missing from the service
-   */
-  constructor(private todoSvc: TodoListService, private http: HttpService) { }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Todo | import(&quot;rxjs&quot;).Observable&lt;Todo&gt; | Promise&lt;Todo&gt; {
-    const todoId &#x3D; route.paramMap.get(&#x27;id&#x27;);
 
-    if(!todoId) {
-      return {_id: null, title: &#x27;&#x27;, content: &#x27;&#x27;, status: false, __v: 0};
-    }
-    if(this.todoSvc.todos.length !&#x3D;&#x3D; 0) {
 
-      return this.todoSvc.getTodo(todoId);
-    } else {
-      return this.http.getTodoList().pipe(map((data: Array&lt;Todo&gt;) &#x3D;&gt; {
-        let todo: Todo &#x3D; data.find((currTodo) &#x3D;&gt; currTodo._id &#x3D;&#x3D;&#x3D; todoId);
-        return todo;
-      }));
-    }
   }
+
 }
 </code></pre>
         </div>
@@ -340,7 +328,7 @@ export class TodoDataResolverService implements Resolve&lt;Todo&gt; {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'guard';
-            var COMPODOC_CURRENT_PAGE_URL = 'TodoDataResolverService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'GetEmailResolver.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

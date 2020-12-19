@@ -70,6 +70,7 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
                     <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
     </p>
 
@@ -133,6 +134,9 @@
                                 <a href="#color">color</a>
                             </li>
                             <li>
+                                <a href="#isLoggedOnGmail">isLoggedOnGmail</a>
+                            </li>
+                            <li>
                                 <a href="#isLoggedOnSpotify">isLoggedOnSpotify</a>
                             </li>
                             <li>
@@ -157,10 +161,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#ngAfterViewInit">ngAfterViewInit</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnInit">ngOnInit</a>
                             </li>
                             <li>
+                                <a href="#onRouterEventReceived">onRouterEventReceived</a>
+                            </li>
+                            <li>
                                 <a href="#toggleSidenav">toggleSidenav</a>
+                            </li>
+                            <li>
+                                <a href="#triggerGmailLoginProcedure">triggerGmailLoginProcedure</a>
                             </li>
                             <li>
                                 <a href="#triggerLoginProcedure">triggerLoginProcedure</a>
@@ -183,12 +196,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(bpObserver: BreakpointObserver, spotifySvc: <a href="../injectables/SpotifyService.html">SpotifyService</a>, http: <a href="../injectables/HttpService.html">HttpService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(bpObserver: BreakpointObserver, gmailSvc: <a href="../injectables/GmailService.html">GmailService</a>, spotifySvc: <a href="../injectables/SpotifyService.html">SpotifyService</a>, http: <a href="../injectables/HttpService.html">HttpService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/app.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/app.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -210,6 +223,18 @@
                                                   
                                                         <td>
                                                                     <code>BreakpointObserver</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>gmailSvc</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/GmailService.html" target="_self" >GmailService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -275,6 +300,45 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <b>
+                            ngAfterViewInit
+                        </b>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">src/app/app.component.ts:31</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="ngOnInit"></a>
                     <span class="name">
                         <b>
@@ -293,8 +357,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">src/app/app.component.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/app/app.component.ts:24</a></div>
                 </td>
             </tr>
 
@@ -305,6 +369,76 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onRouterEventReceived"></a>
+                    <span class="name">
+                        <b>
+                            onRouterEventReceived
+                        </b>
+                        <a href="#onRouterEventReceived"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onRouterEventReceived(val: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/app/app.component.ts:36</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>val</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -332,8 +466,47 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="40"
-                            class="link-to-prism">src/app/app.component.ts:40</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/app.component.ts:49</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="triggerGmailLoginProcedure"></a>
+                    <span class="name">
+                        <b>
+                            triggerGmailLoginProcedure
+                        </b>
+                        <a href="#triggerGmailLoginProcedure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>triggerGmailLoginProcedure()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="59"
+                            class="link-to-prism">src/app/app.component.ts:59</a></div>
                 </td>
             </tr>
 
@@ -371,8 +544,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="44"
-                            class="link-to-prism">src/app/app.component.ts:44</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">src/app/app.component.ts:53</a></div>
                 </td>
             </tr>
 
@@ -419,6 +592,32 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/app.component.ts:18</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isLoggedOnGmail"></a>
+                        <span class="name">
+                            <b>
+                            isLoggedOnGmail</b>
+                            <a href="#isLoggedOnGmail"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
                                     <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/app.component.ts:16</a></div>
                             </td>
                         </tr>
@@ -445,7 +644,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/app.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/app.component.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -471,7 +670,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/app.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/app.component.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -497,7 +696,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/app.component.ts:12</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/app.component.ts:13</a></div>
                             </td>
                         </tr>
 
@@ -529,7 +728,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/app.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/app.component.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -542,43 +741,52 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterViewInit, Component, OnInit } from &#x27;@angular/core&#x27;;
 import { BreakpointObserver } from &#x27;@angular/cdk/layout&#x27;;
-import { SpotifyService } from &#x27;./services/Spotify/spotify.service&#x27;;
+import { SpotifyService } from &#x27;./Spotify/services/spotify.service&#x27;;
 import { HttpService } from &#x27;./services/http.service&#x27;;
 import { Router, NavigationEnd } from &#x27;@angular/router&#x27;;
+import { GmailService } from &#x27;./gmail/services/gmail.service&#x27;;
 @Component({
   selector: &#x27;app-root&#x27;,
   templateUrl: &#x27;./app.component.html&#x27;,
   styleUrls: [&#x27;./app.component.css&#x27;]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit, OnInit {
   opened &#x3D; true;
   title &#x3D; &#x27;dashboard&#x27;;
   isLoggedOnSpotify &#x3D; false;
+  isLoggedOnGmail &#x3D; false;
   isSmallScreen &#x3D; false;
   color &#x3D; &#x27;black&#x27;;
-  constructor(private bpObserver: BreakpointObserver, private spotifySvc: SpotifyService, private http: HttpService, private router: Router) {
-    this.isSmallScreen &#x3D; bpObserver.isMatched(&#x27;(max-width: 599px)&#x27;);
+  constructor(private bpObserver: BreakpointObserver, private gmailSvc: GmailService, private spotifySvc: SpotifyService, private http: HttpService, private router: Router) {
 
-    this.router.events.subscribe((val: any) &#x3D;&gt; {
-
-      if(val instanceof NavigationEnd) {
-
-        if(val.url.includes(&#x27;/spotify/logged&#x27;)) {
-          this.isLoggedOnSpotify &#x3D; this.spotifySvc.checkSpotifyStatus();
-          this.router.navigate([&#x27;spotify&#x27;])
-        }
-      }
-    });
+    this.router.events.subscribe(this.onRouterEventReceived.bind(this));
   }
 
   ngOnInit() {
+    this.isLoggedOnSpotify &#x3D; this.spotifySvc.checkSpotifyStatus();
+    this.isLoggedOnGmail &#x3D; this.gmailSvc.checkGmailStatus();
+  }
 
 
 
+  ngAfterViewInit() {
+    this.isSmallScreen &#x3D; this.bpObserver.isMatched(&#x27;(max-width: 599px)&#x27;);
 
+  }
 
+  onRouterEventReceived(val: any) {
+
+    if(val instanceof NavigationEnd) {
+      if(val.url.includes(&#x27;/spotify/logged&#x27;)) {
+        this.isLoggedOnSpotify &#x3D; this.spotifySvc.checkSpotifyStatus();
+        this.router.navigate([&#x27;spotify&#x27;])
+      } else if(val.url.includes(&#x27;/gmail/logged&#x27;)) {
+        this.isLoggedOnGmail &#x3D; this.gmailSvc.checkGmailStatus();
+        this.router.navigate([&#x27;gmail&#x27;]);
+      }
+    }
   }
 
   toggleSidenav() {
@@ -587,6 +795,12 @@ export class AppComponent implements OnInit {
 
   triggerLoginProcedure() {
     this.http.getSpotifyAuthUrl().subscribe((response: any) &#x3D;&gt; {
+      window.location.href &#x3D; response.url;
+    })
+  }
+
+  triggerGmailLoginProcedure() {
+    this.http.getGmailAuthUrl().subscribe((response: any) &#x3D;&gt; {
       window.location.href &#x3D; response.url;
     })
   }
@@ -651,6 +865,9 @@ export class AppComponent implements OnInit {
 
         &lt;/mat-expansion-panel-header&gt;
 
+        &lt;mat-action-row class&#x3D;&#x27;clickable&#x27; (click)&#x3D;&quot;triggerGmailLoginProcedure()&quot; *ngIf&#x3D;&quot;!isLoggedOnGmail&quot;&gt;Click here to login&lt;/mat-action-row&gt;
+        &lt;mat-action-row class&#x3D;&#x27;clickable&#x27; routerLink&#x3D;&quot;/gmail&quot; *ngIf&#x3D;&quot;isLoggedOnGmail&quot;&gt;Home&lt;/mat-action-row&gt;
+
       &lt;/mat-expansion-panel&gt;
       &lt;mat-expansion-panel&gt;
         &lt;mat-expansion-panel-header&gt;
@@ -670,6 +887,7 @@ export class AppComponent implements OnInit {
       &lt;app-spotify-player&gt;&lt;/app-spotify-player&gt;
 
     &lt;/ng-container&gt;
+
 &lt;/mat-sidenav-container&gt;
 
 </code></pre>
@@ -740,8 +958,8 @@ export class AppComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary" class="toolbar">  <mat-toolbar-row>    <button mat-icon-button (click)="toggleSidenav()">      <mat-icon>menu</mat-icon>    </button>    <span>My dashboard</span>  </mat-toolbar-row>  </mat-toolbar><mat-sidenav-container class="sidenav" >    <mat-sidenav #sidenav color="primary" mode="side" [style]="{\'width\': \'12vw\'}" [opened]="opened">      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>Todo List</mat-panel-title>        </mat-expansion-panel-header>        <mat-action-row class=\'clickable\'><span routerLink=\'/todolist\'>List</span></mat-action-row>        <mat-action-row class=\'clickable\' routerLink="/todolist/add">Add</mat-action-row>      </mat-expansion-panel>      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>GitHub</mat-panel-title>        </mat-expansion-panel-header>        <mat-action-row class=\'clickable\'>My projects</mat-action-row>        <mat-action-row class=\'clickable\'>Add an element</mat-action-row>      </mat-expansion-panel>      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>RSS</mat-panel-title>        </mat-expansion-panel-header>        <mat-action-row class=\'clickable\'>My projects</mat-action-row>        <mat-action-row class=\'clickable\'>Add an element</mat-action-row>      </mat-expansion-panel>      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>GMail</mat-panel-title>        </mat-expansion-panel-header>      </mat-expansion-panel>      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>Spotify</mat-panel-title>        </mat-expansion-panel-header>        <mat-action-row class=\'clickable\' (click)="triggerLoginProcedure()" *ngIf="!isLoggedOnSpotify">Click here to login</mat-action-row>        <mat-action-row class=\'clickable\' routerLink="/spotify" *ngIf="isLoggedOnSpotify">Home</mat-action-row>      </mat-expansion-panel>    </mat-sidenav>    <router-outlet></router-outlet>    <ng-container *ngIf="isLoggedOnSpotify">      <app-spotify-player></app-spotify-player>    </ng-container></mat-sidenav-container></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'GithubComponent', 'selector': 'app-github'},{'name': 'GmailComponent', 'selector': 'app-gmail'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'SpotifyHomeComponent', 'selector': 'app-spotify-home'},{'name': 'SpotifyPlayerComponent', 'selector': 'app-spotify-player'},{'name': 'SpotifySearchComponent', 'selector': 'app-spotify-search'},{'name': 'SpotifyStoreTokenComponent', 'selector': 'app-spotify-store-token'},{'name': 'SpotifyUserInfoComponent', 'selector': 'app-spotify-user-info'},{'name': 'TodoEditComponent', 'selector': 'app-todo-edit'},{'name': 'TodoListComponent', 'selector': 'app-todo-list'}];
+        var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary" class="toolbar">  <mat-toolbar-row>    <button mat-icon-button (click)="toggleSidenav()">      <mat-icon>menu</mat-icon>    </button>    <span>My dashboard</span>  </mat-toolbar-row>  </mat-toolbar><mat-sidenav-container class="sidenav" >    <mat-sidenav #sidenav color="primary" mode="side" [style]="{\'width\': \'12vw\'}" [opened]="opened">      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>Todo List</mat-panel-title>        </mat-expansion-panel-header>        <mat-action-row class=\'clickable\'><span routerLink=\'/todolist\'>List</span></mat-action-row>        <mat-action-row class=\'clickable\' routerLink="/todolist/add">Add</mat-action-row>      </mat-expansion-panel>      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>GitHub</mat-panel-title>        </mat-expansion-panel-header>        <mat-action-row class=\'clickable\'>My projects</mat-action-row>        <mat-action-row class=\'clickable\'>Add an element</mat-action-row>      </mat-expansion-panel>      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>RSS</mat-panel-title>        </mat-expansion-panel-header>        <mat-action-row class=\'clickable\'>My projects</mat-action-row>        <mat-action-row class=\'clickable\'>Add an element</mat-action-row>      </mat-expansion-panel>      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>GMail</mat-panel-title>        </mat-expansion-panel-header>        <mat-action-row class=\'clickable\' (click)="triggerGmailLoginProcedure()" *ngIf="!isLoggedOnGmail">Click here to login</mat-action-row>        <mat-action-row class=\'clickable\' routerLink="/gmail" *ngIf="isLoggedOnGmail">Home</mat-action-row>      </mat-expansion-panel>      <mat-expansion-panel>        <mat-expansion-panel-header>          <mat-panel-title>Spotify</mat-panel-title>        </mat-expansion-panel-header>        <mat-action-row class=\'clickable\' (click)="triggerLoginProcedure()" *ngIf="!isLoggedOnSpotify">Click here to login</mat-action-row>        <mat-action-row class=\'clickable\' routerLink="/spotify" *ngIf="isLoggedOnSpotify">Home</mat-action-row>      </mat-expansion-panel>    </mat-sidenav>    <router-outlet></router-outlet>    <ng-container *ngIf="isLoggedOnSpotify">      <app-spotify-player></app-spotify-player>    </ng-container></mat-sidenav-container></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EmailContainerComponent', 'selector': 'app-email-container'},{'name': 'GithubComponent', 'selector': 'app-github'},{'name': 'GmailComponent', 'selector': 'app-gmail'},{'name': 'GmailEmailListComponent', 'selector': 'app-email-list'},{'name': 'GmailStoreTokenComponent', 'selector': 'app-gmailstoretoken'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'ReadEmailComponent', 'selector': 'app-read-email'},{'name': 'SpotifyHomeComponent', 'selector': 'app-spotify-home'},{'name': 'SpotifyPlayerComponent', 'selector': 'app-spotify-player'},{'name': 'SpotifySearchComponent', 'selector': 'app-spotify-search'},{'name': 'SpotifyStoreTokenComponent', 'selector': 'app-spotify-store-token'},{'name': 'TodoEditComponent', 'selector': 'app-todo-edit'},{'name': 'TodoListComponent', 'selector': 'app-todo-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
 </script>
