@@ -41,8 +41,6 @@ export class GmailService {
    */
   fetchEmailList(limit = 50, token = null) {
 
-    let messages: Array<GmailCustomEmail> = [];
-
     // First call to get the email list
     this.http.getEmailList(limit, token).subscribe((response: {messages: Array<{id: string, threadId: string}>, nextPageToken: string}) => {
 
@@ -133,5 +131,21 @@ export class GmailService {
 
   containsEmailWithId(emailId: string) : boolean {
     return this.cachedMessages[emailId] != null;
+  }
+
+  markEmailAsRead(id: string) {
+    return this.http.modifyEmail(id, {
+      "removeLabelIds": [
+        'UNREAD'
+      ]
+    });
+  }
+
+  markEmailAsUnread(id: string) {
+    // this.http.modifyEmail({
+    //   "addLabelIds": [
+    //     'UNREAD'
+    //   ]
+    // });
   }
 }

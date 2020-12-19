@@ -149,4 +149,16 @@ export class HttpService {
     return this.http.get("https://gmail.googleapis.com/gmail/v1/users/me/messages/" + emailId, reqOpts);
 
   }
+
+
+  modifyEmail(id: string, form: object) {
+
+    const reqOpts = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
+      })
+    };
+
+    return this.http.post('https://gmail.googleapis.com/gmail/v1/users/me/messages/' + id + '/modify', form, reqOpts);
+  }
 }
