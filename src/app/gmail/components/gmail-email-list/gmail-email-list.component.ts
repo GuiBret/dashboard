@@ -59,7 +59,7 @@ export class GmailEmailListComponent implements OnInit {
     this.emailList = [];
     this.isLoading = true;
     this.currPageSize = event.pageSize;
-    this.gmailService.fetchEmailList(event.pageSize, this.gmailService.pageToken);
+    this.gmailService.fetchEmailList(event.pageSize, this.gmailService.pageToken, this.emailSearchControl.value);
 
   }
 
