@@ -34,3 +34,7 @@ tr:hover {
 .hidden {
   display: none;
 }
+
+.mat-column-snippet {
+  max-width: 60vw;
+}
