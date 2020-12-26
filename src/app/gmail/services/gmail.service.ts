@@ -56,6 +56,16 @@ export class GmailService {
       // When all calls are finished, we post the email list
       forkJoin(messagesToFetch).subscribe({
         complete: () => {
+
+          // We order the messages by date before sending them
+          this.messageBox = this.messageBox.sort((a, b) => {
+            if(a.internalDate < b.internalDate) {
+              return 1;
+            }
+
+            return -1;
+          })
+
           this.newEmailListPosted.next(this.messageBox);
           this.messageBox = [];
         }
