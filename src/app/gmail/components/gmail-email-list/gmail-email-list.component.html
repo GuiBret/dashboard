@@ -1,3 +1,10 @@
+<input type="text"
+       placeholder="Search"
+       matInput
+       [formControl]="emailSearchControl"
+       (keydown.enter)="makeSearch()">
+
+
 
 <ng-container *ngIf="emailList.length !== 0">
   <table mat-table [dataSource]="emailList">
