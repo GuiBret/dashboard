@@ -88,16 +88,16 @@ export class GmailService {
 
     const id = emailInfo.id;
     const internalDate = emailInfo.internalDate;
-    const isRead = !emailInfo.labelIds.includes('UNREAD');
+    const isRead = !emailInfo.labelIds || !emailInfo.labelIds.includes('UNREAD');
 
     const snippet = quotedPrintable.decode(emailInfo.snippet);
 
     const sender = emailInfo.payload.headers.filter((currHeader: {name: string, value: string}) => {
-      return currHeader.name === 'From';
+      return currHeader.name.toUpperCase() === 'FROM';
     })[0].value;
 
     const subject = emailInfo.payload.headers.filter((currHeader: {name: string, value: string}) => {
-      return currHeader.name === 'Subject';
+      return currHeader.name.toUpperCase() === 'SUBJECT';
     })[0].value;
 
     let htmlContentAsBase64;
