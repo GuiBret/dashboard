@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { GmailCustomEmail } from '../../interfaces/gmail-custom-email.interface';
 import { GmailEmail } from '../../interfaces/gmail-email.interface';
 import { GmailService } from '../../services/gmail.service';
@@ -31,6 +32,10 @@ export class GmailEmailListComponent implements OnInit {
   private currPageSize = 50;
   private currPageIndex = 1;
 
+  options = [];
+
+  emailSearchControl = new FormControl();
+
   isLoading = false;
 
   constructor(private gmailService: GmailService) { }
@@ -41,7 +46,9 @@ export class GmailEmailListComponent implements OnInit {
     this.gmailService.onNewEmailListPosted.subscribe((newEmailList: Array<GmailCustomEmail>) => {
       this.isLoading = false;
       this.emailList = newEmailList;
-    })
+    });
+
+    // this.emailSearchControl.valueChanges.subscribe(this.makeSearch.bind(this));
   }
 
   ngOnDestroy() {
@@ -51,8 +58,13 @@ export class GmailEmailListComponent implements OnInit {
   loadNewList(event: any) {
     this.emailList = [];
     this.isLoading = true;
+    this.currPageSize = event.pageSize;
     this.gmailService.fetchEmailList(event.pageSize, this.gmailService.pageToken);
 
   }
 
+  makeSearch() {
+    this.gmailService.fetchEmailList(this.currPageSize, this.gmailService.pageToken, this.emailSearchControl.value);
+
+  }
 }
