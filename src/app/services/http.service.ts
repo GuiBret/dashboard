@@ -120,7 +120,7 @@ export class HttpService {
     return this.http.get(environment.serverRoot + '/gmail/get-url', reqOpts);
   }
 
-  getEmailList(limit: number, token: string) {
+  getEmailList(limit: number, token: string, query: string = null) {
 
     const params = new URLSearchParams();
 
@@ -133,6 +133,10 @@ export class HttpService {
 
     if(token) {
       params.append('pageToken', token);
+    }
+
+    if(query) {
+      params.append('q', query);
     }
 
     return this.http.get(`https://gmail.googleapis.com/gmail/v1/users/me/messages?` + params.toString(), reqOpts);
