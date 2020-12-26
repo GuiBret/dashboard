@@ -39,13 +39,17 @@ export class GmailService {
   /**
    * Retrieves the email id list, then makes another call per email to get content
    */
-  fetchEmailList(limit = 50, token = null) {
+  fetchEmailList(limit = 50, token = null, query = null) {
 
     // First call to get the email list
-    this.http.getEmailList(limit, token).subscribe((response: {messages: Array<{id: string, threadId: string}>, nextPageToken: string}) => {
+    this.http.getEmailList(limit, token, query).subscribe((response: {messages: Array<{id: string, threadId: string}>, nextPageToken: string, resultSizeEstimate: number}) => {
 
       this.nextPageToken = response.nextPageToken;
-
+      if(response.resultSizeEstimate === 0) {
+        this.newEmailListPosted.next([]);
+        this.messageBox = [];
+        return;
+      }
       // Then we make a call for each
       const messagesToFetch = response.messages.map(this.makeGetCallOnEmail.bind(this));
 
