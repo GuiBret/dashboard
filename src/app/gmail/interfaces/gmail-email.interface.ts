@@ -1,7 +1,7 @@
 export class GmailEmail {
   id: string;
   internalDate: number;
-  labelIds: Array<string>;
+  labelIds?: Array<string>;
   payload: {
     headers: [
       {
