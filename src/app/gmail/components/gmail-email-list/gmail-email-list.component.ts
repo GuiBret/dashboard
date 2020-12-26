@@ -27,7 +27,7 @@ import { GmailService } from '../../services/gmail.service';
 export class GmailEmailListComponent implements OnInit {
 
   public emailList: Array<GmailCustomEmail> = [];
-  public displayedColumns: Array<string> = ['from', 'snippet'];
+  public displayedColumns: Array<string> = ['from', 'snippet', 'internalDate'];
 
   private currPageSize = 50;
   private currPageIndex = 1;
@@ -55,6 +55,11 @@ export class GmailEmailListComponent implements OnInit {
     this.emailList = [];
   }
 
+  // TODO: Group the next 2 functions
+  /**
+   * Triggered when changing page or elements per page, records the info and performs a search
+   * @param event
+   */
   loadNewList(event: any) {
     this.emailList = [];
     this.isLoading = true;
@@ -64,6 +69,8 @@ export class GmailEmailListComponent implements OnInit {
   }
 
   makeSearch() {
+    this.emailList = [];
+    this.isLoading = true;
     this.gmailService.fetchEmailList(this.currPageSize, this.gmailService.pageToken, this.emailSearchControl.value);
 
   }
