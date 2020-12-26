@@ -139,6 +139,8 @@ export class HttpService {
       params.append('q', query);
     }
 
+    params.append("labelIds", "INBOX");
+
     return this.http.get(`https://gmail.googleapis.com/gmail/v1/users/me/messages?` + params.toString(), reqOpts);
   }
 
