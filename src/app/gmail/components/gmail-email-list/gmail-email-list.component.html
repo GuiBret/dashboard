@@ -18,7 +18,7 @@
     </ng-container>
     <ng-container matColumnDef="snippet">
       <th mat-header-cell *matHeaderCellDef>Date</th>
-      <td mat-cell *matCellDef="let email" [innerHTML]="email.snippet"> {{ email.snippet }}</td>
+      <td mat-cell *matCellDef="let email"><span>{{email.subject}}</span><span style="color:gray; font-weight:normal;"> {{ email.snippet | slice:0:50 }}</span></td>
     </ng-container>
 
 
