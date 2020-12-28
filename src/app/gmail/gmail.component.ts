@@ -14,7 +14,7 @@ export class GmailComponent implements OnInit {
 
   ngOnInit(): void {
     if(localStorage.getItem('gmailToken')) {
-      this.gmailService.fetchEmailList();
+      this.gmailService.fetchEmailList('init');
       this.titleService.setTitle('Email list');
     }
   }

@@ -53,6 +53,7 @@ export class GmailEmailListComponent implements OnInit {
 
   ngOnDestroy() {
     this.emailList = [];
+    this.gmailService.resetTokens();
   }
 
   // TODO: Group the next 2 functions
@@ -63,15 +64,20 @@ export class GmailEmailListComponent implements OnInit {
   loadNewList(event: any) {
     this.emailList = [];
     this.isLoading = true;
+
+    let direction = (event.pageIndex > event.previousPageIndex) ? 'next' : 'prev';
+
     this.currPageSize = event.pageSize;
-    this.gmailService.fetchEmailList(event.pageSize, this.gmailService.pageToken, this.emailSearchControl.value);
+    this.gmailService.fetchEmailList(direction, event.pageSize, this.emailSearchControl.value);
 
   }
 
   makeSearch() {
     this.emailList = [];
     this.isLoading = true;
-    this.gmailService.fetchEmailList(this.currPageSize, this.gmailService.pageToken, this.emailSearchControl.value);
+    this.gmailService.resetTokens();
+
+    this.gmailService.fetchEmailList('init', this.currPageSize, this.emailSearchControl.value);
 
   }
 }

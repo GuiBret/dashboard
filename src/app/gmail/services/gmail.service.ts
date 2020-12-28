@@ -23,6 +23,8 @@ export class GmailService {
   private messageBox = [];
 
   private nextPageToken = '';
+  private tokens = [null];
+  private currTokenIdx = 0;
 
   constructor(private http: HttpService) {
 
@@ -32,19 +34,59 @@ export class GmailService {
     return this.nextPageToken;
   }
 
+  resetTokens() {
+    this.tokens = [null];
+    this.currTokenIdx = 0;
+  }
+
   checkGmailStatus() {
     return localStorage.getItem('gmailToken') != null && parseInt(localStorage.getItem('gmailExp')) > (new Date().getTime());
   }
 
   /**
    * Retrieves the email id list, then makes another call per email to get content
+   *
+   *
+   *
+   * sélection token :
+
+   * si init : rien (null)
+   * si next : currTokenIdx
+   * si prev : currTokenIdx - 1
+   *
+   * Après requête :
+   *
+   * Si prev : rien, currTokenIdx--
+   * Si next :
+   *    currTokenIdx++
+   *    si currTokenIdx === tokens.length - 1 (dernier élement)
+   *        push token
+
+   * Si init : push token
    */
-  fetchEmailList(limit = 50, token = null, query = null) {
+  fetchEmailList(direction: string, limit = 50, query = null) {
+    let token = null;
+    if(direction === 'next') {
+      this.currTokenIdx++;
+      token = this.tokens[this.currTokenIdx];
+    } else if(direction === 'prev') {
+      this.currTokenIdx--;
+      token = this.tokens[this.currTokenIdx];
+    }
 
     // First call to get the email list
     this.http.getEmailList(limit, token, query).subscribe((response: {messages: Array<{id: string, threadId: string}>, nextPageToken: string, resultSizeEstimate: number}) => {
 
-      this.nextPageToken = response.nextPageToken;
+      // If we are trying to go to next page and go to a new token which we did not go to, we add it to the list
+
+      if(direction === 'init') {
+        this.tokens.push(response.nextPageToken);
+      }
+      else if(direction === 'next' && this.currTokenIdx === this.tokens.length - 1) {
+          this.tokens.push(response.nextPageToken);
+      }
+
+
       if(response.resultSizeEstimate === 0) {
         this.newEmailListPosted.next([]);
         this.messageBox = [];
