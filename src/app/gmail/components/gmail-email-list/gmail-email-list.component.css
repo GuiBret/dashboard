@@ -36,5 +36,9 @@ tr:hover {
 }
 
 .mat-column-snippet {
-  max-width: 60vw;
+  width: 60vw;
+}
+
+.mat-column-id {
+  width:5vw;
 }
