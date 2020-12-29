@@ -8,6 +8,14 @@
 
 <ng-container *ngIf="emailList.length !== 0">
   <table mat-table [dataSource]="emailList">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox indeterminate="true" [(ngModel)]="indeterminateCheckboxState"></mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let id">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="toggleEmail()"></mat-checkbox>
+      </td>
+    </ng-container>
     <ng-container matColumnDef="from">
       <th mat-header-cell *matHeaderCellDef>Sender</th>
       <td mat-cell *matCellDef="let email">{{ email.from | slice:0:20 }}</td>

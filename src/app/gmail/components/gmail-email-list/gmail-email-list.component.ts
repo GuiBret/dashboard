@@ -27,10 +27,10 @@ import { GmailService } from '../../services/gmail.service';
 export class GmailEmailListComponent implements OnInit {
 
   public emailList: Array<GmailCustomEmail> = [];
-  public displayedColumns: Array<string> = ['from', 'snippet', 'internalDate'];
+  public displayedColumns: Array<string> = ['id', 'from', 'snippet', 'internalDate'];
 
   private currPageSize = 50;
-  private currPageIndex = 1;
+  indeterminateCheckboxState = false;
 
   options = [];
 
@@ -79,5 +79,9 @@ export class GmailEmailListComponent implements OnInit {
 
     this.gmailService.fetchEmailList('init', this.currPageSize, this.emailSearchControl.value);
 
+  }
+
+  toggleEmail($event: any) {
+    event.stopPropagation();
   }
 }
