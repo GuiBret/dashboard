@@ -10,10 +10,10 @@
   <table mat-table [dataSource]="emailList">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox [indeterminate]="indeterminateCheckboxState"></mat-checkbox>
+        <mat-checkbox [indeterminate]="indeterminateCheckboxState" [checked]="indeterminateCheckboxChecked" (change)="toggleAllEmails($event)"></mat-checkbox>
       </th>
-      <td mat-cell *matCellDef="let id">
-        <mat-checkbox (click)="$event.stopPropagation()" (click)="toggleEmail($event)"></mat-checkbox>
+      <td mat-cell *matCellDef="let email">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="toggleEmail()" [(ngModel)]="email.selected"></mat-checkbox>
       </td>
     </ng-container>
     <ng-container matColumnDef="from">

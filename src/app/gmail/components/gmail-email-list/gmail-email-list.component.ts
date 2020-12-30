@@ -32,6 +32,8 @@ export class GmailEmailListComponent implements OnInit {
 
   indeterminateCheckboxState = false;
 
+  indeterminateCheckboxChecked = false;
+
   options = [];
 
   emailSearchControl = new FormControl();
@@ -47,8 +49,6 @@ export class GmailEmailListComponent implements OnInit {
       this.isLoading = false;
       this.emailList = newEmailList;
     });
-
-    // this.emailSearchControl.valueChanges.subscribe(this.makeSearch.bind(this));
   }
 
   ngOnDestroy() {
@@ -81,7 +81,46 @@ export class GmailEmailListComponent implements OnInit {
 
   }
 
-  toggleEmail(event: any) {
+  stopPropagation(event: any) {
     event.stopPropagation();
+  }
+
+  toggleEmail() {
+
+
+    this.defineIndeterminateState();
+  }
+
+  /**
+   * Selects all emails if false => true, unselects all emails otherwise
+   */
+  toggleAllEmails(event: {source: any, checked: boolean}) {
+
+    const newValue = event.checked;
+    for(let i = 0; i < this.emailList.length; i++) {
+
+      this.emailList[i].selected = newValue;
+    }
+
+    this.defineIndeterminateState();
+
+  }
+
+  defineIndeterminateState() {
+    console.log('Define indeterminate state')
+    const nbOfEmailsSelected = this.emailList.filter(elem => elem.selected).length;
+
+    if(nbOfEmailsSelected === 0) {
+      this.indeterminateCheckboxChecked = false;
+      this.indeterminateCheckboxState = false;
+    } else if (nbOfEmailsSelected === this.currPageSize) {
+      this.indeterminateCheckboxState = false;
+      this.indeterminateCheckboxChecked = true;
+    } else {
+      this.indeterminateCheckboxState = true;
+      this.indeterminateCheckboxChecked = null;
+    }
+
+
   }
 }

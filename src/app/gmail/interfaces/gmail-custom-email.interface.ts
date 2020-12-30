@@ -6,4 +6,5 @@ export class GmailCustomEmail {
   internalDate: number;
   subject: string;
   htmlContent: string;
+  selected: boolean;
 }

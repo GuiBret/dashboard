@@ -181,7 +181,8 @@ export class GmailService {
       snippet: snippet,
       from: sender,
       subject: subject,
-      htmlContent: htmlContent
+      htmlContent: htmlContent,
+      selected: false
     };
   }
 
