@@ -86,8 +86,6 @@ export class GmailEmailListComponent implements OnInit {
   }
 
   toggleEmail() {
-
-
     this.defineIndeterminateState();
   }
 
@@ -97,17 +95,17 @@ export class GmailEmailListComponent implements OnInit {
   toggleAllEmails(event: {source: any, checked: boolean}) {
 
     const newValue = event.checked;
-    for(let i = 0; i < this.emailList.length; i++) {
 
-      this.emailList[i].selected = newValue;
-    }
+    this.emailList.forEach((email) => {
+      email.selected = newValue;
+    });
 
     this.defineIndeterminateState();
 
   }
 
   defineIndeterminateState() {
-    console.log('Define indeterminate state')
+
     const nbOfEmailsSelected = this.emailList.filter(elem => elem.selected).length;
 
     if(nbOfEmailsSelected === 0) {
