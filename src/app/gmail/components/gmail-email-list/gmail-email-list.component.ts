@@ -2,7 +2,6 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GmailCustomEmail } from '../../interfaces/gmail-custom-email.interface';
-import { GmailEmail } from '../../interfaces/gmail-email.interface';
 import { GmailService } from '../../services/gmail.service';
 
 @Component({
@@ -30,6 +29,7 @@ export class GmailEmailListComponent implements OnInit {
   public displayedColumns: Array<string> = ['id', 'from', 'snippet', 'internalDate'];
 
   private currPageSize = 50;
+
   indeterminateCheckboxState = false;
 
   options = [];
@@ -81,7 +81,7 @@ export class GmailEmailListComponent implements OnInit {
 
   }
 
-  toggleEmail($event: any) {
+  toggleEmail(event: any) {
     event.stopPropagation();
   }
 }
