@@ -48,6 +48,7 @@ export class GmailEmailListComponent implements OnInit {
     this.gmailService.onNewEmailListPosted.subscribe((newEmailList: Array<GmailCustomEmail>) => {
       this.isLoading = false;
       this.emailList = newEmailList;
+      this.defineIndeterminateState();
     });
   }
 
@@ -130,7 +131,10 @@ export class GmailEmailListComponent implements OnInit {
                                            .map(email => email.id);
 
     this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe(() => {
-      console.log('Emails deleted');
+      this.gmailService.resetTokens();
+      this.isLoading = true;
+
+      this.gmailService.fetchEmailList('init');
     });
   }
 }
