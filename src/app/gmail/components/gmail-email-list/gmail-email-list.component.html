@@ -5,15 +5,20 @@
        (keydown.enter)="makeSearch()">
 
 
+<div id="actions">
+  <button mat-raised-button color="primary" [disabled]="indeterminateCheckboxState === false" (click)="deleteSelectedEmails()">Delete permanently</button>
+
+</div>
 
 <ng-container *ngIf="emailList.length !== 0">
   <table mat-table [dataSource]="emailList">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox [indeterminate]="indeterminateCheckboxState" [checked]="indeterminateCheckboxChecked" (change)="toggleAllEmails($event)"></mat-checkbox>
+        <mat-checkbox [(indeterminate)]="indeterminateCheckboxState" (change)="toggleAllEmails($event)"></mat-checkbox>
       </th>
-      <td mat-cell *matCellDef="let email">
+      <td mat-cell *matCellDef="let email" class="mat-cell-selection">
         <mat-checkbox (click)="$event.stopPropagation()" (change)="toggleEmail()" [(ngModel)]="email.selected"></mat-checkbox>
+        <mat-icon [fontSet]="(email.selected) ? 'material-icons' : 'material-icons-outlined'">label_important</mat-icon>
       </td>
     </ng-container>
     <ng-container matColumnDef="from">
@@ -28,9 +33,17 @@
       <th mat-header-cell *matHeaderCellDef>Date</th>
       <td mat-cell *matCellDef="let email"><span>{{email.subject}}</span><span style="color:gray; font-weight:normal;"> {{ email.snippet | slice:0:50 }}</span></td>
     </ng-container>
+    <ng-container matColumnDef="header-actions">
 
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="4">
+        Coucou</th>
+    </ng-container>
 
+    <!-- <ng-container id="headergroup"> -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- <tr mat-header-row *matHeaderRowDef="['header-actions']"></tr> -->
+    <!-- </ng-container> -->
+
     <tr [@emailElem] mat-row *matRowDef="let myRowData; columns: displayedColumns" [ngClass]="{'unread': !myRowData.isRead}" routerLink="/gmail/read-email/{{myRowData.id}}"></tr>
 
   </table>

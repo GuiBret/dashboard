@@ -205,4 +205,13 @@ export class GmailService {
     //   ]
     // });
   }
+
+  deleteMultipleEmails(emailIds: Array<string>) {
+
+    const payload = {
+      ids: emailIds
+    };
+
+    return this.http.deleteMultipleEmails(payload);
+  }
 }
