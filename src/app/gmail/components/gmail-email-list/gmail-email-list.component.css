@@ -4,16 +4,30 @@
 }
 
 table {
-  height:70vh;
+  height:60vh;
   display:block;
   overflow-y:scroll;
 }
 
+#actions {
+  height:8vh;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
 .mat-header-row {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.mat-cell-selection {
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-start;
+  align-items: center;
+  height:inherit;
 }
 
 .unread {

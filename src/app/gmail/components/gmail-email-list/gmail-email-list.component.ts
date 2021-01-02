@@ -121,4 +121,16 @@ export class GmailEmailListComponent implements OnInit {
 
 
   }
+
+  /**
+   * Callback to click on button "Delete selected", checks which emails are marked for deletion and tells the service to make the request
+   */
+  deleteSelectedEmails() {
+    const selectedEmailIds = this.emailList.filter((email) => email.selected)
+                                           .map(email => email.id);
+
+    this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe(() => {
+      console.log('Emails deleted');
+    });
+  }
 }
