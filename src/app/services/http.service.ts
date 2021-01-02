@@ -182,4 +182,14 @@ export class HttpService {
 
     return this.http.post('https://gmail.googleapis.com/gmail/v1/users/me/messages/batchDelete', payload, reqOpts);
   }
+
+  batchModifyEmails(payload: object) {
+    const reqOpts = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
+      })
+    };
+
+    return this.http.post('https://gmail.googleapis.com/gmail/v1/users/me/messages/batchModify', payload, reqOpts);
+  }
 }

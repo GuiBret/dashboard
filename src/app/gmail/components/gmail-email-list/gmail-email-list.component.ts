@@ -46,6 +46,7 @@ export class GmailEmailListComponent implements OnInit {
 
     this.isLoading = true;
     this.gmailService.onNewEmailListPosted.subscribe((newEmailList: Array<GmailCustomEmail>) => {
+      console.log(newEmailList);
       this.isLoading = false;
       this.emailList = newEmailList;
       this.defineIndeterminateState();
@@ -82,11 +83,24 @@ export class GmailEmailListComponent implements OnInit {
 
   }
 
-  stopPropagation(event: any) {
+  stopPropagationAndToggleEmail(event: any, emailId: string) {
+    event.preventDefault();
     event.stopPropagation();
+    this.emailList = this.emailList.map((email) => {
+      if(email.id === emailId) {
+        email.selected = !email.selected;
+      }
+
+      return email;
+    });
+
+    this.defineIndeterminateState();
+
+
   }
 
   toggleEmail() {
+    console.log('Toggle email');
     this.defineIndeterminateState();
   }
 
@@ -127,14 +141,35 @@ export class GmailEmailListComponent implements OnInit {
    * Callback to click on button "Delete selected", checks which emails are marked for deletion and tells the service to make the request
    */
   deleteSelectedEmails() {
-    const selectedEmailIds = this.emailList.filter((email) => email.selected)
-                                           .map(email => email.id);
+    const selectedEmailIds = this.getSelectedEmails().map(email => email.id);
 
     this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe(() => {
       this.gmailService.resetTokens();
       this.isLoading = true;
 
-      this.gmailService.fetchEmailList('init');
+      this.gmailService.fetchEmailList('init', this.currPageSize, this.emailSearchControl.value);
     });
+  }
+
+  markMultipleEmailsAsRead() {
+    const selectedEmailIds = this.getSelectedEmails().map(email => email.id);
+
+    this.gmailService.markMultipleEmailsAsRead(selectedEmailIds).subscribe(() => {
+      this.emailList = this.emailList.map((email: GmailCustomEmail) => {
+        if(selectedEmailIds.includes(email.id)) {
+          email.isRead = true;
+        }
+
+        email.selected = false;
+
+        return email;
+      });
+
+      this.defineIndeterminateState();
+    });
+  }
+
+  private getSelectedEmails(): Array<GmailCustomEmail> {
+    return this.emailList.filter((email) => email.selected);
   }
 }

@@ -214,4 +214,14 @@ export class GmailService {
 
     return this.http.deleteMultipleEmails(payload);
   }
+
+  markMultipleEmailsAsRead(ids: Array<string>) {
+
+    const payload = {
+      ids: ids,
+      removeLabelIds: ['UNREAD']
+    };
+
+    return this.http.batchModifyEmails(payload);
+  }
 }
