@@ -19,7 +19,7 @@ export class GmailService {
   public onNewEmailListPosted = this.newEmailListPosted.asObservable();
 
   // TODO: merge these 2 properties
-  private cachedMessages: Object = {};
+  private cachedMessages: object = {};
   private messageBox = [];
 
   private nextPageToken = '';
@@ -40,7 +40,7 @@ export class GmailService {
   }
 
   checkGmailStatus() {
-    return localStorage.getItem('gmailToken') != null && parseInt(localStorage.getItem('gmailExp')) > (new Date().getTime());
+    return localStorage.getItem('gmailToken') != null && parseInt(localStorage.getItem('gmailExp'), 10) > (new Date().getTime());
   }
 
   /**
@@ -49,7 +49,6 @@ export class GmailService {
    *
    *
    * sélection token :
-
    * si init : rien (null)
    * si next : currTokenIdx
    * si prev : currTokenIdx - 1
@@ -61,58 +60,73 @@ export class GmailService {
    *    currTokenIdx++
    *    si currTokenIdx === tokens.length - 1 (dernier élement)
    *        push token
-
    * Si init : push token
    */
   fetchEmailList(direction: string, limit = 50, query = null) {
     let token = null;
-    if(direction === 'next') {
+    if (direction === 'next') {
       this.currTokenIdx++;
       token = this.tokens[this.currTokenIdx];
-    } else if(direction === 'prev') {
+    } else if (direction === 'prev') {
       this.currTokenIdx--;
       token = this.tokens[this.currTokenIdx];
     }
 
     // First call to get the email list
-    this.http.getEmailList(limit, token, query).subscribe((response: {messages: Array<{id: string, threadId: string}>, nextPageToken: string, resultSizeEstimate: number}) => {
-
-      // If we are trying to go to next page and go to a new token which we did not go to, we add it to the list
-
-      if(direction === 'init') {
-        this.tokens.push(response.nextPageToken);
-      }
-      else if(direction === 'next' && this.currTokenIdx === this.tokens.length - 1) {
-          this.tokens.push(response.nextPageToken);
-      }
-
-
-      if(response.resultSizeEstimate === 0) {
-        this.newEmailListPosted.next([]);
-        this.messageBox = [];
-        return;
-      }
-      // Then we make a call for each
-      const messagesToFetch = response.messages.map(this.makeGetCallOnEmail.bind(this));
-
-      // When all calls are finished, we post the email list
-      forkJoin(messagesToFetch).subscribe({
-        complete: () => {
-
-          // We order the messages by date before sending them
-          this.messageBox = this.messageBox.sort((a, b) => {
-            if(a.internalDate < b.internalDate) {
-              return 1;
-            }
-
-            return -1;
-          })
-
-          this.newEmailListPosted.next(this.messageBox);
-          this.messageBox = [];
-        }
-      });
+    this.http.getEmailList(limit, token, query).subscribe({
+      next: this.onEmailListReceived.bind(this, direction),
+      error: this.handleError.bind(this)
     });
+  }
+
+  /**
+   * Callback of getEmailList if everything went well
+   * @param direction init, next or prev, used to know if we will search the next, previous page or we try to get a page for the first time
+   * @param response The response
+   */
+  onEmailListReceived(direction: string,
+                      response: {messages: Array<{id: string, threadId: string}>,
+                      nextPageToken: string,
+                      resultSizeEstimate: number}) {
+
+    // If we are trying to go to next page and go to a new token which we did not go to, we add it to the list
+    if (direction === 'init') {
+      this.tokens.push(response.nextPageToken);
+    }
+    else if (direction === 'next' && this.currTokenIdx === this.tokens.length - 1) {
+        this.tokens.push(response.nextPageToken);
+    }
+
+    if (response.resultSizeEstimate === 0) {
+      this.newEmailListPosted.next([]);
+      this.messageBox = [];
+      return;
+    }
+
+    // Then we make a call for each
+    const messagesToFetch = response.messages.map(this.makeGetCallOnEmail.bind(this));
+
+    // When all calls are finished, we post the email list
+    forkJoin(messagesToFetch).subscribe({
+      complete: () => {
+
+        // We order the messages by date before sending them
+        this.messageBox = this.messageBox.sort((a, b) => {
+          if (a.internalDate < b.internalDate) {
+            return 1;
+          }
+
+          return -1;
+        });
+
+        this.newEmailListPosted.next(this.messageBox);
+        this.messageBox = [];
+      }
+    });
+  }
+
+  handleError(error: any) {
+    alert('Flute');
   }
 
   /**
@@ -136,7 +150,7 @@ export class GmailService {
     return this.cachedMessages[emailId];
   }
 
-  filterEmailInfo(emailInfo: GmailEmail) : GmailCustomEmail {
+  filterEmailInfo(emailInfo: GmailEmail): GmailCustomEmail {
 
     const id = emailInfo.id;
     const internalDate = emailInfo.internalDate;
@@ -155,16 +169,16 @@ export class GmailService {
 
     let htmlContentAsBase64;
 
-    if(emailInfo.payload.body.size !== 0) {
+    if (emailInfo.payload.body.size !== 0) {
       htmlContentAsBase64 = emailInfo.payload.body.data;
     } else { // Otherwise we check in parts
 
       // TODO: Add recursion on part search
-      let filteredParts = emailInfo.payload.parts.filter((currPart: { mimeType: string, body: {data: string}}) => {
+      const filteredParts = emailInfo.payload.parts.filter((currPart: { mimeType: string, body: {data: string}}) => {
         return currPart.mimeType === 'text/html';
       });
 
-      if(filteredParts.length === 0) {
+      if (filteredParts.length === 0) {
         htmlContentAsBase64 = '';
       } else {
         htmlContentAsBase64 = filteredParts[0].body.data;
@@ -176,25 +190,25 @@ export class GmailService {
     const htmlContent = atob( htmlContentAsBase64.replace(/-/g, '+').replace(/_/g, '/') );
 
     return {
-      id: id,
-      internalDate: internalDate,
-      isRead: isRead,
-      snippet: snippet,
+      id,
+      internalDate,
+      isRead,
+      snippet,
       from: sender,
-      subject: subject,
-      htmlContent: htmlContent,
+      subject,
+      htmlContent,
       selected: false,
-      important: important
+      important
     };
   }
 
-  containsEmailWithId(emailId: string) : boolean {
+  containsEmailWithId(emailId: string): boolean {
     return this.cachedMessages[emailId] != null;
   }
 
   markEmailAsRead(id: string) {
     return this.http.modifyEmail(id, {
-      "removeLabelIds": [
+      removeLabelIds: [
         'UNREAD'
       ]
     });
@@ -220,16 +234,20 @@ export class GmailService {
   markMultipleEmailsAsRead(ids: Array<string>) {
 
     const payload = {
-      ids: ids,
+      ids,
       removeLabelIds: ['UNREAD']
     };
 
     return this.http.batchModifyEmails(payload);
   }
 
-  toggleImportantEmail(email: GmailCustomEmail) : Observable<any> {
+  /**
+   * Checks the state of the "important" attribute, defines the payload to be sent accordingly, then calls the http service to make the call
+   * @param email The email in which we want to add / remove the IMPORTANT label
+   */
+  toggleImportantEmail(email: GmailCustomEmail): Observable<any> {
     let payload = {};
-    if(email.important) {
+    if (!email.important) {
       payload = {
         addLabelIds: ['IMPORTANT']
       };
