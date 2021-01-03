@@ -111,13 +111,7 @@ export class GmailService {
       complete: () => {
 
         // We order the messages by date before sending them
-        this.messageBox = this.messageBox.sort((a, b) => {
-          if (a.internalDate < b.internalDate) {
-            return 1;
-          }
-
-          return -1;
-        });
+        this.messageBox = this.messageBox.sort(this.sortEmailsByDate.bind(this));
 
         this.newEmailListPosted.next(this.messageBox);
         this.messageBox = [];
@@ -258,5 +252,13 @@ export class GmailService {
     }
 
     return this.http.modifyEmail(email.id, payload);
+  }
+
+  sortEmailsByDate(a, b) {
+    if (a.internalDate < b.internalDate) {
+      return 1;
+    }
+
+    return -1;
   }
 }
