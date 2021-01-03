@@ -51,9 +51,5 @@ tr:hover {
 }
 
 .mat-column-snippet {
-  width: 60vw;
-}
-
-.mat-column-id {
-  width:5vw;
+  width: 60%;
 }
