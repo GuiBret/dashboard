@@ -7,4 +7,5 @@ export class GmailCustomEmail {
   subject: string;
   htmlContent: string;
   selected: boolean;
+  important: boolean;
 }
