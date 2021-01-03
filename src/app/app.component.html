@@ -48,9 +48,12 @@
 
 
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="isLoggedOnGmail">
         <mat-expansion-panel-header>
-          <mat-panel-title>GMail</mat-panel-title>
+          <mat-panel-title id="title-gmail">
+            <span>GMail</span>
+            <mat-icon [ngClass]="{'red-dot': !isLoggedOnGmail, 'green-dot': isLoggedOnGmail}">fiber_manual_record</mat-icon>
+          </mat-panel-title>
 
         </mat-expansion-panel-header>
 
@@ -58,9 +61,12 @@
         <mat-action-row class='clickable' routerLink="/gmail" *ngIf="isLoggedOnGmail">Home</mat-action-row>
 
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="isLoggedOnSpotify">
         <mat-expansion-panel-header>
-          <mat-panel-title>Spotify</mat-panel-title>
+          <mat-panel-title id="title-spotify">
+            <span>Spotify</span>
+            <mat-icon [ngClass]="{'red-dot': !isLoggedOnSpotify, 'green-dot': isLoggedOnSpotify}">fiber_manual_record</mat-icon>
+          </mat-panel-title>
 
         </mat-expansion-panel-header>
 
