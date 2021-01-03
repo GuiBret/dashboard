@@ -100,7 +100,7 @@ export class GmailEmailListComponent implements OnInit {
   }
 
   toggleEmail() {
-    console.log('Toggle email');
+
     this.defineIndeterminateState();
   }
 
@@ -135,6 +135,21 @@ export class GmailEmailListComponent implements OnInit {
     }
 
 
+  }
+
+  toggleImportantEmail(event: any, email: GmailCustomEmail) {
+    event.stopPropagation();
+
+    const emailId = email.id;
+      this.emailList = this.emailList.map((emailInList: GmailCustomEmail) => {
+        if(emailInList.id === emailId) {
+          email.important = !email.important;
+        }
+
+        return emailInList;
+      });
+
+    this.gmailService.toggleImportantEmail(email).subscribe(() => {});
   }
 
   /**

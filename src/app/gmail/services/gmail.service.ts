@@ -141,6 +141,7 @@ export class GmailService {
     const id = emailInfo.id;
     const internalDate = emailInfo.internalDate;
     const isRead = !emailInfo.labelIds || !emailInfo.labelIds.includes('UNREAD');
+    const important = !emailInfo.labelIds || emailInfo.labelIds.includes('IMPORTANT');
 
     const snippet = quotedPrintable.decode(emailInfo.snippet);
 
@@ -182,7 +183,8 @@ export class GmailService {
       from: sender,
       subject: subject,
       htmlContent: htmlContent,
-      selected: false
+      selected: false,
+      important: important
     };
   }
 
@@ -223,5 +225,20 @@ export class GmailService {
     };
 
     return this.http.batchModifyEmails(payload);
+  }
+
+  toggleImportantEmail(email: GmailCustomEmail) : Observable<any> {
+    let payload = {};
+    if(email.important) {
+      payload = {
+        addLabelIds: ['IMPORTANT']
+      };
+    } else {
+      payload = {
+        removeLabelIds: ['IMPORTANT']
+      };
+    }
+
+    return this.http.modifyEmail(email.id, payload);
   }
 }
