@@ -317,8 +317,7 @@ describe('GmailEmailListComponent', () => {
       expect(gmailServiceStub.toggleImportantEmail).toHaveBeenCalledWith(mockEmailList3[0]);
 
     });
-  })
-
+  });
 });
 
 
