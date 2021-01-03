@@ -45,17 +45,18 @@ export class GmailEmailListComponent implements OnInit {
   ngOnInit(): void {
 
     this.isLoading = true;
-    this.gmailService.onNewEmailListPosted.subscribe((newEmailList: Array<GmailCustomEmail>) => {
-      console.log(newEmailList);
-      this.isLoading = false;
-      this.emailList = newEmailList;
-      this.defineIndeterminateState();
-    });
+    this.gmailService.onNewEmailListPosted.subscribe(this.handleNewEmailList.bind(this));
   }
 
   ngOnDestroy() {
     this.emailList = [];
     this.gmailService.resetTokens();
+  }
+
+  handleNewEmailList(newEmailList: Array<GmailCustomEmail>) {
+    this.isLoading = false;
+    this.emailList = newEmailList;
+    this.defineIndeterminateState();
   }
 
   // TODO: Group the next 2 functions
@@ -122,7 +123,7 @@ export class GmailEmailListComponent implements OnInit {
   defineIndeterminateState() {
 
     const nbOfEmailsSelected = this.emailList.filter(elem => elem.selected).length;
-
+    console.log(this.emailList);
     if(nbOfEmailsSelected === 0) {
       this.indeterminateCheckboxChecked = false;
       this.indeterminateCheckboxState = false;
