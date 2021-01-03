@@ -14,7 +14,8 @@ describe('GmailEmailListComponent', () => {
   const gmailServiceStub: Partial<GmailService> = {
     onNewEmailListPosted: new Observable(),
     resetTokens: () => {},
-    fetchEmailList: () => {}
+    fetchEmailList: () => {},
+    toggleImportantEmail: (email: GmailCustomEmail) => {return new Observable();}
   };
 
   let mockEmailList: Array<GmailCustomEmail>;
@@ -227,8 +228,97 @@ describe('GmailEmailListComponent', () => {
 
       component['reverseAttributeInList'](mockEmailList3[0].id, 'selected');
     })
+  });
+  describe('Load new list', () => {
+    it('should call fetch the email list with prev since the new index is lower than the previous', () => {
+      const mockEvent = {
+        pageIndex: 1,
+        previousPageIndex: 2,
+        pageSize: 100
+      };
 
+      component['emailSearchControl'].setValue("");
+      component['currPageSize'] = 200;
+
+      spyOn(component, 'prepareInterfaceForSearch');
+      spyOn(gmailServiceStub, 'fetchEmailList');
+
+      component.loadNewList(mockEvent);
+
+      expect(component['currPageSize']).toEqual(100);
+      expect(gmailServiceStub['fetchEmailList']).toHaveBeenCalledWith('prev', 100, '');
+    });
+
+    it('should call fetch the email list with next since the new index is higher than the previous', () => {
+      const mockEvent = {
+        pageIndex: 3,
+        previousPageIndex: 2,
+        pageSize: 100
+      };
+
+      component['emailSearchControl'].setValue("");
+      component['currPageSize'] = 200;
+
+      spyOn(component, 'prepareInterfaceForSearch');
+      spyOn(gmailServiceStub, 'fetchEmailList');
+
+      component.loadNewList(mockEvent);
+
+      expect(component['currPageSize']).toEqual(100);
+      expect(gmailServiceStub['fetchEmailList']).toHaveBeenCalledWith('next', 100, '');
+    });
+  });
+
+  describe('Stop propagation and toggle email', () => {
+    it('should have prevented the normal behavior from happening and toggled the selected status of the email', () => {
+
+
+
+      const stopPropSpy = jasmine.createSpy();
+      const prevDefaultSpy = jasmine.createSpy();
+      // https://stackoverflow.com/questions/8475564/using-jasmines-spyon-upon-a-private-method
+      spyOn<any>(component, 'reverseAttributeInList');
+
+      const mockEvent = {
+        stopPropagation: stopPropSpy,
+        preventDefault: prevDefaultSpy
+      };
+
+      const mockEmailId = mockEmailList3[0].id;
+      component['emailList'] = mockEmailList3;
+
+
+      component.stopPropagationAndToggleEmail(mockEvent, mockEmailId);
+
+      expect(stopPropSpy).toHaveBeenCalled();
+      expect(prevDefaultSpy).toHaveBeenCalled();
+
+      expect(component['reverseAttributeInList']).toHaveBeenCalledWith(mockEmailId, 'selected');
+    });
+  });
+
+  describe('Toggle important email', () => {
+    it('should apply modifications on screen, and then call the service', () => {
+
+      const stopPropSpy = jasmine.createSpy();
+      const mockEvent = {
+        stopPropagation: stopPropSpy
+      };
+      // https://stackoverflow.com/questions/8475564/using-jasmines-spyon-upon-a-private-method
+      spyOn<any>(component, 'reverseAttributeInList');
+      spyOn(gmailServiceStub, 'toggleImportantEmail').and.returnValue(new Observable());
+      component['emailList'] = mockEmailList3;
+
+      component.toggleImportantEmail(mockEvent, mockEmailList3[0]);
+
+      expect(stopPropSpy).toHaveBeenCalled();
+
+      expect(component['reverseAttributeInList']).toHaveBeenCalledWith(mockEmailList3[0].id, 'important');
+      expect(gmailServiceStub.toggleImportantEmail).toHaveBeenCalledWith(mockEmailList3[0]);
+
+    });
   })
+
 });
 
 

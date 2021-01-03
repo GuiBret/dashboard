@@ -97,11 +97,6 @@ export class GmailEmailListComponent implements OnInit {
 
   }
 
-  toggleEmail() {
-
-    this.defineIndeterminateState();
-  }
-
   /**
    * Selects all emails if false => true, unselects all emails otherwise
    */
@@ -149,13 +144,7 @@ export class GmailEmailListComponent implements OnInit {
   deleteSelectedEmails() {
     const selectedEmailIds = this.getSelectedEmails().map(email => email.id);
 
-    this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe(this.onMultipleEmailsDeleted.bind(this));
-  }
-
-  onMultipleEmailsDeleted() {
-    this.gmailService.resetTokens();
-    this.isLoading = true;
-    this.gmailService.fetchEmailList('init', this.currPageSize, this.emailSearchControl.value);
+    this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe(this.makeInitSearch.bind(this));
   }
 
   markMultipleEmailsAsRead() {
