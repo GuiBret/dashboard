@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { HttpService } from 'src/app/services/http.service';
 
 import { ReadEmailComponent } from './read-email.component';
 
@@ -22,11 +24,15 @@ describe('ReadEmailComponent', () => {
     })
   };
 
+  const httpServiceStub: Partial<HttpService> = {};
+  const snackbarStub: Partial<MatSnackBar> = {};
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ReadEmailComponent ],
       providers: [
-        {provide: ActivatedRoute, useValue: actRouteStub}
+        {provide: ActivatedRoute, useValue: actRouteStub},
+        {provide: HttpService, useValue: httpServiceStub},
+        {provide: MatSnackBar, useValue: snackbarStub},
       ]
     })
     .compileComponents();
