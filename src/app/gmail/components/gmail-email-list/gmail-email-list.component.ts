@@ -126,7 +126,7 @@ export class GmailEmailListComponent implements OnInit {
     if(nbOfEmailsSelected === 0) {
       this.indeterminateCheckboxChecked = false;
       this.indeterminateCheckboxState = false;
-    } else if (nbOfEmailsSelected === this.currPageSize) {
+    } else if (nbOfEmailsSelected === this.emailList.length) {
       this.indeterminateCheckboxState = false;
       this.indeterminateCheckboxChecked = true;
     } else {
