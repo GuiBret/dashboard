@@ -65,8 +65,7 @@ export class GmailEmailListComponent implements OnInit {
    * @param event
    */
   loadNewList(event: any) {
-    this.emailList = [];
-    this.isLoading = true;
+    this.prepareInterfaceForSearch();
 
     let direction = (event.pageIndex > event.previousPageIndex) ? 'next' : 'prev';
 
@@ -75,25 +74,23 @@ export class GmailEmailListComponent implements OnInit {
 
   }
 
-  makeSearch() {
-    this.emailList = [];
-    this.isLoading = true;
+  makeInitSearch() {
+    this.prepareInterfaceForSearch();
     this.gmailService.resetTokens();
-
     this.gmailService.fetchEmailList('init', this.currPageSize, this.emailSearchControl.value);
 
+  }
+
+
+  prepareInterfaceForSearch() {
+    this.emailList = [];
+    this.isLoading = true;
   }
 
   stopPropagationAndToggleEmail(event: any, emailId: string) {
     event.preventDefault();
     event.stopPropagation();
-    this.emailList = this.emailList.map((email) => {
-      if(email.id === emailId) {
-        email.selected = !email.selected;
-      }
-
-      return email;
-    });
+    this.reverseAttributeInList(emailId, 'selected');
 
     this.defineIndeterminateState();
 
@@ -142,14 +139,7 @@ export class GmailEmailListComponent implements OnInit {
     event.stopPropagation();
 
     const emailId = email.id;
-      this.emailList = this.emailList.map((emailInList: GmailCustomEmail) => {
-        if(emailInList.id === emailId) {
-          email.important = !email.important;
-        }
-
-        return emailInList;
-      });
-
+    this.reverseAttributeInList(emailId, 'important');
     this.gmailService.toggleImportantEmail(email).subscribe(() => {});
   }
 
@@ -159,12 +149,13 @@ export class GmailEmailListComponent implements OnInit {
   deleteSelectedEmails() {
     const selectedEmailIds = this.getSelectedEmails().map(email => email.id);
 
-    this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe(() => {
-      this.gmailService.resetTokens();
-      this.isLoading = true;
+    this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe(this.onMultipleEmailsDeleted.bind(this));
+  }
 
-      this.gmailService.fetchEmailList('init', this.currPageSize, this.emailSearchControl.value);
-    });
+  onMultipleEmailsDeleted() {
+    this.gmailService.resetTokens();
+    this.isLoading = true;
+    this.gmailService.fetchEmailList('init', this.currPageSize, this.emailSearchControl.value);
   }
 
   markMultipleEmailsAsRead() {
@@ -187,5 +178,15 @@ export class GmailEmailListComponent implements OnInit {
 
   private getSelectedEmails(): Array<GmailCustomEmail> {
     return this.emailList.filter((email) => email.selected);
+  }
+
+  private reverseAttributeInList(searchedId: string, attrName: string) {
+    this.emailList = this.emailList.map((email) => {
+      if(email.id === searchedId) {
+        email[attrName] = !email[attrName];
+      }
+
+      return email;
+    });
   }
 }
