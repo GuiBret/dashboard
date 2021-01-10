@@ -35,11 +35,11 @@ export class AppComponent implements AfterViewInit, OnInit {
 
   onRouterEventReceived(val: any) {
 
-    if(val instanceof NavigationEnd) {
-      if(val.url.includes('/spotify/logged')) {
+    if (val instanceof NavigationEnd) {
+      if (val.url.includes('/spotify/logged')) {
         this.isLoggedOnSpotify = this.spotifySvc.checkSpotifyStatus();
-        this.router.navigate(['spotify'])
-      } else if(val.url.includes('/gmail/logged')) {
+        this.router.navigate(['spotify']);
+      } else if (val.url.includes('/gmail/logged')) {
         this.isLoggedOnGmail = this.gmailSvc.checkGmailStatus();
         this.router.navigate(['gmail']);
       }
@@ -51,14 +51,14 @@ export class AppComponent implements AfterViewInit, OnInit {
   }
 
   triggerLoginProcedure() {
-    this.http.getSpotifyAuthUrl().subscribe((response: any) => {
-      window.location.href = response.url;
-    })
+    this.http.getSpotifyAuthUrl().subscribe(this.makeRedirect.bind(this));
   }
 
   triggerGmailLoginProcedure() {
-    this.http.getGmailAuthUrl().subscribe((response: any) => {
-      window.location.href = response.url;
-    })
+    this.http.getGmailAuthUrl().subscribe(this.makeRedirect.bind(this));
+  }
+
+  makeRedirect(response: any) {
+    window.location.href = response.url;
   }
 }
