@@ -19,40 +19,42 @@ export class SpotifyInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    if(req.url.includes('spotify') && !req.url.includes('refresh-token')) {
+    if (req.url.includes('spotify') && !req.url.includes('refresh-token')) {
 
-      if(localStorage.getItem('spotifyToken')) {
+      if (localStorage.getItem('spotifyToken')) {
 
         // If the token is still valid, we simply push the current token to the headers
-        if(parseInt(localStorage.getItem('spotifyExp')) > new Date().getTime()) {
+        if (parseInt(localStorage.getItem('spotifyExp'), 10) > new Date().getTime()) {
           req = req.clone({
             setHeaders: {
-              'Authorization': 'Bearer ' + localStorage.getItem('spotifyToken')
+              Authorization: 'Bearer ' + localStorage.getItem('spotifyToken')
             }
           });
 
         } else { // Otherwise, we will request a new one
           return new Observable<HttpEvent<any>>((observer) => {
-            this.httpSvc.refreshSpotifyToken(localStorage.getItem('spotifyRefresh')).subscribe((response: any) => {
-
-              // We store the token, the refresh, etc
-              localStorage.setItem('spotifyToken', response.token);
-              localStorage.setItem('spotifyExp', (new Date().getTime() + (3600 * 1000)).toString());
-
-              // Then we relaunch the request using the new token
-              let request = req.clone({
-                setHeaders: {
-                  'Authorization': 'Bearer ' + localStorage.getItem('spotifyToken')
-                }
-              });
-
-              return next.handle(request);
-            })
-          })
+            this.httpSvc.refreshSpotifyToken(localStorage.getItem('spotifyRefresh'))
+                        .subscribe(this.handleTokenResponse.bind(this, req, next));
+          });
 
         }
       }
     }
     return next.handle(req);
+  }
+
+  handleTokenResponse(req: HttpRequest<unknown>, next: HttpHandler, tokenResponse: any) {
+    // We store the token, the refresh, etc
+    localStorage.setItem('spotifyToken', tokenResponse.token);
+    localStorage.setItem('spotifyExp', (new Date().getTime() + (3600 * 1000)).toString());
+
+    // Then we relaunch the request using the new token
+    const request = req.clone({
+      setHeaders: {
+        Authorization: 'Bearer ' + localStorage.getItem('spotifyToken')
+      }
+    });
+
+    return next.handle(request);
   }
 }
