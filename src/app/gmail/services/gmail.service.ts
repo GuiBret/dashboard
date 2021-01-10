@@ -3,7 +3,7 @@ import { emit } from 'process';
 import { forkJoin, Observable, Subject } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { GmailCustomEmail } from '../interfaces/gmail-custom-email.interface';
-import { GmailEmail } from '../interfaces/gmail-email.interface';
+import { GmailEmail, GmailEmailPart } from '../interfaces/gmail-email.interface';
 import * as quotedPrintable from 'quoted-printable';
 import { map } from 'rxjs/operators';
 
@@ -107,6 +107,10 @@ export class GmailService {
     const messagesToFetch = response.messages.map(this.makeGetCallOnEmail.bind(this));
 
     // When all calls are finished, we post the email list
+    this.fetchAllMessages(messagesToFetch);
+  }
+
+  fetchAllMessages(messagesToFetch) {
     forkJoin(messagesToFetch).subscribe({
       complete: () => {
 
@@ -146,20 +150,22 @@ export class GmailService {
 
   filterEmailInfo(emailInfo: GmailEmail): GmailCustomEmail {
 
+
+    let isRead = true;
+    let important = false;
     const id = emailInfo.id;
-    const internalDate = emailInfo.internalDate;
-    const isRead = !emailInfo.labelIds || !emailInfo.labelIds.includes('UNREAD');
-    const important = !emailInfo.labelIds || emailInfo.labelIds.includes('IMPORTANT');
+    const internalDate = parseInt(emailInfo.internalDate, 10);
+
+    if (emailInfo.labelIds) {
+      isRead = !emailInfo.labelIds.includes('UNREAD');
+      important = emailInfo.labelIds.includes('IMPORTANT');
+    }
 
     const snippet = quotedPrintable.decode(emailInfo.snippet);
 
-    const sender = emailInfo.payload.headers.filter((currHeader: {name: string, value: string}) => {
-      return currHeader.name.toUpperCase() === 'FROM';
-    })[0].value;
+    const sender = this.searchHeader(emailInfo.payload.headers, 'FROM');
 
-    const subject = emailInfo.payload.headers.filter((currHeader: {name: string, value: string}) => {
-      return currHeader.name.toUpperCase() === 'SUBJECT';
-    })[0].value;
+    const subject = this.searchHeader(emailInfo.payload.headers, 'SUBJECT');
 
     let htmlContentAsBase64;
 
@@ -168,7 +174,7 @@ export class GmailService {
     } else { // Otherwise we check in parts
 
       // TODO: Add recursion on part search
-      const filteredParts = emailInfo.payload.parts.filter((currPart: { mimeType: string, body: {data: string}}) => {
+      const filteredParts = emailInfo.payload.parts.filter((currPart: GmailEmailPart) => {
         return currPart.mimeType === 'text/html';
       });
 
@@ -260,5 +266,18 @@ export class GmailService {
     }
 
     return -1;
+  }
+
+  searchHeader(headerArr: Array<any>, headerName: string) {
+    let result = '';
+    const header = headerArr.filter((currHeader: {name: string, value: string}) => {
+      return currHeader.name.toUpperCase() === headerName.toUpperCase();
+    });
+
+    if (header && header.length !== 0) {
+      result = header[0].value;
+    }
+
+    return result;
   }
 }
