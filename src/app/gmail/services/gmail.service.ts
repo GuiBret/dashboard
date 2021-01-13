@@ -79,6 +79,24 @@ export class GmailService {
     });
   }
 
+  fetchTrash(direction: string, limit = 50, labels = null) {
+
+    let token = null;
+
+    if (direction === 'next') {
+      this.currTokenIdx++;
+      token = this.tokens[this.currTokenIdx];
+    } else if (direction === 'prev') {
+      this.currTokenIdx--;
+      token = this.tokens[this.currTokenIdx];
+    }
+
+    this.http.getEmailList(limit, token, null, 'TRASH').subscribe({
+      next: this.onEmailListReceived.bind(this, direction),
+      error: this.handleError.bind(this)
+    });
+  }
+
   /**
    * Callback of getEmailList if everything went well
    * @param direction init, next or prev, used to know if we will search the next, previous page or we try to get a page for the first time
@@ -97,6 +115,7 @@ export class GmailService {
         this.tokens.push(response.nextPageToken);
     }
 
+    console.log(response);
     if (response.resultSizeEstimate === 0) {
       this.newEmailListPosted.next([]);
       this.messageBox = [];
@@ -280,4 +299,6 @@ export class GmailService {
 
     return result;
   }
+
+
 }

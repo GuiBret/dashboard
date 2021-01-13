@@ -18,7 +18,7 @@ export class HttpService {
   getTodoList() {
     const reqOpts = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST'
       })
     };
@@ -36,7 +36,7 @@ export class HttpService {
 
     const reqOpts = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST'
       })
     };
@@ -53,7 +53,7 @@ export class HttpService {
   editTodo(idTodo: string, todoData: Todo) {
     const reqOpts = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
       })
     };
@@ -69,7 +69,7 @@ export class HttpService {
   deleteTodoElement(idTodo: string) {
     const reqOpts = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PUT,DELETE'
       })
     };
@@ -79,7 +79,7 @@ export class HttpService {
   addNewTodo(newTodoData: Todo) {
     const reqOpts = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, DELETE'
       })
     };
@@ -112,7 +112,7 @@ export class HttpService {
   getGmailAuthUrl() {
     const reqOpts = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET, POST, PUT,DELETE'
       })
     };
@@ -120,39 +120,39 @@ export class HttpService {
     return this.http.get(environment.serverRoot + '/gmail/get-url', reqOpts);
   }
 
-  getEmailList(limit: number, token: string, query: string = null) {
+  getEmailList(limit: number, token: string, query: string = null, labels: string = 'INBOX') {
 
     const params = new URLSearchParams();
 
     params.append('max_results', limit.toString());
     const reqOpts = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
+        Authorization: 'Bearer ' + localStorage.getItem('gmailToken')
       })
     };
 
-    if(token) {
+    if (token) {
       params.append('pageToken', token);
     }
 
-    if(query) {
+    if (query) {
       params.append('q', query);
     }
 
-    params.append("labelIds", "INBOX");
-
+    params.append('labelIds', labels);
+    console.log(labels);
     return this.http.get(`https://gmail.googleapis.com/gmail/v1/users/me/messages?` + params.toString(), reqOpts);
   }
 
   getIndividualEmailInfo(emailId: string) {
     const reqOpts = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
+        Authorization: 'Bearer ' + localStorage.getItem('gmailToken')
       })
     };
 
 
-    return this.http.get("https://gmail.googleapis.com/gmail/v1/users/me/messages/" + emailId, reqOpts);
+    return this.http.get('https://gmail.googleapis.com/gmail/v1/users/me/messages/' + emailId, reqOpts);
 
   }
 
@@ -161,7 +161,7 @@ export class HttpService {
 
     const reqOpts = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
+        Authorization: 'Bearer ' + localStorage.getItem('gmailToken')
       })
     };
 
@@ -176,7 +176,7 @@ export class HttpService {
 
     const reqOpts = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
+        Authorization: 'Bearer ' + localStorage.getItem('gmailToken')
       })
     };
 
@@ -186,7 +186,7 @@ export class HttpService {
   batchModifyEmails(payload: object) {
     const reqOpts = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + localStorage.getItem('gmailToken')
+        Authorization: 'Bearer ' + localStorage.getItem('gmailToken')
       })
     };
 
