@@ -62,7 +62,7 @@ export class GmailService {
    *        push token
    * Si init : push token
    */
-  fetchEmailList(direction: string, limit = 50, query = null) {
+  fetchEmailList(direction: string, limit = 50, query = null, labels: string = 'INBOX') {
     let token = null;
     if (direction === 'next') {
       this.currTokenIdx++;
@@ -73,7 +73,7 @@ export class GmailService {
     }
 
     // First call to get the email list
-    this.http.getEmailList(limit, token, query).subscribe({
+    this.http.getEmailList(limit, token, query, labels).subscribe({
       next: this.onEmailListReceived.bind(this, direction),
       error: this.handleError.bind(this)
     });

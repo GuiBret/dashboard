@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GmailCustomEmail } from '../../interfaces/gmail-custom-email.interface';
 import { GmailService } from '../../services/gmail.service';
@@ -40,6 +40,8 @@ export class GmailEmailListComponent implements OnInit {
 
   isLoading = false;
 
+  @Input() labels: string;
+
   constructor(private gmailService: GmailService) { }
 
   ngOnInit(): void {
@@ -70,14 +72,14 @@ export class GmailEmailListComponent implements OnInit {
     const direction = (event.pageIndex > event.previousPageIndex) ? 'next' : 'prev';
 
     this.currPageSize = event.pageSize;
-    this.gmailService.fetchEmailList(direction, event.pageSize, this.emailSearchControl.value);
+    this.gmailService.fetchEmailList(direction, event.pageSize, this.emailSearchControl.value, this.labels);
 
   }
 
   makeInitSearch() {
     this.prepareInterfaceForSearch();
     this.gmailService.resetTokens();
-    this.gmailService.fetchEmailList('init', this.currPageSize, this.emailSearchControl.value);
+    this.gmailService.fetchEmailList('init', this.currPageSize, this.emailSearchControl.value, this.labels);
 
   }
 
@@ -93,7 +95,6 @@ export class GmailEmailListComponent implements OnInit {
     this.reverseAttributeInList(emailId, 'selected');
 
     this.defineIndeterminateState();
-
 
   }
 
@@ -126,8 +127,6 @@ export class GmailEmailListComponent implements OnInit {
       this.indeterminateCheckboxState = true;
       this.indeterminateCheckboxChecked = null;
     }
-
-
   }
 
   toggleImportantEmail(event: any, email: GmailCustomEmail) {

@@ -11,7 +11,6 @@ export class GmailTrashComponent implements OnInit {
   constructor(private gmailService: GmailService) { }
 
   ngOnInit(): void {
-    this.gmailService.fetchTrash('init');
+    this.gmailService.fetchEmailList('init', 50, null, 'TRASH');
   }
-
 }
