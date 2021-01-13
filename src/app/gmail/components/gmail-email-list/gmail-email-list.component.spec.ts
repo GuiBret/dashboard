@@ -15,7 +15,7 @@ describe('GmailEmailListComponent', () => {
     onNewEmailListPosted: new Observable(),
     resetTokens: () => {},
     fetchEmailList: () => {},
-    toggleImportantEmail: (email: GmailCustomEmail) => {return new Observable();}
+    toggleImportantEmail: (email: GmailCustomEmail) => new Observable()
   };
 
   let mockEmailList: Array<GmailCustomEmail>;
@@ -122,6 +122,7 @@ describe('GmailEmailListComponent', () => {
 
   describe('Define indeterminate state', () => {
     it('should set the states as false since no emails are selected', () => {
+      // tslint:disable-next-line: no-string-literal
       component['emailList'] = mockEmailList;
       component.indeterminateCheckboxChecked = true;
       component.indeterminateCheckboxState = true;
@@ -134,7 +135,7 @@ describe('GmailEmailListComponent', () => {
     });
 
     it('should mark indeterminate as true & checked as null since we have one of 2 selected', () => {
-
+      // tslint:disable-next-line: no-string-literal
       component['emailList'] = [...mockEmailList2];
 
 
@@ -148,6 +149,7 @@ describe('GmailEmailListComponent', () => {
     });
 
     it('should mark indeterminate as false & checked as true since all emails are selected', () => {
+      // tslint:disable-next-line: no-string-literal
       component['emailList'] = [...mockEmailList3];
 
 
@@ -164,22 +166,27 @@ describe('GmailEmailListComponent', () => {
   describe('Handle new email list', () => {
     it('should have properly set the email list', () => {
       spyOn(component, 'defineIndeterminateState');
-
+      // tslint:disable-next-line: no-string-literal
       component['emailList'] = mockEmailList;
+      // tslint:disable-next-line: no-string-literal
       component['isLoading'] = true;
       component.handleNewEmailList(mockEmailList2);
 
+      // tslint:disable-next-line: no-string-literal
       expect(component['emailList']).toEqual(mockEmailList2);
+      // tslint:disable-next-line: no-string-literal
       expect(component['isLoading']).toEqual(false);
       expect(component.defineIndeterminateState).toHaveBeenCalled();
 
-    })
+    });
   });
 
   describe('Get selected emails', () => {
     it('should properly return the selected emails', () => {
+      // tslint:disable-next-line: no-string-literal
       component['emailList'] = mockEmailList2;
 
+      // tslint:disable-next-line: no-string-literal
       const selectedEmails = component['getSelectedEmails']();
 
       expect(selectedEmails.length).toEqual(1);
@@ -192,12 +199,15 @@ describe('GmailEmailListComponent', () => {
 
   describe('Prepare interface for search', () => {
     it('should have reset the email list and set isLoading to true', () => {
+      // tslint:disable-next-line: no-string-literal
       component['emailList'] = mockEmailList2;
+      // tslint:disable-next-line: no-string-literal
       component['isLoading'] = false;
 
       component.prepareInterfaceForSearch();
-
+      // tslint:disable-next-line: no-string-literal
       expect(component['emailList'].length).toEqual(0);
+      // tslint:disable-next-line: no-string-literal
       expect(component['isLoading']).toEqual(true);
     });
   });
@@ -209,11 +219,14 @@ describe('GmailEmailListComponent', () => {
       spyOn(gmailServiceStub, 'resetTokens');
       spyOn(gmailServiceStub, 'fetchEmailList');
 
+      // tslint:disable-next-line: no-string-literal
       component['currPageSize'] = 25;
+      // tslint:disable-next-line: no-string-literal
       component['emailSearchControl'].setValue('Hello');
 
       component.makeInitSearch();
 
+      // tslint:disable-next-line: no-string-literal
       expect(component['prepareInterfaceForSearch']).toHaveBeenCalled();
       expect(gmailServiceStub.resetTokens).toHaveBeenCalled();
       expect(gmailServiceStub.fetchEmailList).toHaveBeenCalledWith('init', 25, 'Hello');
@@ -224,10 +237,12 @@ describe('GmailEmailListComponent', () => {
     it('should have reversed the attribute of a given email', () => {
 
       // All emails are selected, we will reverse one of these
+      // tslint:disable-next-line: no-string-literal
       component['emailList'] = mockEmailList3;
 
+      // tslint:disable-next-line: no-string-literal
       component['reverseAttributeInList'](mockEmailList3[0].id, 'selected');
-    })
+    });
   });
   describe('Load new list', () => {
     it('should call fetch the email list with prev since the new index is lower than the previous', () => {
@@ -237,7 +252,9 @@ describe('GmailEmailListComponent', () => {
         pageSize: 100
       };
 
-      component['emailSearchControl'].setValue("");
+      // tslint:disable-next-line: no-string-literal
+      component['emailSearchControl'].setValue('');
+      // tslint:disable-next-line: no-string-literal
       component['currPageSize'] = 200;
 
       spyOn(component, 'prepareInterfaceForSearch');
@@ -245,7 +262,9 @@ describe('GmailEmailListComponent', () => {
 
       component.loadNewList(mockEvent);
 
+      // tslint:disable-next-line: no-string-literal
       expect(component['currPageSize']).toEqual(100);
+      // tslint:disable-next-line: no-string-literal
       expect(gmailServiceStub['fetchEmailList']).toHaveBeenCalledWith('prev', 100, '');
     });
 
@@ -256,7 +275,9 @@ describe('GmailEmailListComponent', () => {
         pageSize: 100
       };
 
-      component['emailSearchControl'].setValue("");
+      // tslint:disable-next-line: no-string-literal
+      component['emailSearchControl'].setValue('');
+      // tslint:disable-next-line: no-string-literal
       component['currPageSize'] = 200;
 
       spyOn(component, 'prepareInterfaceForSearch');
@@ -264,7 +285,9 @@ describe('GmailEmailListComponent', () => {
 
       component.loadNewList(mockEvent);
 
+      // tslint:disable-next-line: no-string-literal
       expect(component['currPageSize']).toEqual(100);
+      // tslint:disable-next-line: no-string-literal
       expect(gmailServiceStub['fetchEmailList']).toHaveBeenCalledWith('next', 100, '');
     });
   });
@@ -285,6 +308,7 @@ describe('GmailEmailListComponent', () => {
       };
 
       const mockEmailId = mockEmailList3[0].id;
+      // tslint:disable-next-line: no-string-literal
       component['emailList'] = mockEmailList3;
 
 
@@ -293,6 +317,7 @@ describe('GmailEmailListComponent', () => {
       expect(stopPropSpy).toHaveBeenCalled();
       expect(prevDefaultSpy).toHaveBeenCalled();
 
+      // tslint:disable-next-line: no-string-literal
       expect(component['reverseAttributeInList']).toHaveBeenCalledWith(mockEmailId, 'selected');
     });
   });
@@ -307,15 +332,46 @@ describe('GmailEmailListComponent', () => {
       // https://stackoverflow.com/questions/8475564/using-jasmines-spyon-upon-a-private-method
       spyOn<any>(component, 'reverseAttributeInList');
       spyOn(gmailServiceStub, 'toggleImportantEmail').and.returnValue(new Observable());
+      // tslint:disable-next-line: no-string-literal
       component['emailList'] = mockEmailList3;
 
       component.toggleImportantEmail(mockEvent, mockEmailList3[0]);
 
       expect(stopPropSpy).toHaveBeenCalled();
 
+      // tslint:disable-next-line: no-string-literal
       expect(component['reverseAttributeInList']).toHaveBeenCalledWith(mockEmailList3[0].id, 'important');
       expect(gmailServiceStub.toggleImportantEmail).toHaveBeenCalledWith(mockEmailList3[0]);
 
+    });
+  });
+
+  describe('Toggle all emails', () => {
+    it('should apply the new state to all emails', () => {
+      // tslint:disable-next-line: no-string-literal
+      component['emailList'] = mockEmailList;
+
+      // tslint:disable-next-line: no-string-literal
+      component['emailList'].forEach((email) => {
+        return email.selected;
+      });
+
+
+      // tslint:disable-next-line: no-string-literal
+      component['toggleAllEmails']({source: {}, checked: true});
+
+      component.emailList.forEach((email) => {
+        expect(email.selected).toEqual(true);
+      });
+    });
+  });
+
+  describe('Mark multiple emails as read', () => {
+    it('should call the HTTP service to mark the email as read', () => {
+      // tslint:disable-next-line: no-string-literal
+      component['emailList'] = mockEmailList;
+
+      component.markMultipleEmailsAsRead();
     });
   });
 });

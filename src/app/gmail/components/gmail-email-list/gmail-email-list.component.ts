@@ -67,7 +67,7 @@ export class GmailEmailListComponent implements OnInit {
   loadNewList(event: any) {
     this.prepareInterfaceForSearch();
 
-    let direction = (event.pageIndex > event.previousPageIndex) ? 'next' : 'prev';
+    const direction = (event.pageIndex > event.previousPageIndex) ? 'next' : 'prev';
 
     this.currPageSize = event.pageSize;
     this.gmailService.fetchEmailList(direction, event.pageSize, this.emailSearchControl.value);
@@ -115,8 +115,8 @@ export class GmailEmailListComponent implements OnInit {
   defineIndeterminateState() {
 
     const nbOfEmailsSelected = this.emailList.filter(elem => elem.selected).length;
-    console.log(this.emailList);
-    if(nbOfEmailsSelected === 0) {
+
+    if (nbOfEmailsSelected === 0) {
       this.indeterminateCheckboxChecked = false;
       this.indeterminateCheckboxState = false;
     } else if (nbOfEmailsSelected === this.emailList.length) {
@@ -150,19 +150,8 @@ export class GmailEmailListComponent implements OnInit {
   markMultipleEmailsAsRead() {
     const selectedEmailIds = this.getSelectedEmails().map(email => email.id);
 
-    this.gmailService.markMultipleEmailsAsRead(selectedEmailIds).subscribe(() => {
-      this.emailList = this.emailList.map((email: GmailCustomEmail) => {
-        if(selectedEmailIds.includes(email.id)) {
-          email.isRead = true;
-        }
-
-        email.selected = false;
-
-        return email;
-      });
-
-      this.defineIndeterminateState();
-    });
+    this.gmailService.markMultipleEmailsAsRead(selectedEmailIds)
+                     .subscribe(this.onCallbackForBatchMarkAsRead.bind(this, selectedEmailIds));
   }
 
   private getSelectedEmails(): Array<GmailCustomEmail> {
@@ -171,11 +160,25 @@ export class GmailEmailListComponent implements OnInit {
 
   private reverseAttributeInList(searchedId: string, attrName: string) {
     this.emailList = this.emailList.map((email) => {
-      if(email.id === searchedId) {
+      if (email.id === searchedId) {
         email[attrName] = !email[attrName];
       }
 
       return email;
     });
+  }
+
+  private onCallbackForBatchMarkAsRead(selectedEmailIds: Array<string>) {
+    this.emailList = this.emailList.map((email: GmailCustomEmail) => {
+      if (selectedEmailIds.includes(email.id)) {
+        email.isRead = true;
+      }
+
+      email.selected = false;
+
+      return email;
+    });
+
+    this.defineIndeterminateState();
   }
 }
