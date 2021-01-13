@@ -8,6 +8,7 @@ import { ReadEmailComponent } from './pages/read-email/read-email.component';
 import { EmailContainerComponent } from './components/email-container/email-container.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
+import { GmailTrashComponent } from './pages/gmail-trash/gmail-trash.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
     GmailEmailListComponent,
     ReadEmailComponent,
     EmailContainerComponent,
+    GmailTrashComponent,
   ],
   imports: [
     GmailRoutingModule,
