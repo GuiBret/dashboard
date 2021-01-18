@@ -34,9 +34,17 @@ export class GmailService {
     return this.nextPageToken;
   }
 
+  get messagesSelected() {
+    return this.messageBox.filter(message => message.selected);
+  }
+
   resetTokens() {
     this.tokens = [null];
     this.currTokenIdx = 0;
+  }
+
+  resetMessageBox() {
+    this.messageBox = [];
   }
 
   checkGmailStatus() {
@@ -137,7 +145,6 @@ export class GmailService {
         this.messageBox = this.messageBox.sort(this.sortEmailsByDate.bind(this));
 
         this.newEmailListPosted.next(this.messageBox);
-        this.messageBox = [];
       }
     });
   }
@@ -298,6 +305,24 @@ export class GmailService {
     }
 
     return result;
+  }
+
+  toggleSelectMessage(messageId: string) {
+    this.messageBox = this.messageBox.map((message: GmailCustomEmail) => {
+      if (message.id === messageId) {
+        message.selected = !message.selected;
+      }
+
+      return message;
+    });
+  }
+
+  toggleSelectedOnAllEmails(newValue: boolean) {
+    this.messageBox.forEach((email: GmailCustomEmail) => {
+      email.selected = newValue;
+
+      return email;
+    });
   }
 
 

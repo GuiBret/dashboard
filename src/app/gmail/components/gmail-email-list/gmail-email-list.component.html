@@ -5,9 +5,12 @@
        (keydown.enter)="makeInitSearch()">
 
 
+<app-gmail-actions (emailListChanged)="onCallbackForBatchMarkAsRead($event)"
+                   (triggerSearch)="makeInitSearch()"
+                   [indeterminateCheckboxChecked]="indeterminateCheckboxChecked" [mode]="mode"></app-gmail-actions>
 <div id="actions">
-  <button mat-raised-button color="primary" [disabled]="indeterminateCheckboxChecked === false" (click)="markMultipleEmailsAsRead()">Mark as read</button>
-  <button mat-raised-button color="primary" [disabled]="indeterminateCheckboxChecked === false" (click)="deleteSelectedEmails()">Delete permanently</button>
+  <!-- <button mat-raised-button color="primary" [disabled]="indeterminateCheckboxChecked === false" (click)="markMultipleEmailsAsRead()">Mark as read</button> -->
+  <!-- <button mat-raised-button color="primary" [disabled]="indeterminateCheckboxChecked === false" (click)="deleteSelectedEmails()">Delete permanently</button> -->
 
 </div>
 

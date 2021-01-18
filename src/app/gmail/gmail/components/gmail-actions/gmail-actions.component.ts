@@ -33,8 +33,9 @@ export class GmailActionsComponent implements OnInit {
    */
   deleteSelectedEmails() {
     const selectedEmailIds = this.gmailService.messagesSelected.map(email => email.id);
-
+    console.log(selectedEmailIds);
     this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe((() => {
+      this.gmailService.resetMessageBox();
       this.triggerSearch.next();
     }));
   }

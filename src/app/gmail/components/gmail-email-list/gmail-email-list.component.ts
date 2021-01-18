@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GmailCustomEmail } from '../../interfaces/gmail-custom-email.interface';
 import { GmailService } from '../../services/gmail.service';
@@ -23,7 +23,7 @@ import { GmailService } from '../../services/gmail.service';
     ])
   ]
 })
-export class GmailEmailListComponent implements OnInit {
+export class GmailEmailListComponent implements OnInit, OnDestroy {
 
   public emailList: Array<GmailCustomEmail> = [];
   public displayedColumns: Array<string> = ['id', 'from', 'snippet', 'internalDate'];
@@ -41,6 +41,7 @@ export class GmailEmailListComponent implements OnInit {
   isLoading = false;
 
   @Input() labels: string;
+  @Input() mode: string;
 
   constructor(private gmailService: GmailService) { }
 
@@ -113,6 +114,9 @@ export class GmailEmailListComponent implements OnInit {
 
   }
 
+  /**
+   * Defines the state for the indeterminate checkbox, called after each user interaction + on page load
+   */
   defineIndeterminateState() {
 
     const nbOfEmailsSelected = this.emailList.filter(elem => elem.selected).length;
@@ -137,22 +141,6 @@ export class GmailEmailListComponent implements OnInit {
     this.gmailService.toggleImportantEmail(email).subscribe(() => {});
   }
 
-  /**
-   * Callback to click on button "Delete selected", checks which emails are marked for deletion and tells the service to make the request
-   */
-  deleteSelectedEmails() {
-    const selectedEmailIds = this.getSelectedEmails().map(email => email.id);
-
-    this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe(this.makeInitSearch.bind(this));
-  }
-
-  markMultipleEmailsAsRead() {
-    const selectedEmailIds = this.getSelectedEmails().map(email => email.id);
-
-    this.gmailService.markMultipleEmailsAsRead(selectedEmailIds)
-                     .subscribe(this.onCallbackForBatchMarkAsRead.bind(this, selectedEmailIds));
-  }
-
   private getSelectedEmails(): Array<GmailCustomEmail> {
     return this.emailList.filter((email) => email.selected);
   }
@@ -167,7 +155,8 @@ export class GmailEmailListComponent implements OnInit {
     });
   }
 
-  private onCallbackForBatchMarkAsRead(selectedEmailIds: Array<string>) {
+  onCallbackForBatchMarkAsRead(selectedEmailIds: Array<string>) {
+    console.log(selectedEmailIds);
     this.emailList = this.emailList.map((email: GmailCustomEmail) => {
       if (selectedEmailIds.includes(email.id)) {
         email.isRead = true;
