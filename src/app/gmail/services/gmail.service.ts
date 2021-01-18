@@ -71,6 +71,7 @@ export class GmailService {
    * Si init : push token
    */
   fetchEmailList(direction: string, limit = 50, query = null, labels: string = 'INBOX') {
+    this.messageBox = [];
     let token = null;
     if (direction === 'next') {
       this.currTokenIdx++;
