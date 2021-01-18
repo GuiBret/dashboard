@@ -1,6 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ifError } from 'assert';
 import { GmailCustomEmail } from '../../interfaces/gmail-custom-email.interface';
 import { GmailService } from '../../services/gmail.service';
 
@@ -43,7 +45,7 @@ export class GmailEmailListComponent implements OnInit, OnDestroy {
   @Input() labels: string;
   @Input() mode: string;
 
-  constructor(private gmailService: GmailService) { }
+  constructor(private gmailService: GmailService, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -138,7 +140,13 @@ export class GmailEmailListComponent implements OnInit, OnDestroy {
 
     const emailId = email.id;
     this.reverseAttributeInList(emailId, 'important');
-    this.gmailService.toggleImportantEmail(email).subscribe(() => {});
+    this.gmailService.toggleImportantEmail(email).subscribe((response: {labelIds: Array<string>}) => {
+      if (response.labelIds.includes('IMPORTANT')) {
+        this.snackbar.open('Email marked as important');
+      } else {
+        this.snackbar.open('Important label removed from email');
+      }
+    });
   }
 
   private getSelectedEmails(): Array<GmailCustomEmail> {

@@ -274,7 +274,9 @@ export class GmailService {
    */
   toggleImportantEmail(email: GmailCustomEmail): Observable<any> {
     let payload = {};
-    if (!email.important) {
+
+    // Note : The email important state has already been changed, then we should consider the new state is the one passed in email
+    if (email.important) {
       payload = {
         addLabelIds: ['IMPORTANT']
       };
