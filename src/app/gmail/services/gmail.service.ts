@@ -15,6 +15,7 @@ import { map } from 'rxjs/operators';
 })
 export class GmailService {
 
+
   private newEmailListPosted: Subject<any> = new Subject();
   public onNewEmailListPosted = this.newEmailListPosted.asObservable();
 
@@ -328,5 +329,26 @@ export class GmailService {
     });
   }
 
+  untrashMessages(ids: Array<string>) {
+    const payload = {
+      ids,
+      removeLabelIds: ['TRASH'],
+      addLabelIds: ['INBOX']
+    };
+
+    return this.http.batchModifyEmails(payload);
+
+
+  }
+
+  trashMessages(ids: Array<string>) {
+    const payload = {
+      ids,
+      addLabelIds: ['TRASH'],
+      removeLabelIds: ['INBOX']
+    };
+
+    return this.http.batchModifyEmails(payload);
+  }
 
 }

@@ -54,4 +54,20 @@ export class GmailActionsComponent implements OnInit {
 
     // this.defineIndeterminateState();
   }
+
+  trashMultipleEmails() {
+    const selectedEmailIds = this.gmailService.messagesSelected.map(email => email.id);
+
+  this.gmailService.trashMessages(selectedEmailIds).subscribe(() => {
+    this.triggerSearch.next();
+  })
+  }
+
+  untrashMessages() {
+    const selectedEmailIds = this.gmailService.messagesSelected.map(email => email.id);
+
+    this.gmailService.untrashMessages(selectedEmailIds).subscribe(() => {
+      this.triggerSearch.next();
+    });
+  }
 }
