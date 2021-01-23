@@ -1,7 +1,6 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
 import { HttpService } from 'src/app/services/http.service';
 import { GmailCustomEmail } from '../interfaces/gmail-custom-email.interface';
 import { GmailEmail } from '../interfaces/gmail-email.interface';
@@ -11,12 +10,12 @@ import { GmailService } from '../services/gmail.service';
 export class GetEmailResolver implements Resolve<any> {
   constructor(private gmailService: GmailService, private httpService: HttpService, private route: ActivatedRoute) {}
 
-  resolve(route: ActivatedRouteSnapshot) : Observable<GmailCustomEmail> {
+  resolve(route: ActivatedRouteSnapshot): Observable<GmailCustomEmail> {
     const emailId = route.paramMap.get('emailid');
 
     return new Observable((observer) => {
 
-      if(this.gmailService.containsEmailWithId(emailId)) {
+      if (this.gmailService.containsEmailWithId(emailId)) {
         observer.next(this.gmailService.getCachedEmail(emailId));
         observer.complete();
 
@@ -30,19 +29,18 @@ export class GetEmailResolver implements Resolve<any> {
 
       });
 
-      if(this.gmailService.containsEmailWithId(emailId)) {
+      if (this.gmailService.containsEmailWithId(emailId)) {
         return this.gmailService.getCachedEmail(emailId);
       }
 
       this.httpService.getIndividualEmailInfo(emailId).subscribe((emailInfo: GmailEmail) => {
         const filteredEmail = this.gmailService.filterEmailInfo(emailInfo);
-        console.log(filteredEmail);
         return {emailContent: filteredEmail};
 
       });
 
 
-    })
+    });
 
 
 
