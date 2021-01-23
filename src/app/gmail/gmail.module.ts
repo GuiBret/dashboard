@@ -10,6 +10,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { GmailTrashComponent } from './pages/gmail-trash/gmail-trash.component';
 import { GmailActionsComponent } from './gmail/components/gmail-actions/gmail-actions.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { GmailInterceptor } from './interceptors/gmail-interceptor';
 
 
 @NgModule({
@@ -31,6 +33,10 @@ import { GmailActionsComponent } from './gmail/components/gmail-actions/gmail-ac
   exports: [
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: GmailInterceptor,
+    multi: true
+  }],
 })
 export class GmailModule {}
