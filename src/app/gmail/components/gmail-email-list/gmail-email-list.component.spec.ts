@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { HttpService } from 'src/app/services/http.service';
 import { GmailCustomEmail } from '../../interfaces/gmail-custom-email.interface';
 import { GmailService } from '../../services/gmail.service';
 
@@ -16,6 +16,9 @@ describe('GmailEmailListComponent', () => {
     resetTokens: () => {},
     fetchEmailList: () => {},
     toggleImportantEmail: (email: GmailCustomEmail) => new Observable()
+  };
+  const matSnackbarStub: Partial<MatSnackBar> = {
+    open: (message, action, config) => jasmine.createSpyObj(MatSnackBarRef)
   };
 
   let mockEmailList: Array<GmailCustomEmail>;
@@ -104,6 +107,7 @@ describe('GmailEmailListComponent', () => {
       providers: [
 
         { provide: GmailService, useValue: gmailServiceStub},
+        { provide: MatSnackBar, useValue: matSnackbarStub},
       ]
     })
     .compileComponents();
@@ -186,6 +190,7 @@ describe('GmailEmailListComponent', () => {
       // tslint:disable-next-line: no-string-literal
       component['emailList'] = mockEmailList2;
 
+
       // tslint:disable-next-line: no-string-literal
       const selectedEmails = component['getSelectedEmails']();
 
@@ -224,12 +229,14 @@ describe('GmailEmailListComponent', () => {
       // tslint:disable-next-line: no-string-literal
       component['emailSearchControl'].setValue('Hello');
 
+      // tslint:disable-next-line: no-string-literal
+      component['labels'] = 'INBOX';
       component.makeInitSearch();
 
       // tslint:disable-next-line: no-string-literal
       expect(component['prepareInterfaceForSearch']).toHaveBeenCalled();
       expect(gmailServiceStub.resetTokens).toHaveBeenCalled();
-      expect(gmailServiceStub.fetchEmailList).toHaveBeenCalledWith('init', 25, 'Hello');
+      expect(gmailServiceStub.fetchEmailList).toHaveBeenCalledWith('init', 25, 'Hello', 'INBOX');
     });
   });
 
@@ -245,7 +252,7 @@ describe('GmailEmailListComponent', () => {
     });
   });
   describe('Load new list', () => {
-    it('should call fetch the email list with prev since the new index is lower than the previous', () => {
+    it('should fetch the email list with prev since the new index is lower than the previous', () => {
       const mockEvent = {
         pageIndex: 1,
         previousPageIndex: 2,
@@ -257,6 +264,9 @@ describe('GmailEmailListComponent', () => {
       // tslint:disable-next-line: no-string-literal
       component['currPageSize'] = 200;
 
+      // tslint:disable-next-line: no-string-literal
+      component['labels'] = 'INBOX';
+
       spyOn(component, 'prepareInterfaceForSearch');
       spyOn(gmailServiceStub, 'fetchEmailList');
 
@@ -265,7 +275,7 @@ describe('GmailEmailListComponent', () => {
       // tslint:disable-next-line: no-string-literal
       expect(component['currPageSize']).toEqual(100);
       // tslint:disable-next-line: no-string-literal
-      expect(gmailServiceStub['fetchEmailList']).toHaveBeenCalledWith('prev', 100, '');
+      expect(gmailServiceStub['fetchEmailList']).toHaveBeenCalledWith('prev', 100, '', 'INBOX');
     });
 
     it('should call fetch the email list with next since the new index is higher than the previous', () => {
@@ -280,6 +290,9 @@ describe('GmailEmailListComponent', () => {
       // tslint:disable-next-line: no-string-literal
       component['currPageSize'] = 200;
 
+      // tslint:disable-next-line: no-string-literal
+      component['labels'] = 'INBOX';
+
       spyOn(component, 'prepareInterfaceForSearch');
       spyOn(gmailServiceStub, 'fetchEmailList');
 
@@ -288,7 +301,7 @@ describe('GmailEmailListComponent', () => {
       // tslint:disable-next-line: no-string-literal
       expect(component['currPageSize']).toEqual(100);
       // tslint:disable-next-line: no-string-literal
-      expect(gmailServiceStub['fetchEmailList']).toHaveBeenCalledWith('next', 100, '');
+      expect(gmailServiceStub['fetchEmailList']).toHaveBeenCalledWith('next', 100, '', 'INBOX');
     });
   });
 
@@ -366,14 +379,7 @@ describe('GmailEmailListComponent', () => {
     });
   });
 
-  describe('Mark multiple emails as read', () => {
-    it('should call the HTTP service to mark the email as read', () => {
-      // tslint:disable-next-line: no-string-literal
-      component['emailList'] = mockEmailList;
 
-      component.markMultipleEmailsAsRead();
-    });
-  });
 });
 
 

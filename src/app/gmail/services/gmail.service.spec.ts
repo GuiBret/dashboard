@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { HttpService } from 'src/app/services/http.service';
+import { GmailCustomEmail } from '../interfaces/gmail-custom-email.interface';
 import { GmailService } from './gmail.service';
 
 describe('GmailService', () => {
@@ -144,7 +145,7 @@ describe('GmailService', () => {
   describe('Toggle important email', () => {
 
     it('should add the IMPORTANT label since it is not marked as such', () => {
-      const mockEmail = {
+      const mockImportantEmail: GmailCustomEmail = {
         id: 'a',
         snippet: 'abc',
         isRead: true,
@@ -158,10 +159,10 @@ describe('GmailService', () => {
 
       spyOn(httpServiceStub, 'modifyEmail');
 
-      service.toggleImportantEmail(mockEmail);
+      service.toggleImportantEmail(mockImportantEmail);
 
-      expect(httpServiceStub.modifyEmail).toHaveBeenCalledWith(mockEmail.id, {
-        addLabelIds: ['IMPORTANT']
+      expect(httpServiceStub.modifyEmail).toHaveBeenCalledWith(mockImportantEmail.id, {
+        removeLabelIds: ['IMPORTANT'] // Counterintuitive : When calling this function, the state was already changed
       });
 
     });
@@ -184,7 +185,7 @@ describe('GmailService', () => {
       service.toggleImportantEmail(mockImportantEmail);
 
       expect(httpServiceStub.modifyEmail).toHaveBeenCalledWith(mockImportantEmail.id, {
-        removeLabelIds: ['IMPORTANT']
+        addLabelIds: ['IMPORTANT'] // Counterintuitive : When calling this function, the state was already changed
       });
 
     });
@@ -219,12 +220,14 @@ describe('GmailService', () => {
       // tslint:disable-next-line: no-string-literal
       service['query'] = '';
 
+
+
       service.fetchEmailList('init');
       // tslint:disable-next-line: no-string-literal
       expect(service['currTokenIdx']).toEqual(0);
       // tslint:disable-next-line: no-string-literal
       expect(service['tokens']).toEqual([null]);
-      expect(httpServiceStub.getEmailList).toHaveBeenCalledWith(50, null, null);
+      expect(httpServiceStub.getEmailList).toHaveBeenCalledWith(50, null, null, 'INBOX');
     });
 
     it('should have used the following token since we have passed next', () => {
@@ -239,7 +242,7 @@ describe('GmailService', () => {
 
       // tslint:disable-next-line: no-string-literal
       expect(service['currTokenIdx']).toEqual(1);
-      expect(httpServiceStub.getEmailList).toHaveBeenCalledWith(50, 'a', null);
+      expect(httpServiceStub.getEmailList).toHaveBeenCalledWith(50, 'a', null, 'INBOX');
     });
 
     it('should have used the previous token since we have passed prev', () => {
@@ -254,7 +257,7 @@ describe('GmailService', () => {
 
       // tslint:disable-next-line: no-string-literal
       expect(service['currTokenIdx']).toEqual(1);
-      expect(httpServiceStub.getEmailList).toHaveBeenCalledWith(50, 'a', null);
+      expect(httpServiceStub.getEmailList).toHaveBeenCalledWith(50, 'a', null, 'INBOX');
     });
 
   });
