@@ -324,11 +324,6 @@ describe('GmailService', () => {
 
       // tslint:disable-next-line: no-string-literal
       expect(service['messageBox'].length).toEqual(1);
-
-      // tslint:disable-next-line: no-string-literal
-      console.log('Cached messages');
-      // tslint:disable-next-line: no-string-literal
-      console.log(service['cachedMessages']);
       // tslint:disable-next-line: no-string-literal
       expect(service['cachedMessages'][mockEmail.id]).toEqual({id: 'a', internalDate: 1234, snippet: 'Hello', isRead: true, from: 'a@abc.com', subject: '', htmlContent: '<p></p>', selected: false, important: true});
     });
@@ -433,4 +428,38 @@ describe('GmailService', () => {
       });
     });
   });
+
+  describe('Untrash messages', () => {
+    it('should have called the HTTP service to batch modify the emails', () => {
+      spyOn(httpServiceStub, 'batchModifyEmails');
+      const list = ['a', 'b', 'c'];
+
+      service.untrashMessages(list);
+
+      expect(httpServiceStub.batchModifyEmails).toHaveBeenCalledWith({
+        ids: list,
+        removeLabelIds: ['TRASH'],
+        addLabelIds: ['INBOX'],
+      });
+    });
+
+
+  });
+
+
+  describe('Trash messages', () => {
+    it('should have called the HTTP service to batch modify the emails', () => {
+      spyOn(httpServiceStub, 'batchModifyEmails');
+      const list = ['a', 'b', 'c'];
+
+      service.trashMessages(list);
+
+      expect(httpServiceStub.batchModifyEmails).toHaveBeenCalledWith({
+        ids: list,
+        removeLabelIds: ['INBOX'],
+        addLabelIds: ['TRASH'],
+      });
+    });
+  });
+
 });
