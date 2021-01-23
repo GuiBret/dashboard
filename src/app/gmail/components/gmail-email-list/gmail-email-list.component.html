@@ -1,8 +1,10 @@
-<input type="text"
+<div id="input-container">
+  <input type="text"
        placeholder="Search"
        matInput
        [formControl]="emailSearchControl"
-       (keydown.enter)="makeInitSearch()">
+       (keydown.enter)="makeInitSearch()" [ngStyle]="{'width': '80vw'}">
+</div>
 
 
 <app-gmail-actions (emailListChanged)="onCallbackForBatchMarkAsRead($event)"

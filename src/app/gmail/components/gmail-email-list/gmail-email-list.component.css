@@ -53,3 +53,9 @@ tr:hover {
 .mat-column-snippet {
   width: 60%;
 }
+
+#input-container {
+  display:flex;
+  width: 100%;
+  justify-content: space-around;
+}
