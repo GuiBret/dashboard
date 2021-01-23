@@ -5,18 +5,20 @@ import { NavigationEnd, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { AppComponent } from './app.component';
+import { GmailService } from './gmail/services/gmail.service';
 import { HttpService } from './services/http.service';
 import { SpotifyService } from './Spotify/services/spotify.service';
 
 describe('AppComponent', () => {
 
   let spotifySvcStub: Partial<SpotifyService>;
+  let gmailSvcStub: Partial<GmailService>;
   let routerStub: Partial<Router>;
   let httpSvcStub: Partial<HttpService>;
 
   spotifySvcStub = {
     checkSpotifyStatus: jasmine.createSpy()
-  }
+  };
 
   routerStub = {
     navigate: jasmine.createSpy()
@@ -24,7 +26,11 @@ describe('AppComponent', () => {
 
   httpSvcStub = {
     getSpotifyAuthUrl: jasmine.createSpy().and.returnValue(new Observable())
-  }
+  };
+
+  gmailSvcStub = {
+    checkGmailStatus: jasmine.createSpy()
+  };
 
 
 
@@ -39,6 +45,7 @@ describe('AppComponent', () => {
       providers: [
         {useValue: httpSvcStub, provide: HttpService},
         {useValue: spotifySvcStub, provide: SpotifyService},
+        {useValue: gmailSvcStub, provide: GmailService},
       ]
     }).compileComponents();
   }));
@@ -95,6 +102,18 @@ describe('AppComponent', () => {
       app.triggerLoginProcedure();
 
       expect(httpSvcStub.getSpotifyAuthUrl).toHaveBeenCalled();
+    });
+  });
+
+  describe('Ng on init', () => {
+    it('should call the functions to check if Gmail and spotify are active', () => {
+      const fixture = TestBed.createComponent(AppComponent);
+      const app = fixture.componentInstance;
+
+      app.ngOnInit();
+
+      expect(gmailSvcStub.checkGmailStatus).toHaveBeenCalled();
+      expect(spotifySvcStub.checkSpotifyStatus).toHaveBeenCalled();
     });
   });
 

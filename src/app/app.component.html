@@ -19,8 +19,8 @@
 
         </mat-expansion-panel-header>
 
-        <mat-action-row class='clickable'><span routerLink='/todolist'>List</span></mat-action-row>
-        <mat-action-row class='clickable' routerLink="/todolist/add">Add</mat-action-row>
+        <mat-action-row class='clickable'><span routerLink='/todolist' routerLinkActive="active-link">List</span></mat-action-row>
+        <mat-action-row class='clickable' routerLink="/todolist/add" routerLinkActive="active-link">Add</mat-action-row>
 
 
       </mat-expansion-panel>
@@ -28,7 +28,7 @@
 
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>GitHub</mat-panel-title>
+          <mat-panel-title>GitHub (To be implemented)</mat-panel-title>
 
         </mat-expansion-panel-header>
 
@@ -39,30 +39,40 @@
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title>RSS</mat-panel-title>
+          <mat-panel-title>RSS (To be implemented)</mat-panel-title>
 
         </mat-expansion-panel-header>
 
-        <mat-action-row class='clickable'>My projects</mat-action-row>
-        <mat-action-row class='clickable'>Add an element</mat-action-row>
+        <mat-action-row class='clickable' disabled>My projects</mat-action-row>
+        <mat-action-row class='clickable' disabled>Add an element</mat-action-row>
 
 
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="isLoggedOnGmail">
         <mat-expansion-panel-header>
-          <mat-panel-title>GMail</mat-panel-title>
+          <mat-panel-title id="title-gmail">
+            <span>GMail</span>
+            <mat-icon [ngClass]="{'red-dot': !isLoggedOnGmail, 'green-dot': isLoggedOnGmail}">fiber_manual_record</mat-icon>
+          </mat-panel-title>
 
         </mat-expansion-panel-header>
 
+        <mat-action-row class='clickable' (click)="triggerGmailLoginProcedure()" *ngIf="!isLoggedOnGmail">Click here to login</mat-action-row>
+        <mat-action-row class='clickable' routerLink="/gmail" *ngIf="isLoggedOnGmail" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</mat-action-row>
+        <mat-action-row class='clickable' routerLink="/gmail/trash" *ngIf="isLoggedOnGmail" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Trash</mat-action-row>
+
       </mat-expansion-panel>
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="isLoggedOnSpotify">
         <mat-expansion-panel-header>
-          <mat-panel-title>Spotify</mat-panel-title>
+          <mat-panel-title id="title-spotify">
+            <span>Spotify</span>
+            <mat-icon [ngClass]="{'red-dot': !isLoggedOnSpotify, 'green-dot': isLoggedOnSpotify}">fiber_manual_record</mat-icon>
+          </mat-panel-title>
 
         </mat-expansion-panel-header>
 
         <mat-action-row class='clickable' (click)="triggerLoginProcedure()" *ngIf="!isLoggedOnSpotify">Click here to login</mat-action-row>
-        <mat-action-row class='clickable' routerLink="/spotify" *ngIf="isLoggedOnSpotify">Home</mat-action-row>
+        <mat-action-row class='clickable' routerLink="/spotify" *ngIf="isLoggedOnSpotify" routerLinkActive="active-link">Home</mat-action-row>
 
       </mat-expansion-panel>
     </mat-sidenav>
@@ -73,5 +83,6 @@
       <app-spotify-player></app-spotify-player>
 
     </ng-container>
+
 </mat-sidenav-container>
 

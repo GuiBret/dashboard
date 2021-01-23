@@ -88,10 +88,22 @@
                                 <a href="#editTodo">editTodo</a>
                             </li>
                             <li>
+                                <a href="#getEmailList">getEmailList</a>
+                            </li>
+                            <li>
+                                <a href="#getGmailAuthUrl">getGmailAuthUrl</a>
+                            </li>
+                            <li>
+                                <a href="#getIndividualEmailInfo">getIndividualEmailInfo</a>
+                            </li>
+                            <li>
                                 <a href="#getSpotifyAuthUrl">getSpotifyAuthUrl</a>
                             </li>
                             <li>
                                 <a href="#getTodoList">getTodoList</a>
+                            </li>
+                            <li>
+                                <a href="#modifyEmail">modifyEmail</a>
                             </li>
                             <li>
                                 <a href="#refreshSpotifyToken">refreshSpotifyToken</a>
@@ -452,6 +464,197 @@ If token missing, returns the Spotify login url</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getEmailList"></a>
+                    <span class="name">
+                        <b>
+                            getEmailList
+                        </b>
+                        <a href="#getEmailList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getEmailList(limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="123"
+                            class="link-to-prism">src/app/services/http.service.ts:123</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>limit</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>token</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getGmailAuthUrl"></a>
+                    <span class="name">
+                        <b>
+                            getGmailAuthUrl
+                        </b>
+                        <a href="#getGmailAuthUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getGmailAuthUrl()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="112"
+                            class="link-to-prism">src/app/services/http.service.ts:112</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getIndividualEmailInfo"></a>
+                    <span class="name">
+                        <b>
+                            getIndividualEmailInfo
+                        </b>
+                        <a href="#getIndividualEmailInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getIndividualEmailInfo(emailId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/app/services/http.service.ts:141</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>emailId</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getSpotifyAuthUrl"></a>
                     <span class="name">
                         <b>
@@ -470,14 +673,16 @@ If token missing, returns the Spotify login url</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="106"
-                            class="link-to-prism">src/app/services/http.service.ts:106</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="108"
+                            class="link-to-prism">src/app/services/http.service.ts:108</a></div>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                    <div class="io-description"><p>Calls the server to retrieve Spotify&#39;s auth url</p>
+</div>
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -523,6 +728,88 @@ If token missing, returns the Spotify login url</p>
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="modifyEmail"></a>
+                    <span class="name">
+                        <b>
+                            modifyEmail
+                        </b>
+                        <a href="#modifyEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>modifyEmail(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, form: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank">object</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="154"
+                            class="link-to-prism">src/app/services/http.service.ts:154</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>form</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -690,7 +977,7 @@ If token missing, returns the Spotify login url</p>
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
-import { Todo } from &#x27;../models/todo&#x27;;
+import { Todo } from &#x27;../TodoList/models/todo&#x27;;
 import { environment } from &#x27;../../environments/environment&#x27;;
 
 @Injectable({
@@ -792,9 +1079,64 @@ export class HttpService {
   refreshSpotifyToken(refreshToken: string) {
     return this.http.get(environment.serverRoot + &#x27;/spotify/refresh-token/&#x27; + refreshToken);
   }
-
+  /**
+   * Calls the server to retrieve Spotify&#x27;s auth url
+   */
   getSpotifyAuthUrl() {
     return this.http.get(environment.serverRoot + &#x27;/spotify/get-url&#x27;);
+  }
+
+  getGmailAuthUrl() {
+    const reqOpts &#x3D; {
+      headers: new HttpHeaders({
+        &#x27;Access-Control-Allow-Origin&#x27;:&#x27;*&#x27;,
+        &#x27;Access-Control-Allow-Methods&#x27;: &#x27;GET, POST, PUT,DELETE&#x27;
+      })
+    };
+
+    return this.http.get(environment.serverRoot + &#x27;/gmail/get-url&#x27;, reqOpts);
+  }
+
+  getEmailList(limit: number, token: string) {
+
+    const params &#x3D; new URLSearchParams();
+
+    params.append(&#x27;max_results&#x27;, limit.toString());
+    const reqOpts &#x3D; {
+      headers: new HttpHeaders({
+        &#x27;Authorization&#x27;: &#x27;Bearer &#x27; + localStorage.getItem(&#x27;gmailToken&#x27;)
+      })
+    };
+
+    if(token) {
+      params.append(&#x27;pageToken&#x27;, token);
+    }
+
+    return this.http.get(&#x60;https://gmail.googleapis.com/gmail/v1/users/me/messages?&#x60; + params.toString(), reqOpts);
+  }
+
+  getIndividualEmailInfo(emailId: string) {
+    const reqOpts &#x3D; {
+      headers: new HttpHeaders({
+        &#x27;Authorization&#x27;: &#x27;Bearer &#x27; + localStorage.getItem(&#x27;gmailToken&#x27;)
+      })
+    };
+
+
+    return this.http.get(&quot;https://gmail.googleapis.com/gmail/v1/users/me/messages/&quot; + emailId, reqOpts);
+
+  }
+
+
+  modifyEmail(id: string, form: object) {
+
+    const reqOpts &#x3D; {
+      headers: new HttpHeaders({
+        &#x27;Authorization&#x27;: &#x27;Bearer &#x27; + localStorage.getItem(&#x27;gmailToken&#x27;)
+      })
+    };
+
+    return this.http.post(&#x27;https://gmail.googleapis.com/gmail/v1/users/me/messages/&#x27; + id + &#x27;/modify&#x27;, form, reqOpts);
   }
 }
 </code></pre>

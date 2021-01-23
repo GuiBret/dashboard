@@ -57,7 +57,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/interceptors/spotify.interceptor.ts</code>
+            <code>src/app/Spotify/interceptors/spotify.interceptor.ts</code>
         </p>
 
             <p class="comment">
@@ -109,7 +109,7 @@ TODO : rewrite</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/interceptors/spotify.interceptor.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/Spotify/interceptors/spotify.interceptor.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -175,7 +175,7 @@ TODO : rewrite</p>
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="20"
-                            class="link-to-prism">src/app/interceptors/spotify.interceptor.ts:20</a></div>
+                            class="link-to-prism">src/app/Spotify/interceptors/spotify.interceptor.ts:20</a></div>
                 </td>
             </tr>
 
@@ -248,7 +248,7 @@ import {
   HttpInterceptor
 } from &#x27;@angular/common/http&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { HttpService } from &#x27;../services/http.service&#x27;;
+import { HttpService } from &#x27;../../services/http.service&#x27;;
 
 /**
  * Checks if the token is still valid, if not, will request a refresh token
@@ -288,7 +288,7 @@ export class SpotifyInterceptor implements HttpInterceptor {
                 }
               });
 
-              next.handle(request);
+              return next.handle(request);
             })
           })
 

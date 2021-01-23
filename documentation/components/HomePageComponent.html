@@ -288,8 +288,9 @@ export class HomePageComponent implements OnInit {
 &lt;/ul&gt;
 &lt;p&gt;With Spotify, you can perform some actions when logging in, like :&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;Search an artist&lt;/li&gt;
-  &lt;li&gt;Play this artist (try it out !)&lt;/li&gt;
+  &lt;li&gt;Search an artist, an album or a track&lt;/li&gt;
+  &lt;li&gt;Play any of these three (try it out !)&lt;/li&gt;
+  &lt;li&gt;Volume &amp; Play / pause controls&lt;/li&gt;
   &lt;li&gt;&lt;i&gt;And many more features to come...&lt;/i&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </code></pre>
@@ -327,8 +328,8 @@ export class HomePageComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><p>Welcome to my dashboard !</p><p>This dashboard contains : </p><ul>  <li>A todo-list linked to a Mongo DB</li>  <li>Support for Spotify\'s API</li></ul><p>With the todo list, you can : </p><ul>  <li>Create a todo</li>  <li>Edit a todo</li>  <li>Delete a todo</li>  <li>Save the todo list</li></ul><p>With Spotify, you can perform some actions when logging in, like :</p><ul>  <li>Search an artist</li>  <li>Play this artist (try it out !)</li>  <li><i>And many more features to come...</i></li></ul></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'GithubComponent', 'selector': 'app-github'},{'name': 'GmailComponent', 'selector': 'app-gmail'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'SpotifyHomeComponent', 'selector': 'app-spotify-home'},{'name': 'SpotifyPlayerComponent', 'selector': 'app-spotify-player'},{'name': 'SpotifySearchComponent', 'selector': 'app-spotify-search'},{'name': 'SpotifyStoreTokenComponent', 'selector': 'app-spotify-store-token'},{'name': 'SpotifyUserInfoComponent', 'selector': 'app-spotify-user-info'},{'name': 'TodoEditComponent', 'selector': 'app-todo-edit'},{'name': 'TodoListComponent', 'selector': 'app-todo-list'}];
+        var COMPONENT_TEMPLATE = '<div><p>Welcome to my dashboard !</p><p>This dashboard contains : </p><ul>  <li>A todo-list linked to a Mongo DB</li>  <li>Support for Spotify\'s API</li></ul><p>With the todo list, you can : </p><ul>  <li>Create a todo</li>  <li>Edit a todo</li>  <li>Delete a todo</li>  <li>Save the todo list</li></ul><p>With Spotify, you can perform some actions when logging in, like :</p><ul>  <li>Search an artist, an album or a track</li>  <li>Play any of these three (try it out !)</li>  <li>Volume & Play / pause controls</li>  <li><i>And many more features to come...</i></li></ul></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'EmailContainerComponent', 'selector': 'app-email-container'},{'name': 'GithubComponent', 'selector': 'app-github'},{'name': 'GmailComponent', 'selector': 'app-gmail'},{'name': 'GmailEmailListComponent', 'selector': 'app-email-list'},{'name': 'GmailStoreTokenComponent', 'selector': 'app-gmailstoretoken'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'ReadEmailComponent', 'selector': 'app-read-email'},{'name': 'SpotifyHomeComponent', 'selector': 'app-spotify-home'},{'name': 'SpotifyPlayerComponent', 'selector': 'app-spotify-player'},{'name': 'SpotifySearchComponent', 'selector': 'app-spotify-search'},{'name': 'SpotifyStoreTokenComponent', 'selector': 'app-spotify-store-token'},{'name': 'TodoEditComponent', 'selector': 'app-todo-edit'},{'name': 'TodoListComponent', 'selector': 'app-todo-list'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'HomePageComponent'};
 </script>

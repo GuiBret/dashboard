@@ -73,41 +73,12 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgModule } from &#x27;@angular/core&#x27;;
 import { Routes, RouterModule } from &#x27;@angular/router&#x27;;
 import { HomePageComponent } from &#x27;./pages/home-page/home-page.component&#x27;;
-import { TodoListComponent } from &#x27;./pages/todo-list/todo-list.component&#x27;;
-import { TodoEditComponent } from &#x27;./components/TodoList/todo-edit/todo-edit.component&#x27;;
-import { SpotifyHomeComponent } from &#x27;./pages/spotify-home/spotify-home.component&#x27;;
-import { SpotifyStoreTokenComponent } from &#x27;./pages/spotify-store-token/spotify-store-token.component&#x27;;
-import { SpotifyTokenGuard } from &#x27;./guards/spotify-token.guard&#x27;;
-import { TodoDataResolverService } from &#x27;./resolvers/todo-data-resolver.service&#x27;;
 
 
 const routes: Routes &#x3D; [
   {
     path: &#x27;&#x27;, component: HomePageComponent
-  },
-  {
-    path: &#x27;todolist&#x27;, component: TodoListComponent
-  },
-  {
-    path: &#x27;todolist/:id/edit&#x27;, component:TodoEditComponent, resolve: {
-      todo: TodoDataResolverService
-    }
-  },
-  {
-    path: &#x27;todolist/add&#x27;, component:TodoEditComponent, resolve: {
-      todo: TodoDataResolverService
-    }
-  },
-  {
-    path: &#x27;spotify&#x27;, component: SpotifyHomeComponent, canActivate: [SpotifyTokenGuard]
-  },
-  {
-    path: &#x27;spotify/logged&#x27;, component: SpotifyHomeComponent, canActivate: [SpotifyTokenGuard]
-  },
-  {
-    path: &#x27;spotify/store-token/:token/:refresh&#x27;, component: SpotifyStoreTokenComponent
   }
-
 ];
 
 @NgModule({

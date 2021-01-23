@@ -12,30 +12,30 @@ describe('HttpService', () => {
 
   const mockTodoList: Array<Todo> = [
     {
-      _id: "a",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'a',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     },
     {
-      _id: "b",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'b',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     },
     {
-      _id: "c",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'c',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     },
     {
-      _id: "d",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'd',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     },
@@ -109,5 +109,50 @@ describe('HttpService', () => {
 
       expect(httpClientStub.delete).toHaveBeenCalledWith(environment.serverRoot + '/todos/1', jasmine.any(Object));
     });
-  })
+  });
+
+  describe('Get email list', () => {
+    it('should make a call with all params', () => {
+
+      getSpy.calls.reset();
+      localStorage.setItem('gmailToken', 'mytoken');
+
+      service.getEmailList(50, 'abcdef', 'myquery');
+
+      expect(httpClientStub.get).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages?max_results=50&pageToken=abcdef&q=myquery&labelIds=INBOX', jasmine.any(Object));
+
+    });
+
+    it('should ignore the query since it is missing', () => {
+      getSpy.calls.reset();
+      localStorage.setItem('gmailToken', 'mytoken');
+
+      service.getEmailList(50, 'abcdef');
+
+      expect(httpClientStub.get).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages?max_results=50&pageToken=abcdef&labelIds=INBOX', jasmine.any(Object));
+    });
+
+    it('should ignore the token since it is missing', () => {
+      getSpy.calls.reset();
+      localStorage.setItem('gmailToken', 'mytoken');
+
+      service.getEmailList(50, null, 'myquery');
+
+      expect(httpClientStub.get).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages?max_results=50&q=myquery&labelIds=INBOX', jasmine.any(Object));
+    });
+  });
+
+  describe('Batch modify emails', () => {
+    it('should make a POST call with the payload', () => {
+
+      postSpy.calls.reset();
+      const mockPayload = {
+        ids: ['abc', 'def', 'ghi']
+      };
+
+      service.batchModifyEmails(mockPayload);
+
+      expect(postSpy).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages/batchModify', mockPayload, jasmine.any(Object));
+    });
+  });
 });

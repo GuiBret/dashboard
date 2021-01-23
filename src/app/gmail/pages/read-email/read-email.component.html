@@ -1,0 +1,7 @@
+<h1>{{emailContent.subject}}</h1>
+
+
+<div id="email_container">
+  <span>From : <i>{{emailContent.from}}</i></span>
+  <app-email-container [htmlContent]="emailContent.htmlContent"></app-email-container>
+</div>

@@ -31,3 +31,22 @@
     height:15vh;
   }
 
+#title-gmail, #title-spotify {
+  display:flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.red-dot {
+  color:red;
+}
+
+.green-dot {
+  color:green;
+}
+
+.active-link {
+  font-weight: bolder;
+}
+

@@ -1,0 +1,4 @@
+#email_container {
+  max-height:80vh;
+  overflow-y:scroll;
+}

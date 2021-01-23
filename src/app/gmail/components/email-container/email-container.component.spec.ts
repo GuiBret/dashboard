@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SpotifyUserInfoComponent } from './spotify-user-info.component';
+import { EmailContainerComponent } from './email-container.component';
 
-describe('SpotifyUserInfoComponent', () => {
-  let component: SpotifyUserInfoComponent;
-  let fixture: ComponentFixture<SpotifyUserInfoComponent>;
+describe('EmailContainerComponent', () => {
+  let component: EmailContainerComponent;
+  let fixture: ComponentFixture<EmailContainerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpotifyUserInfoComponent ]
+      declarations: [ EmailContainerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SpotifyUserInfoComponent);
+    fixture = TestBed.createComponent(EmailContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
