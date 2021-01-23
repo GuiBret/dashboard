@@ -2,5 +2,5 @@
   <button mat-raised-button color="primary" *ngIf="mode === 'normal'" [disabled]="indeterminateCheckboxChecked === false" (click)="markMultipleEmailsAsRead()">Mark as read</button>
   <button mat-raised-button color="primary" *ngIf="mode === 'normal'" [disabled]="indeterminateCheckboxChecked === false" (click)="trashMultipleEmails()">Trash</button>
   <button mat-raised-button color="primary" *ngIf="mode === 'trash'" [disabled]="indeterminateCheckboxChecked === false" (click)="untrashMessages()">Untrash</button>
-  <button mat-raised-button color="primary" [disabled]="indeterminateCheckboxChecked === false" (click)="deleteSelectedEmails()">Delete permanently</button>
+  <button mat-raised-button color="primary" [disabled]="indeterminateCheckboxChecked === false" (click)="deleteMultipleEmails()()">Delete permanently</button>
 </div>

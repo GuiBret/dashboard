@@ -17,10 +17,6 @@ export class GmailActionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ngOnChanges() {
-    console.log(this.mode);
-  }
-
   markMultipleEmailsAsRead() {
     const selectedEmailIds = this.gmailService.messagesSelected.map(email => email.id);
 
@@ -28,46 +24,46 @@ export class GmailActionsComponent implements OnInit {
                      .subscribe(this.onCallbackForBatchMarkAsRead.bind(this, selectedEmailIds));
   }
 
+  private onCallbackForBatchMarkAsRead(selectedEmailIds: Array<string>): void {
+    this.emailListChanged.next(selectedEmailIds);
+  }
+
   /**
    * Callback to click on button "Delete selected", checks which emails are marked for deletion and tells the service to make the request
    */
-  deleteSelectedEmails() {
-    const selectedEmailIds = this.gmailService.messagesSelected.map(email => email.id);
-    console.log(selectedEmailIds);
-    this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe((() => {
-      this.gmailService.resetMessageBox();
-      this.triggerSearch.next();
-    }));
-  }
-
-  private onCallbackForBatchMarkAsRead(selectedEmailIds: Array<string>) {
-    this.emailListChanged.next(selectedEmailIds);
-    // this.emailList = this.emailList.map((email: GmailCustomEmail) => {
-    //   if (selectedEmailIds.includes(email.id)) {
-    //     email.isRead = true;
-    //   }
-
-    //   email.selected = false;
-
-    //   return email;
-    // });
-
-    // this.defineIndeterminateState();
-  }
-
-  trashMultipleEmails() {
+  deleteMultipleEmails(): void {
     const selectedEmailIds = this.gmailService.messagesSelected.map(email => email.id);
 
-  this.gmailService.trashMessages(selectedEmailIds).subscribe(() => {
+    this.gmailService.deleteMultipleEmails(selectedEmailIds).subscribe(this.onMultipleEmailsDeleted.bind(this));
+  }
+
+  private onMultipleEmailsDeleted(): void {
+    this.gmailService.resetMessageBox();
     this.triggerSearch.next();
-  })
+  }
+
+
+
+  trashMultipleEmails(): void {
+    const selectedEmailIds = this.gmailService.messagesSelected.map(email => email.id);
+
+    this.gmailService.trashMessages(selectedEmailIds).subscribe(this.onMultipleEmailsTrashed.bind(this));
+  }
+
+  /**
+   * Callback of trashMultipleEmails, triggers a new search in the email list component
+   */
+  private onMultipleEmailsTrashed() {
+    this.triggerSearch.next();
   }
 
   untrashMessages() {
     const selectedEmailIds = this.gmailService.messagesSelected.map(email => email.id);
 
-    this.gmailService.untrashMessages(selectedEmailIds).subscribe(() => {
-      this.triggerSearch.next();
-    });
+    this.gmailService.untrashMessages(selectedEmailIds).subscribe(this.onMultipleEmailsUntrashed.bind(this));
+  }
+
+  private onMultipleEmailsUntrashed() {
+    this.triggerSearch.next();
   }
 }
