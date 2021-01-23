@@ -140,7 +140,7 @@ export class HttpService {
     }
 
     params.append('labelIds', labels);
-    console.log(labels);
+
     return this.http.get(`https://gmail.googleapis.com/gmail/v1/users/me/messages?` + params.toString(), reqOpts);
   }
 

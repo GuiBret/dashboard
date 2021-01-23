@@ -164,7 +164,6 @@ export class GmailEmailListComponent implements OnInit, OnDestroy {
   }
 
   onCallbackForBatchMarkAsRead(selectedEmailIds: Array<string>) {
-    console.log(selectedEmailIds);
     this.emailList = this.emailList.map((email: GmailCustomEmail) => {
       if (selectedEmailIds.includes(email.id)) {
         email.isRead = true;
