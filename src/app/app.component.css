@@ -46,3 +46,7 @@
   color:green;
 }
 
+.active-link {
+  font-weight: bolder;
+}
+

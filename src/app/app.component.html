@@ -19,8 +19,8 @@
 
         </mat-expansion-panel-header>
 
-        <mat-action-row class='clickable'><span routerLink='/todolist'>List</span></mat-action-row>
-        <mat-action-row class='clickable' routerLink="/todolist/add">Add</mat-action-row>
+        <mat-action-row class='clickable'><span routerLink='/todolist' routerLinkActive="active-link">List</span></mat-action-row>
+        <mat-action-row class='clickable' routerLink="/todolist/add" routerLinkActive="active-link">Add</mat-action-row>
 
 
       </mat-expansion-panel>
@@ -58,8 +58,8 @@
         </mat-expansion-panel-header>
 
         <mat-action-row class='clickable' (click)="triggerGmailLoginProcedure()" *ngIf="!isLoggedOnGmail">Click here to login</mat-action-row>
-        <mat-action-row class='clickable' routerLink="/gmail" *ngIf="isLoggedOnGmail">Home</mat-action-row>
-        <mat-action-row class='clickable' routerLink="/gmail/trash" *ngIf="isLoggedOnGmail">Trash</mat-action-row>
+        <mat-action-row class='clickable' routerLink="/gmail" *ngIf="isLoggedOnGmail" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Home</mat-action-row>
+        <mat-action-row class='clickable' routerLink="/gmail/trash" *ngIf="isLoggedOnGmail" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Trash</mat-action-row>
 
       </mat-expansion-panel>
       <mat-expansion-panel [expanded]="isLoggedOnSpotify">
@@ -72,7 +72,7 @@
         </mat-expansion-panel-header>
 
         <mat-action-row class='clickable' (click)="triggerLoginProcedure()" *ngIf="!isLoggedOnSpotify">Click here to login</mat-action-row>
-        <mat-action-row class='clickable' routerLink="/spotify" *ngIf="isLoggedOnSpotify">Home</mat-action-row>
+        <mat-action-row class='clickable' routerLink="/spotify" *ngIf="isLoggedOnSpotify" routerLinkActive="active-link">Home</mat-action-row>
 
       </mat-expansion-panel>
     </mat-sidenav>
