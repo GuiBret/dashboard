@@ -107,7 +107,6 @@ export class GmailService {
         this.tokens.push(response.nextPageToken);
     }
 
-    console.log(response);
     if (response.resultSizeEstimate === 0) {
       this.newEmailListPosted.next([]);
       this.messageBox = [];
