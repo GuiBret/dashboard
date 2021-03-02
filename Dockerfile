@@ -13,6 +13,8 @@ RUN node_modules/.bin/ng build --prod --baseHref=/dashboard/ --deployUrl=/dashbo
 
 FROM nginx:latest
 
-COPY --from=compile-image /opt/ng/dist/dashboard /usr/share/nginx/html/dashboard
 
-COPY .htaccess /usr/share/nginx/html/dashboard
+COPY --from=compile-image /opt/ng/dist/dashboard /usr/share/nginx/html/dashboard
+COPY nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 80
