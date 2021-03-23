@@ -19,7 +19,7 @@
       </th>
       <td mat-cell *matCellDef="let email" class="mat-cell-selection" (click)="stopPropagationAndToggleEmail($event, email.id)">
         <mat-checkbox  (change)="defineIndeterminateState()" [(ngModel)]="email.selected"></mat-checkbox>
-        <mat-icon [fontSet]="(email.important) ? 'material-icons' : 'material-icons-outlined'" (click)="toggleImportantEmail($event, email)">label_important</mat-icon>
+        <mat-icon appearance="outline" [class]="(email.important) ? 'material-icons-outlined' : 'material-icons-two-tone'" (click)="toggleImportantEmail($event, email)">label_important</mat-icon>
       </td>
     </ng-container>
     <ng-container matColumnDef="from">
