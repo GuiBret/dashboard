@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 /**
  * The service that handles all playback actions with Spotify
@@ -11,6 +12,10 @@ import { map } from 'rxjs/operators';
 export class SpotifyPlayerService {
 
   private playerID: string = "";
+
+  private playbackMetadataChangedSource = new Subject();
+
+  onPlaybackMetadataChanged  = this.playbackMetadataChangedSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -61,7 +66,7 @@ export class SpotifyPlayerService {
     }
   }
 
-  // TODO : implement it
+  // TODO: implement it
   getAvailableDevices() {
 
   }
@@ -77,6 +82,10 @@ export class SpotifyPlayerService {
 
   getPlayerID() : string {
     return this.playerID;
+  }
+
+  pushPlaybackMetadataChanged(newPlaybackData: any): void {
+    this.playbackMetadataChangedSource.next(newPlaybackData);
   }
 
 
