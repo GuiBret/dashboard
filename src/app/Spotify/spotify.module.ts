@@ -50,6 +50,9 @@ import { SharedModule } from '../shared/shared.module';
     provide: HTTP_INTERCEPTORS,
     useClass: SpotifyInterceptor,
     multi: true
+  },
+  {
+    provide: Window, useValue: window
   }],
 })
 export class SpotifyModule {}
