@@ -22,13 +22,14 @@ import { SpotifyModule } from './Spotify/spotify.module';
 import { TodoListModule } from './TodoList/todo-list.module';
 import { SharedModule } from './shared/shared.module';
 import { GmailModule } from './gmail/gmail.module';
+import { SpotifyInternalPlayerComponent } from './components/Spotify/spotify-internal-player/spotify-internal-player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     GithubComponent,
-
+    SpotifyInternalPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +54,9 @@ import { GmailModule } from './gmail/gmail.module';
 
   ],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    {provide: Window, useValue: window}
+  ]
 })
 export class AppModule { }
