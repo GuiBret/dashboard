@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { SpotifyPlayerService } from '../../services/spotify-player.service';
 
 @Component({
   selector: 'app-spotify-search',
@@ -16,7 +17,7 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
     songs: new FormControl(false),
     artists: new FormControl(true),
   });
-  constructor(private spotifyService: SpotifyService) { }
+  constructor(private spotifyService: SpotifyService, private spotifyPlayerService: SpotifyPlayerService) { }
 
   /**
    * The element of the autocomplete input
@@ -60,7 +61,7 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
   }
 
   playElement(selectedOption: {uri: string, type: string}) {
-    this.spotifyService.playElement(selectedOption.uri, selectedOption.type);
+    this.spotifyService.playElement(selectedOption.uri, selectedOption.type, this.spotifyPlayerService.getPlayerID());
   }
 
   onOptionsChanged(newFormValue: {albums: boolean, artists: boolean, songs: boolean}) {

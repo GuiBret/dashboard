@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class SpotifyPlayerService {
 
+  private playerID: string = "";
 
   constructor(private http: HttpClient) { }
 
@@ -60,6 +61,7 @@ export class SpotifyPlayerService {
     }
   }
 
+  // TODO : implement it
   getAvailableDevices() {
 
   }
@@ -67,6 +69,14 @@ export class SpotifyPlayerService {
   setVolume(value: number) {
     this.http.put('https://api.spotify.com/v1/me/player/volume?volume_percent=' + value, {}).subscribe(() => {});
 
+  }
+
+  setPlayerID(newPlayerID: string) {
+    this.playerID = newPlayerID;
+  }
+
+  getPlayerID() : string {
+    return this.playerID;
   }
 
 

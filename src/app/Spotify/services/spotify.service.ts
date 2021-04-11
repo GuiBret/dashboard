@@ -43,7 +43,7 @@ export class SpotifyService {
     return this.http.get(environment.serverRoot + '/spotify/autocomp/' + query + '?type=' + params.join(','));
   }
 
-  playElement(uri: string, type: string) {
+  playElement(uri: string, type: string, playerID: string) {
 
     // Will change depending on if we try to play a track or an album / an artist
     let form: {uris?: Array<string>, context_uri?: string} = {};
@@ -54,7 +54,8 @@ export class SpotifyService {
       form.context_uri = uri;
     }
 
-    this.http.put('https://api.spotify.com/v1/me/player/play', form).subscribe(() => {
+
+    this.http.put('https://api.spotify.com/v1/me/player/play?device_id=' + playerID, form).subscribe(() => {
       this.playbackChangedSource.next();
     });
   }
