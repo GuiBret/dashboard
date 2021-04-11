@@ -20,7 +20,11 @@ export class SpotifyPlayerComponent implements OnInit {
 
   playbackChanged : Subscription;
 
+  playIntervalID: number;
+
+  // TODO : handle song duration
   songDuration: number = 1000;
+
   currentSongPosition = 0;
   volume: number = 20;
 
@@ -63,9 +67,14 @@ export class SpotifyPlayerComponent implements OnInit {
     // If the current status is "Play", we'll pause the playback
     if(this.currPlayerStatus) {
       obs = this.spotifyPlayerSvc.pauseSong();
+      clearInterval(this.playIntervalID);
 
     } else {
       obs = this.spotifyPlayerSvc.playSong();
+
+      this.playIntervalID = window.setInterval(() => {
+        this.currentSongPosition++;
+      }, 1000);
     }
 
     obs.subscribe((response) => {
