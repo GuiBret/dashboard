@@ -56,14 +56,14 @@ describe('SpotifyService', () => {
   describe('Play element', () => {
     it('should have made PUT request with an attribute "uri" since we are trying to play a song', () => {
       putSpyObj.calls.reset();
-      service.playElement('randomuri', 'track');
-      expect(httpClientStub.put).toHaveBeenCalledWith('https://api.spotify.com/v1/me/player/play', {uris: ['randomuri']});
+      service.playElement('randomuri', 'track', 'abc');
+      expect(httpClientStub.put).toHaveBeenCalledWith('https://api.spotify.com/v1/me/player/play?device_id=abc', {uris: ['randomuri']});
     });
 
     it('should have made PUT request with an attribute "context_uri" since we are trying to play an album (same for an album)', () => {
       putSpyObj.calls.reset();
-      service.playElement('randomuri', 'album');
-      expect(httpClientStub.put).toHaveBeenCalledWith('https://api.spotify.com/v1/me/player/play', {context_uri: 'randomuri'});
+      service.playElement('randomuri', 'album', 'abc');
+      expect(httpClientStub.put).toHaveBeenCalledWith('https://api.spotify.com/v1/me/player/play?device_id=abc', {context_uri: 'randomuri'});
     });
   });
 
