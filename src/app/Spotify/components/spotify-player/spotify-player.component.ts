@@ -19,6 +19,9 @@ export class SpotifyPlayerComponent implements OnInit {
   };
 
   playbackChanged : Subscription;
+
+  songDuration: number = 1000;
+  currentSongPosition = 0;
   volume: number = 20;
 
   currPlayerStatus = true;

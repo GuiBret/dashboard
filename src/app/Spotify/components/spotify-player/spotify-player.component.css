@@ -19,6 +19,13 @@
 
 }
 
+#middle-panel {
+  width:50vw;
+  display:flex;
+  align-items: center;
+  flex-direction:column;
+}
+
 #controls {
   display:flex;
   align-items: center;
@@ -27,4 +34,8 @@
 #volume_and_change_device {
   display:flex;
   flex-direction:column;
+}
+
+#playback-slider {
+  width: 40vw;
 }

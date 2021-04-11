@@ -21,16 +21,29 @@
         </div>
 
       </div>
-      <div id="controls">
-        <button mat-mini-fab (click)="goToPreviousSong()">
-          <mat-icon>skip_previous</mat-icon>
-        </button>
-        <button mat-fab color="primary" (click)="onClickPlayPause()">
-          <mat-icon>{{currPlayerStatus ? 'pause' : 'play_arrow'}}</mat-icon>
-        </button>
-        <button mat-mini-fab (click)="goToNextSong()">
-          <mat-icon>skip_next</mat-icon>
-        </button>
+      <div id="middle-panel">
+
+        <div id="controls">
+          <div id="controls-up"></div>
+          <button mat-mini-fab (click)="goToPreviousSong()">
+            <mat-icon>skip_previous</mat-icon>
+          </button>
+          <button mat-fab color="primary" (click)="onClickPlayPause()">
+            <mat-icon>{{currPlayerStatus ? 'pause' : 'play_arrow'}}</mat-icon>
+          </button>
+          <button mat-mini-fab (click)="goToNextSong()">
+            <mat-icon>skip_next</mat-icon>
+          </button>
+        </div>
+
+        <div id="slider-container">
+          <div id="slider">
+            <span id="song-current-time-label">Song start</span>
+            <mat-slider id="playback-slider" min="0" max="songDuration" step="1" value="currentSongPosition"  [(ngModel)]="currentSongPosition" (change)="setVolume()"></mat-slider>
+            <span id="song-duration-label">Song duration</span>
+          </div>
+        </div>
+
       </div>
 
       <div id="volume_and_change_device">
