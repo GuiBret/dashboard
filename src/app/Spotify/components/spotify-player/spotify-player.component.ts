@@ -20,6 +20,8 @@ export class SpotifyPlayerComponent implements OnInit {
 
   playbackChanged : Subscription;
 
+  playbackMetadataChanged: Subscription;
+
   playIntervalID: number;
 
   // TODO : handle song duration
@@ -35,6 +37,8 @@ export class SpotifyPlayerComponent implements OnInit {
     this.spotifyPlayerSvc.getInfoOnPlayback().subscribe(this.setCurrentSong.bind(this));
 
     this.playbackChanged = this.spotifySvc.onPlaybackChanged.subscribe(this.getPlaybackInfo.bind(this));
+
+    this.playbackMetadataChanged = this.spotifyPlayerSvc.onPlaybackMetadataChanged.subscribe(this.updatePlaybackMetadata.bind(this));
 
 
     // TODO: Find another way to handle that
@@ -108,6 +112,9 @@ export class SpotifyPlayerComponent implements OnInit {
 
   setVolume() {
     this.spotifyPlayerSvc.setVolume(this.volume);
+  }
+
+  updatePlaybackMetadata(newPlaybackInfo) {
   }
 
 }
