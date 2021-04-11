@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-declare global {
-  interface Window {
-    onSpotifyWebPlaybackSDKReady: any
-  }
-}
+import { SpotifyPlayerService } from 'src/app/Spotify/services/spotify-player.service';
+import { SpotifyService } from 'src/app/Spotify/services/spotify.service';
+
 
 @Component({
   selector: 'app-spotify-internal-player',
@@ -12,40 +10,42 @@ declare global {
 })
 export class SpotifyInternalPlayerComponent implements OnInit {
 
-  constructor() {
+  constructor(private spotifyPlayerSvc: SpotifyPlayerService, private spotifySvc: SpotifyService) {
 
    }
 
   ngOnInit(): void {
+
     window.onSpotifyWebPlaybackSDKReady = () => {
-      const token = 'BQDXkmlrdOGsExoc9Ke7kGok26BHjAHhmxUpXIDQgi-0SmMPF12W1nBWV80Y_49q18MhUNXalpCYwnhOUIECj8L421rf_obRCNkTYKPbEh5DU_BvtqxjWNry0YujspFbDDKmctZpuTcnqLOaT4r3vIbxgSFCrWQl3ZjiKBDA1S7VnKjOMZOmDh4';
-      const player = new Spotify.Player({
-        name: 'Web Playback SDK Quick Start Player',
-        getOAuthToken: cb => { cb(token); }
-      });
 
-      // // Error handling
-      player.addListener('initialization_error', ({ message }) => { console.error(message); });
-      player.addListener('authentication_error', ({ message }) => { console.error(message); });
-      player.addListener('account_error', ({ message }) => { console.error(message); });
-      player.addListener('playback_error', ({ message }) => { console.error(message); });
+      // We connect to the Playback SDK only if we are connected to Spotify
+      if(this.spotifySvc.checkSpotifyStatus()) {
+        const token = localStorage.getItem('spotifyToken');
+        const player = new Spotify.Player({
+          name: 'Dashboard Player',
+          getOAuthToken: cb => { cb(token); }
+        });
 
-      // // Playback status updates
-      player.addListener('player_state_changed', state => { console.log(state); });
+        // // Error handling
+        // TODO: handle errors
+        // player.addListener('initialization_error', ({ message }) => { console.error(message); });
+        // player.addListener('authentication_error', ({ message }) => { console.error(message); });
+        // player.addListener('account_error', ({ message }) => { console.error(message); });
+        // player.addListener('playback_error', ({ message }) => { console.error(message); });
 
-      // // Ready
-      player.addListener('ready', ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
-      });
+        // // Playback status updates
+        player.addListener('player_state_changed', state => { console.log(state); });
 
-      // // Not Ready
-      // player.addListener('not_ready', ({ device_id }) => {
-      //   console.log('Device ID has gone offline', device_id);
-      // });
+        // // Ready
+        player.addListener('ready', ({ device_id }) => {
+          this.spotifyPlayerSvc.setPlayerID(device_id);
+        });
 
-      console.log(player.connect);
-      // // Connect to the player!
-      player.connect();
+        // // Connect to the player!
+        player.connect();
+
+      }
+
 
     }
   }
