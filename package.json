@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --baseHref=/dashboard/ --deployUrl=/dashboard/",
     "build": "ng build --prod --baseHref=/dashboard/ --deployUrl=/dashboard/",
     "test": "ng test --watch --code-coverage",
     "lint": "ng lint",
@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~10.1.1",
     "@angular/router": "~10.1.1",
     "@nestjs/mongoose": "^7.2.2",
+    "@types/spotify-web-playback-sdk": "^0.1.8",
     "base64-js": "^1.5.1",
     "googleapis": "^67.0.0",
     "rxjs": "~6.5.4",
