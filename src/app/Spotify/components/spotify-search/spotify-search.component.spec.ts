@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { SpotifyService } from '../../services/spotify.service';
 
@@ -26,6 +27,7 @@ describe('SpotifySearchComponent', () => {
       providers: [
         {useValue: httpClientStub, provide: HttpClient},
         {useValue: spotifySvcStub, provide: SpotifyService},
+        {useValue: MatSnackBar, provide: MatSnackBar},
       ],
       imports: [
         MatAutocompleteModule
