@@ -4,6 +4,7 @@ import { SpotifyService } from 'src/app/Spotify/services/spotify.service';
 
 import { SpotifyInternalPlayerComponent } from './spotify-internal-player.component';
 
+
 describe('SpotifyInternalPlayerComponent', () => {
   let component: SpotifyInternalPlayerComponent;
   let fixture: ComponentFixture<SpotifyInternalPlayerComponent>;
@@ -11,8 +12,12 @@ describe('SpotifyInternalPlayerComponent', () => {
   let spotifyPlayerSvcStub: Partial<SpotifyPlayerService>;
   let spotifySvcStub: Partial<SpotifyService>;
 
+
+
   spotifyPlayerSvcStub = {};
-  spotifySvcStub = {};
+  spotifySvcStub = {
+    checkSpotifyStatus: jasmine.createSpy().and.returnValue(false)
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -33,5 +38,13 @@ describe('SpotifyInternalPlayerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('On web playback ready', () => {
+    it('should not do anything since we are not connected to Spotify', () => {
+      localStorage.removeItem('spotifyToken');
+      component.ngOnInit();
+      window.onSpotifyWebPlaybackSDKReady();
+    });
   });
 });

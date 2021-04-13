@@ -10,44 +10,44 @@ import { SpotifyService } from 'src/app/Spotify/services/spotify.service';
 })
 export class SpotifyInternalPlayerComponent implements OnInit {
 
+  private player: any;
   constructor(private spotifyPlayerSvc: SpotifyPlayerService, private spotifySvc: SpotifyService) {
 
    }
 
   ngOnInit(): void {
 
-    window.onSpotifyWebPlaybackSDKReady = () => {
+    window.onSpotifyWebPlaybackSDKReady = this.onSpotifyWebPlaybackSDKReady.bind(this);
 
-      // We connect to the Playback SDK only if we are connected to Spotify
-      if(this.spotifySvc.checkSpotifyStatus()) {
-        const token = localStorage.getItem('spotifyToken');
-        const player = new Spotify.Player({
-          name: 'Dashboard Player',
-          getOAuthToken: cb => { cb(token); }
-        });
+  }
+  private onSpotifyWebPlaybackSDKReady() {
+    // We connect to the Playback SDK only if we are connected to Spotify
+    if(this.spotifySvc.checkSpotifyStatus()) {
+      const token = localStorage.getItem('spotifyToken');
+      this.player = new Spotify.Player({
+        name: 'Dashboard Player',
+        getOAuthToken: cb => { cb(token); }
+      });
 
-        // // Error handling
-        // TODO: handle errors
-        // player.addListener('initialization_error', ({ message }) => { console.error(message); });
-        // player.addListener('authentication_error', ({ message }) => { console.error(message); });
-        // player.addListener('account_error', ({ message }) => { console.error(message); });
-        // player.addListener('playback_error', ({ message }) => { console.error(message); });
+      // // Error handling
+      // TODO: handle errors
+      // player.addListener('initialization_error', ({ message }) => { console.error(message); });
+      // player.addListener('authentication_error', ({ message }) => { console.error(message); });
+      // player.addListener('account_error', ({ message }) => { console.error(message); });
+      // player.addListener('playback_error', ({ message }) => { console.error(message); });
 
-        // // Playback status updates
-        player.addListener('player_state_changed', state => { this.spotifyPlayerSvc.pushPlaybackMetadataChanged(state) });
+      // // Playback status updates
+      this.player.addListener('player_state_changed', state => { this.spotifyPlayerSvc.pushPlaybackMetadataChanged(state) });
 
-        // // Ready
-        player.addListener('ready', ({ device_id }) => {
-          this.spotifyPlayerSvc.setPlayerID(device_id);
-        });
+      // // Ready
+      this.player.addListener('ready', ({ device_id }) => {
+        this.spotifyPlayerSvc.setPlayerID(device_id);
+      });
 
-        // // Connect to the player!
-        player.connect();
+      // // Connect to the player!
+      this.player.connect();
 
-      }
-
-
-    }
+}
   }
 
 }
