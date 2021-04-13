@@ -17,13 +17,15 @@ import { SpotifyPlayerComponent } from './components/spotify-player/spotify-play
 import { SpotifySearchComponent } from './components/spotify-search/spotify-search.component';
 import { SpotifyRoutingModule } from './spotify.routing';
 import { SharedModule } from '../shared/shared.module';
+import { DurationPipe } from './pipes/duration.pipe';
 
 @NgModule({
   declarations: [
     SpotifyHomeComponent,
     SpotifySearchComponent,
     SpotifyStoreTokenComponent,
-    SpotifyPlayerComponent
+    SpotifyPlayerComponent,
+    DurationPipe
   ],
   imports: [
     SpotifyRoutingModule,
