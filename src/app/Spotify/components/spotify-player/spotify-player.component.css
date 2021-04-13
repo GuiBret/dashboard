@@ -39,3 +39,8 @@
 #playback-slider {
   width: 40vw;
 }
+
+#song-current-time-label,
+#song-duration-label {
+  font-size: 0.85rem;
+}

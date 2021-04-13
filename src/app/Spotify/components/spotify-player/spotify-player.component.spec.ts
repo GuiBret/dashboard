@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { Song } from 'src/app/Spotify/services/song';
+import { PlaybackMetadata } from '../../interfaces/playback-metadata.interface';
 import { DurationPipe } from '../../pipes/duration.pipe';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
 import { SpotifyService } from '../../services/spotify.service';
@@ -26,6 +27,7 @@ describe('SpotifyPlayerComponent', () => {
     onPlaybackMetadataChanged: new Observable(),
     playSong: mockPlaySong,
     pauseSong: mockPauseSong,
+    setVolume: jasmine.createSpy()
 
   }
 
@@ -126,5 +128,68 @@ describe('SpotifyPlayerComponent', () => {
 
       expect(component.song).toEqual(mockSong);
     })
+  });
+
+  describe("Update playback metadata", () => {
+
+    it('should not have unsubscribed to the play interval ID and recalculated everything per the info', () => {
+      component['playIntervalID'] = null;
+      component['songDuration'] = 250;
+      component['currentSongPosition'] = 12;
+      component['currPlayerStatus'] = true;
+
+      const playbackInfo: PlaybackMetadata = {
+        duration: 40000,
+        position: 2000,
+        paused: true,
+        repeat_mode: 0,
+        shuffle: false
+      };
+
+      component.updatePlaybackMetadata(playbackInfo);
+
+      expect(component.songDuration).toEqual(40);
+      expect(component.currentSongPosition).toEqual(2);
+      expect(component.currPlayerStatus).toEqual(false);
+
+    });
+
+    it('should have recreated the play interval ID and recalculated everything per the info', () => {
+      const mockPlayIntervalID = new Observable().subscribe(() => {});
+      component['playIntervalID'] = mockPlayIntervalID;
+      component['songDuration'] = 250;
+      component['currentSongPosition'] = 12;
+      component['currPlayerStatus'] = true;
+
+      const playbackInfo: PlaybackMetadata = {
+        duration: 40000,
+        position: 2000,
+        paused: true,
+        repeat_mode: 0,
+        shuffle: false
+      };
+
+      component.updatePlaybackMetadata(playbackInfo);
+
+      expect(component['playIntervalID']).not.toEqual(mockPlayIntervalID);
+      expect(component.songDuration).toEqual(40);
+      expect(component.currentSongPosition).toEqual(2);
+      expect(component.currPlayerStatus).toEqual(false);
+
+    });
+
+    describe('Set volume', () => {
+      it('should have called the service which will set the volume', () => {
+        component['volume'] = 27;
+
+        component.setVolume();
+
+        expect(spotifyPlayerSvcStub.setVolume).toHaveBeenCalledWith(27);
+
+
+      })
+    })
+
+
   })
 });
