@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
  * The service that handles all playback actions with Spotify
@@ -17,7 +18,7 @@ export class SpotifyPlayerService {
 
   onPlaybackMetadataChanged  = this.playbackMetadataChangedSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private snackbar: MatSnackBar) { }
 
   /**
    * Pauses the playback
@@ -86,6 +87,11 @@ export class SpotifyPlayerService {
 
   pushPlaybackMetadataChanged(newPlaybackData: any): void {
     this.playbackMetadataChangedSource.next(newPlaybackData);
+  }
+
+  displaySnackbar(message) {
+    this.snackbar.open(message);
+
   }
 
 
