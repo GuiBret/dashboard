@@ -16,6 +16,10 @@ export class SpotifyPlayerService {
 
   private playbackMetadataChangedSource = new Subject();
 
+  private seekPositionInSongSource = new Subject();
+
+  onSeekPositionRequested = this.seekPositionInSongSource.asObservable();
+
   onPlaybackMetadataChanged  = this.playbackMetadataChangedSource.asObservable();
 
   constructor(private http: HttpClient, private snackbar: MatSnackBar) { }
@@ -92,6 +96,10 @@ export class SpotifyPlayerService {
   displaySnackbar(message) {
     this.snackbar.open(message);
 
+  }
+
+  seekPositionInSong(positionInMilliseconds: number) {
+    this.seekPositionInSongSource.next(positionInMilliseconds);
   }
 
 

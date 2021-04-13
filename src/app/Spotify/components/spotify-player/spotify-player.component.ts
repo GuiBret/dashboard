@@ -140,4 +140,8 @@ export class SpotifyPlayerComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  seekPositionInSong() {
+    this.spotifyPlayerSvc.seekPositionInSong(this.currentSongPosition * 1000);
+  }
+
 }

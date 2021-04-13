@@ -19,6 +19,8 @@ export class SpotifyInternalPlayerComponent implements OnInit {
 
     window.onSpotifyWebPlaybackSDKReady = this.onSpotifyWebPlaybackSDKReady.bind(this);
 
+
+
   }
   private onSpotifyWebPlaybackSDKReady() {
     // We connect to the Playback SDK only if we are connected to Spotify
@@ -45,9 +47,18 @@ export class SpotifyInternalPlayerComponent implements OnInit {
       });
 
       // // Connect to the player!
-      this.player.connect();
+      this.player.connect().then(() => {
+        this.spotifyPlayerSvc.onSeekPositionRequested.subscribe(position => {
+          this.player.seek(position);
+        })
+      });
 
-}
+
+
+
+    }
   }
+
+
 
 }

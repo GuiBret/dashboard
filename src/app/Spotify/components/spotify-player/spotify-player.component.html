@@ -39,7 +39,7 @@
         <div id="slider-container">
           <div id="slider">
             <span id="song-current-time-label">{{ currentSongPosition | duration }}</span>
-            <mat-slider id="playback-slider" min="0" max="{{ songDuration }}" step="1" value="currentSongPosition"  [(ngModel)]="currentSongPosition"></mat-slider>
+            <mat-slider id="playback-slider" min="0" max="{{ songDuration }}" step="1" (change)="seekPositionInSong()" value="currentSongPosition"  [(ngModel)]="currentSongPosition"></mat-slider>
             <span id="song-duration-label">{{ songDuration | duration }}</span>
           </div>
         </div>
