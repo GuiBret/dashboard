@@ -96,23 +96,6 @@ describe('TodoEditComponent', () => {
       expect(component['editMode']).toEqual(true);
     });
 
-    // it('should have created a new todo (editMode to false', () => {
-    //   const mockNewTodo = {
-    //     todo : {
-    //       _id: null,
-    //       title: '',
-    //       content: '',
-    //       status: false,
-    //       __v: 0,
-    //     }
-
-    //   };
-
-    //   component.handleRoute(mockNewTodo);
-
-    //   expect(component['editMode']).toEqual(false);
-
-    // })
   });
 
   describe('On submit form', () => {

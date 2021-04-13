@@ -31,13 +31,13 @@ export class SpotifyInternalPlayerComponent implements OnInit {
 
       // // Error handling
       // TODO: handle errors
-      // player.addListener('initialization_error', ({ message }) => { console.error(message); });
-      // player.addListener('authentication_error', ({ message }) => { console.error(message); });
-      // player.addListener('account_error', ({ message }) => { console.error(message); });
-      // player.addListener('playback_error', ({ message }) => { console.error(message); });
+      this.player.addListener('initialization_error', ({ message }) => { this.spotifyPlayerSvc.displaySnackbar("Initialization error"); });
+      this.player.addListener('authentication_error', ({ message }) => { this.spotifyPlayerSvc.displaySnackbar("Authentication error"); });
+      this.player.addListener('account_error', ({ message }) => { this.spotifyPlayerSvc.displaySnackbar("Account error") });
+      this.player.addListener('playback_error', ({ message }) => { console.error(message); });
 
       // // Playback status updates
-      this.player.addListener('player_state_changed', state => { this.spotifyPlayerSvc.pushPlaybackMetadataChanged(state) });
+      this.player.addListener('player_state_changed', state => { this.spotifyPlayerSvc.pushPlaybackMetadataChanged(state); });
 
       // // Ready
       this.player.addListener('ready', ({ device_id }) => {

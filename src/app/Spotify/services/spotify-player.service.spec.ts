@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 
 import { SpotifyPlayerService } from './spotify-player.service';
@@ -8,9 +9,12 @@ describe('SpotifyPlayerService', () => {
   let service: SpotifyPlayerService;
   let httpClientStub: Partial<HttpClient>;
 
+
   const getSpy = jasmine.createSpy().and.returnValue(new Observable());
   const putSpy = jasmine.createSpy().and.returnValue(new Observable());
   const postSpy = jasmine.createSpy().and.returnValue(new Observable());
+
+
 
   httpClientStub = {
     get: getSpy,
@@ -23,6 +27,9 @@ describe('SpotifyPlayerService', () => {
       providers: [
         {
           useValue: httpClientStub, provide: HttpClient
+        },
+        {
+          useValue: MatSnackBar, provide: MatSnackBar
         }
       ]
     });
