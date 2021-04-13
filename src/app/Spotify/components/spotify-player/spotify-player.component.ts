@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, interval } from 'rxjs';
 import { SpotifyService } from '../../services/spotify.service';
 import { Song } from 'src/app/Spotify/services/song';
+import { PlaybackMetadata } from '../../interfaces/playback-metadata.interface';
 
 @Component({
   selector: 'app-spotify-player',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './spotify-player.component.html',
   styleUrls: ['./spotify-player.component.css']
 })
@@ -22,7 +24,7 @@ export class SpotifyPlayerComponent implements OnInit {
 
   playbackMetadataChanged: Subscription;
 
-  playIntervalID: number;
+  playIntervalID: Subscription;
 
   // TODO : handle song duration
   songDuration: number = 1000;
@@ -31,9 +33,10 @@ export class SpotifyPlayerComponent implements OnInit {
   volume: number = 20;
 
   currPlayerStatus = true;
-  constructor(private spotifySvc: SpotifyService, private spotifyPlayerSvc: SpotifyPlayerService) { }
+  constructor(private spotifySvc: SpotifyService, private spotifyPlayerSvc: SpotifyPlayerService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.cdr.detectChanges();
     this.spotifyPlayerSvc.getInfoOnPlayback().subscribe(this.setCurrentSong.bind(this));
 
     this.playbackChanged = this.spotifySvc.onPlaybackChanged.subscribe(this.getPlaybackInfo.bind(this));
@@ -44,7 +47,8 @@ export class SpotifyPlayerComponent implements OnInit {
     // TODO: Find another way to handle that
     setInterval(() => {
       this.getPlaybackInfo();
-    }, 30000);
+      this.cdr.detectChanges();
+    }, 5000);
   }
 
   /**
@@ -53,6 +57,7 @@ export class SpotifyPlayerComponent implements OnInit {
    */
   setCurrentSong(song: Song) {
     this.song = song;
+    this.cdr.detectChanges();
   }
 
   getPlaybackInfo() {
@@ -71,14 +76,15 @@ export class SpotifyPlayerComponent implements OnInit {
     // If the current status is "Play", we'll pause the playback
     if(this.currPlayerStatus) {
       obs = this.spotifyPlayerSvc.pauseSong();
-      clearInterval(this.playIntervalID);
+      this.playIntervalID.unsubscribe();
 
     } else {
       obs = this.spotifyPlayerSvc.playSong();
 
-      this.playIntervalID = window.setInterval(() => {
+      this.playIntervalID = interval(1000).subscribe(() => {
         this.currentSongPosition++;
-      }, 1000);
+      });
+      this.cdr.detectChanges();
     }
 
     obs.subscribe((response) => {
@@ -114,7 +120,24 @@ export class SpotifyPlayerComponent implements OnInit {
     this.spotifyPlayerSvc.setVolume(this.volume);
   }
 
-  updatePlaybackMetadata(newPlaybackInfo) {
+  updatePlaybackMetadata(newPlaybackInfo: PlaybackMetadata) {
+    this.songDuration = newPlaybackInfo.duration / 1000;
+    this.currentSongPosition = Math.floor(newPlaybackInfo.position / 1000);
+    this.currPlayerStatus = !newPlaybackInfo.paused;
+
+    if(this.playIntervalID) {
+      this.playIntervalID.unsubscribe();
+    }
+    this.playIntervalID = interval(1000).subscribe(this.updateTimer.bind(this));
+    this.cdr.detectChanges();
+
+  }
+
+  private updateTimer() {
+    const newSongPosition = this.currentSongPosition + 1;
+    this.currentSongPosition = null;
+    this.currentSongPosition = newSongPosition;
+    this.cdr.detectChanges();
   }
 
 }
