@@ -92,7 +92,7 @@ export class HttpService {
    * If token missing, returns the Spotify login url
    */
   checkSpotifyStatus() {
-    return this.http.get(environment.serverRoot + '/spotify/precheck');
+    return this.http.get(environment.serverRoot + '/spotify/auth/precheck');
   }
 
   /**
@@ -100,13 +100,13 @@ export class HttpService {
    * @param refreshToken The refresh token
    */
   refreshSpotifyToken(refreshToken: string) {
-    return this.http.get(environment.serverRoot + '/spotify/refresh-token/' + refreshToken);
+    return this.http.get(environment.serverRoot + '/spotify/auth/refresh/' + refreshToken);
   }
   /**
    * Calls the server to retrieve Spotify's auth url
    */
   getSpotifyAuthUrl() {
-    return this.http.get(environment.serverRoot + '/spotify/get-url');
+    return this.http.get(environment.serverRoot + '/spotify/auth/url');
   }
 
   getGmailAuthUrl() {
