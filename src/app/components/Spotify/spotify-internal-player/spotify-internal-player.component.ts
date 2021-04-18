@@ -51,8 +51,9 @@ export class SpotifyInternalPlayerComponent implements OnInit {
     this.spotifyPlayerSvc.displaySnackbar(message);
   }
 
-  private onPlayerReady(deviceID: string) {
-    this.spotifyPlayerSvc.setPlayerID(deviceID);
+  private onPlayerReady(data: {device_id: string}) {
+
+    this.spotifyPlayerSvc.setPlayerID(data.device_id);
   }
 
   private onPlayerConnected() {
