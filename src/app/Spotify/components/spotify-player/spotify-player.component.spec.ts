@@ -187,9 +187,28 @@ describe('SpotifyPlayerComponent', () => {
         expect(spotifyPlayerSvcStub.setVolume).toHaveBeenCalledWith(27);
 
 
-      })
-    })
+      });
+    });
 
+    describe('Update timer', () => {
+      it('should not do anything since the player is currently paused', () => {
+        component.currPlayerStatus = false;
+        component.currentSongPosition = 25;
+        component['updateTimer']();
+
+        expect(component.currPlayerStatus).toEqual(false);
+        expect(component.currentSongPosition).toEqual(25);
+      });
+
+      it('should increment the position since the player is running', () => {
+        component.currPlayerStatus = true;
+        component.currentSongPosition = 25;
+        component['updateTimer']();
+
+        expect(component.currPlayerStatus).toEqual(true);
+        expect(component.currentSongPosition).toEqual(26);
+      })
+    });
 
   })
 });

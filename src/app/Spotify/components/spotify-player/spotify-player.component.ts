@@ -30,10 +30,13 @@ export class SpotifyPlayerComponent implements OnInit {
   pauseTriggered: Subject<void> = new Subject();
 
   onPauseTriggered$ = this.pauseTriggered.asObservable();
+
   // TODO : handle song duration
   songDuration: number = 1000;
 
   currentSongPosition = 0;
+
+
   volume: number = 20;
 
   currPlayerStatus = true;
@@ -135,17 +138,14 @@ export class SpotifyPlayerComponent implements OnInit {
 
   private updateTimer() {
 
-    if(!this.currPlayerStatus) {
+    if(this.currPlayerStatus) {
 
-    } else {
-
+      // Tweak to force detection change
       const newSongPosition = this.currentSongPosition + 1;
       this.currentSongPosition = null;
       this.currentSongPosition = newSongPosition;
       this.cdr.detectChanges();
-
     }
-
   }
 
   seekPositionInSong() {
