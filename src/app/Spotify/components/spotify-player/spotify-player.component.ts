@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
-import { Subscription, Observable, interval } from 'rxjs';
+import { Subscription, Observable, interval, Subject } from 'rxjs';
 import { SpotifyService } from '../../services/spotify.service';
 import { Song } from 'src/app/Spotify/services/song';
 import { PlaybackMetadata } from '../../interfaces/playback-metadata.interface';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-spotify-player',
@@ -26,6 +27,9 @@ export class SpotifyPlayerComponent implements OnInit {
 
   playIntervalID: Subscription;
 
+  pauseTriggered: Subject<void> = new Subject();
+
+  onPauseTriggered$ = this.pauseTriggered.asObservable();
   // TODO : handle song duration
   songDuration: number = 1000;
 
@@ -76,20 +80,17 @@ export class SpotifyPlayerComponent implements OnInit {
     // If the current status is "Play", we'll pause the playback
     if(this.currPlayerStatus) {
       obs = this.spotifyPlayerSvc.pauseSong();
-      this.playIntervalID.unsubscribe();
+
+      this.pauseTriggered.next();
 
     } else {
       obs = this.spotifyPlayerSvc.playSong();
 
-      this.playIntervalID = interval(1000).subscribe(() => {
-        this.currentSongPosition++;
-      });
+      this.playIntervalID = interval(1000).pipe(takeUntil(this.pauseTriggered)).subscribe(this.updateTimer.bind(this));
       this.cdr.detectChanges();
     }
 
-    obs.subscribe((response) => {
-      this.currPlayerStatus = !this.currPlayerStatus;
-    })
+    obs.subscribe((response) => {});
   }
 
   /**
@@ -124,16 +125,15 @@ export class SpotifyPlayerComponent implements OnInit {
     this.songDuration = newPlaybackInfo.duration / 1000;
     this.currentSongPosition = Math.floor(newPlaybackInfo.position / 1000);
     this.currPlayerStatus = !newPlaybackInfo.paused;
+    this.pauseTriggered.next();
 
-    if(this.playIntervalID) {
-      this.playIntervalID.unsubscribe();
-    }
-    this.playIntervalID = interval(1000).subscribe(this.updateTimer.bind(this));
+    interval(1000).pipe(takeUntil(this.pauseTriggered)).subscribe(this.updateTimer.bind(this));
     this.cdr.detectChanges();
 
   }
 
   private updateTimer() {
+    console.log(this.currPlayerStatus);
     const newSongPosition = this.currentSongPosition + 1;
     this.currentSongPosition = null;
     this.currentSongPosition = newSongPosition;
