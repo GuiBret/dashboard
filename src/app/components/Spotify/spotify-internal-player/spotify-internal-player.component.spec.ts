@@ -54,7 +54,7 @@ describe('SpotifyInternalPlayerComponent', () => {
     it('should have define the passed deviceID to the service', () => {
       spyOn(spotifyPlayerSvcStub, "setPlayerID");
 
-      component['onPlayerReady']('abcdef');
+      component['onPlayerReady']({device_id: 'abcdef'});
 
       expect(spotifyPlayerSvcStub.setPlayerID).toHaveBeenCalledWith('abcdef');
     });
