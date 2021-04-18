@@ -85,7 +85,7 @@ export class SpotifyPlayerComponent implements OnInit {
 
     } else {
       obs = this.spotifyPlayerSvc.playSong();
-
+      // this.playIntervalID.unsubscribe();
       this.playIntervalID = interval(1000).pipe(takeUntil(this.pauseTriggered)).subscribe(this.updateTimer.bind(this));
       this.cdr.detectChanges();
     }
@@ -122,21 +122,30 @@ export class SpotifyPlayerComponent implements OnInit {
   }
 
   updatePlaybackMetadata(newPlaybackInfo: PlaybackMetadata) {
+
     this.songDuration = newPlaybackInfo.duration / 1000;
     this.currentSongPosition = Math.floor(newPlaybackInfo.position / 1000);
     this.currPlayerStatus = !newPlaybackInfo.paused;
     this.pauseTriggered.next();
 
-    interval(1000).pipe(takeUntil(this.pauseTriggered)).subscribe(this.updateTimer.bind(this));
+    this.playIntervalID = interval(1000).pipe(takeUntil(this.pauseTriggered)).subscribe(this.updateTimer.bind(this));
     this.cdr.detectChanges();
 
   }
 
   private updateTimer() {
-    const newSongPosition = this.currentSongPosition + 1;
-    this.currentSongPosition = null;
-    this.currentSongPosition = newSongPosition;
-    this.cdr.detectChanges();
+
+    if(!this.currPlayerStatus) {
+
+    } else {
+
+      const newSongPosition = this.currentSongPosition + 1;
+      this.currentSongPosition = null;
+      this.currentSongPosition = newSongPosition;
+      this.cdr.detectChanges();
+
+    }
+
   }
 
   seekPositionInSong() {
