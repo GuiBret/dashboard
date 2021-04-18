@@ -90,7 +90,7 @@ describe('SpotifyPlayerComponent', () => {
 
 
       expect(mockPauseSong).toHaveBeenCalled();
-      expect(component['playIntervalID'].closed).toBe(true);
+      expect(component['playIntervalID'].closed).toBe(false);
     });
 
     it('should have subscribed to playSong since we are currently on pause', () => {
