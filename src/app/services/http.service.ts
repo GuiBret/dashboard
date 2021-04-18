@@ -117,7 +117,7 @@ export class HttpService {
       })
     };
 
-    return this.http.get(environment.serverRoot + '/gmail/get-url', reqOpts);
+    return this.http.get(environment.serverRoot + '/gmail/auth/url', reqOpts);
   }
 
   getEmailList(limit: number, token: string, query: string = null, labels: string = 'INBOX') {
