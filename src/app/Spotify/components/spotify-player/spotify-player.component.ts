@@ -133,7 +133,6 @@ export class SpotifyPlayerComponent implements OnInit {
   }
 
   private updateTimer() {
-    console.log(this.currPlayerStatus);
     const newSongPosition = this.currentSongPosition + 1;
     this.currentSongPosition = null;
     this.currentSongPosition = newSongPosition;
