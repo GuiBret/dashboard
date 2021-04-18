@@ -53,14 +53,18 @@ describe('SpotifyInterceptor', () => {
   });
 
   it('should have called the function refreshing the token since the expiration date is passed', () => {
+
     const interceptor: SpotifyInterceptor = TestBed.inject(SpotifyInterceptor);
     const request = new HttpRequest('GET', 'https://test.spotify.com');
     localStorage.setItem('spotifyExp', ((new Date().getTime()) - 1000).toString());
     localStorage.setItem('spotifyRefresh', 'refresh');
+    localStorage.setItem('spotifyToken', 'token');
 
     const nextMockObj = {
       handle: jasmine.createSpy()
     };
+
+
 
     interceptor.intercept(request, nextMockObj).subscribe(() => {
       expect(refreshSpotifyTokenSpy).toHaveBeenCalledWith('refresh');
