@@ -14,7 +14,9 @@ describe('SpotifyInternalPlayerComponent', () => {
 
 
 
-  spotifyPlayerSvcStub = {};
+  spotifyPlayerSvcStub = {
+    setPlayerID: (playerID: string) => {}
+  };
   spotifySvcStub = {
     checkSpotifyStatus: jasmine.createSpy().and.returnValue(false)
   };
@@ -47,4 +49,14 @@ describe('SpotifyInternalPlayerComponent', () => {
       window.onSpotifyWebPlaybackSDKReady();
     });
   });
+
+  describe('On player ready', () => {
+    it('should have define the passed deviceID to the service', () => {
+      spyOn(spotifyPlayerSvcStub, "setPlayerID");
+
+      component['onPlayerReady']('abcdef');
+
+      expect(spotifyPlayerSvcStub.setPlayerID).toHaveBeenCalledWith('abcdef');
+    });
+  })
 });

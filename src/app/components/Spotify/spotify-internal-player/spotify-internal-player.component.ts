@@ -42,9 +42,7 @@ export class SpotifyInternalPlayerComponent implements OnInit {
       this.player.addListener('player_state_changed', state => { this.spotifyPlayerSvc.pushPlaybackMetadataChanged(state); });
 
       // // Ready
-      this.player.addListener('ready', ({ device_id }) => {
-        this.spotifyPlayerSvc.setPlayerID(device_id);
-      });
+      this.player.addListener('ready', this.onPlayerReady.bind(this));
 
       // // Connect to the player!
       this.player.connect().then(this.onPlayerConnected.bind(this));
@@ -54,6 +52,10 @@ export class SpotifyInternalPlayerComponent implements OnInit {
 
   private triggerErrorMessage(message: string) {
     this.spotifyPlayerSvc.displaySnackbar(message);
+  }
+
+  private onPlayerReady(deviceID: string) {
+    this.spotifyPlayerSvc.setPlayerID(deviceID);
   }
 
   private onPlayerConnected() {
