@@ -166,4 +166,14 @@ describe('SpotifyPlayerService', () => {
   });
 
 
+  describe('Set player ID', () => {
+    it('should define the new player ID', () => {
+      service['playerID'] = 'abcdef';
+      service.setPlayerID('123456');
+
+      expect(service['playerID']).toEqual('123456');
+    });
+  });
+
+
 });
