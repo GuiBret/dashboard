@@ -33,10 +33,10 @@ export class SpotifyInternalPlayerComponent implements OnInit {
 
       // // Error handling
       // TODO: handle errors
-      this.player.addListener('initialization_error', ({ message }) => { this.spotifyPlayerSvc.displaySnackbar("Initialization error"); });
-      this.player.addListener('authentication_error', ({ message }) => { this.spotifyPlayerSvc.displaySnackbar("Authentication error"); });
-      this.player.addListener('account_error', ({ message }) => { this.spotifyPlayerSvc.displaySnackbar("Account error") });
-      this.player.addListener('playback_error', ({ message }) => { console.error(message); });
+      this.player.addListener('initialization_error', this.triggerErrorMessage.bind(this, "Initialization error"));
+      this.player.addListener('authentication_error', this.triggerErrorMessage.bind(this, "Authentication error"));
+      this.player.addListener('account_error', this.triggerErrorMessage.bind(this, "Account error"));
+      this.player.addListener('playback_error', this.triggerErrorMessage.bind(this, "Playback error"));
 
       // // Playback status updates
       this.player.addListener('player_state_changed', state => { this.spotifyPlayerSvc.pushPlaybackMetadataChanged(state); });
@@ -47,16 +47,19 @@ export class SpotifyInternalPlayerComponent implements OnInit {
       });
 
       // // Connect to the player!
-      this.player.connect().then(() => {
-        this.spotifyPlayerSvc.onSeekPositionRequested.subscribe(position => {
-          this.player.seek(position);
-        })
-      });
-
-
-
+      this.player.connect().then(this.onPlayerConnected.bind(this));
 
     }
+  }
+
+  private triggerErrorMessage(message: string) {
+    this.spotifyPlayerSvc.displaySnackbar(message);
+  }
+
+  private onPlayerConnected() {
+    this.spotifyPlayerSvc.onSeekPositionRequested.subscribe(position => {
+      this.player.seek(position);
+    })
   }
 
 
