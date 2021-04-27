@@ -19,8 +19,8 @@ export class SpotifyInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    if (req.url.includes('spotify') && !req.url.includes('refresh-token')) {
-
+    if (req.url.includes('spotify') && !req.url.includes('/auth/refresh')) {
+      console.log('On passe ici')
       if (localStorage.getItem('spotifyToken')) {
 
         // If the token is still valid, we simply push the current token to the headers
@@ -40,6 +40,7 @@ export class SpotifyInterceptor implements HttpInterceptor {
         }
       }
     }
+    console.log('On renvoie la requêe quand mêem');
     return next.handle(req);
   }
 
@@ -47,6 +48,8 @@ export class SpotifyInterceptor implements HttpInterceptor {
     // We store the token, the refresh, etc
     localStorage.setItem('spotifyToken', tokenResponse.token);
     localStorage.setItem('spotifyExp', (new Date().getTime() + (3600 * 1000)).toString());
+
+    console.log('New token : ' + tokenResponse.token);
 
     // Then we relaunch the request using the new token
     const request = req.clone({
