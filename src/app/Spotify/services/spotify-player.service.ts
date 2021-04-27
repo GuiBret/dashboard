@@ -106,6 +106,10 @@ export class SpotifyPlayerService {
     return this.http.put('https://api.spotify.com/v1/me/player/shuffle?state=' + newState, {});
   }
 
+  toggleRepeat(repeatMode: string) {
+    return this.http.put('https://api.spotify.com/v1/me/player/repeat?state=' + repeatMode, {});
+  }
+
 
 
 

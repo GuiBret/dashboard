@@ -6,6 +6,12 @@ import { Song } from 'src/app/Spotify/services/song';
 import { PlaybackMetadata } from '../../interfaces/playback-metadata.interface';
 import { takeUntil } from 'rxjs/operators';
 
+enum RepeatState {
+  NO_REPEAT = 'off',
+  REPEAT_ONE = 'track',
+  REPEAT_ALL = 'context'
+};
+
 @Component({
   selector: 'app-spotify-player',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,7 +39,7 @@ export class SpotifyPlayerComponent implements OnInit {
 
   shuffleMode = false;
 
-  repeatMode =  false;
+  repeatMode : RepeatState = RepeatState.NO_REPEAT;
 
   // TODO : handle song duration
   songDuration: number = 1000;
@@ -130,9 +136,11 @@ export class SpotifyPlayerComponent implements OnInit {
 
   updatePlaybackMetadata(newPlaybackInfo: PlaybackMetadata) {
 
+    console.log('Playback metadata updated');
     this.songDuration = newPlaybackInfo.duration / 1000;
     this.currentSongPosition = Math.floor(newPlaybackInfo.position / 1000);
     this.currPlayerStatus = !newPlaybackInfo.paused;
+    this.shuffleMode = !newPlaybackInfo.shuffle;
     this.pauseTriggered.next();
 
     this.playIntervalID = interval(1000).pipe(takeUntil(this.pauseTriggered)).subscribe(this.updateTimer.bind(this));
@@ -163,6 +171,28 @@ export class SpotifyPlayerComponent implements OnInit {
       console.log(this.shuffleMode);
       this.shuffleMode = !this.shuffleMode;
     });
+  }
+
+  toggleRepeat() {
+
+    let newRepeatMode = RepeatState.NO_REPEAT;
+    // TODO : rewrite that
+    switch(this.repeatMode) {
+      case RepeatState.NO_REPEAT:
+        newRepeatMode = RepeatState.REPEAT_ALL;
+      break;
+      case RepeatState.REPEAT_ALL:
+        newRepeatMode = RepeatState.REPEAT_ONE;
+      break;
+      case RepeatState.REPEAT_ONE:
+        newRepeatMode = RepeatState.NO_REPEAT;
+
+    }
+
+
+    this.spotifyPlayerSvc.toggleRepeat(newRepeatMode).subscribe(() => {
+      this.repeatMode = newRepeatMode;
+    })
   }
 
 }
