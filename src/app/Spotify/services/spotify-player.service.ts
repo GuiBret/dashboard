@@ -102,6 +102,10 @@ export class SpotifyPlayerService {
     this.seekPositionInSongSource.next(positionInMilliseconds);
   }
 
+  toggleShuffle(newState: boolean) {
+    return this.http.put('https://api.spotify.com/v1/me/player/shuffle?state=' + newState, {});
+  }
+
 
 
 

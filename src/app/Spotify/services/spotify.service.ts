@@ -40,7 +40,7 @@ export class SpotifyService {
     }
 
     // TODO: Rewrite that properly
-    return this.http.get(environment.serverRoot + '/spotify/autocomp/' + query + '?type=' + params.join(','));
+    return this.http.get(environment.serverRoot + '/spotify/search/' + query + '?type=' + params.join(','));
   }
 
   playElement(uri: string, type: string, playerID: string) {
