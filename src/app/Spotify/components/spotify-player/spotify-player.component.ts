@@ -31,6 +31,10 @@ export class SpotifyPlayerComponent implements OnInit {
 
   onPauseTriggered$ = this.pauseTriggered.asObservable();
 
+  shuffleMode = false;
+
+  repeatMode =  false;
+
   // TODO : handle song duration
   songDuration: number = 1000;
 
@@ -150,6 +154,15 @@ export class SpotifyPlayerComponent implements OnInit {
 
   seekPositionInSong() {
     this.spotifyPlayerSvc.seekPositionInSong(this.currentSongPosition * 1000);
+  }
+
+  toggleShuffle() {
+
+    this.spotifyPlayerSvc.toggleShuffle(!this.shuffleMode).subscribe(() => {
+      console.log("Shuffle mode changed");
+      console.log(this.shuffleMode);
+      this.shuffleMode = !this.shuffleMode;
+    });
   }
 
 }
