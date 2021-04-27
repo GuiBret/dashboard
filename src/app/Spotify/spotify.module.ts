@@ -18,6 +18,7 @@ import { SpotifySearchComponent } from './components/spotify-search/spotify-sear
 import { SpotifyRoutingModule } from './spotify.routing';
 import { SharedModule } from '../shared/shared.module';
 import { DurationPipe } from './pipes/duration.pipe';
+import { RepeatModeIconPipe } from './pipes/repeat-mode-icon.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DurationPipe } from './pipes/duration.pipe';
     SpotifySearchComponent,
     SpotifyStoreTokenComponent,
     SpotifyPlayerComponent,
-    DurationPipe
+    DurationPipe,
+    RepeatModeIconPipe
   ],
   imports: [
     SpotifyRoutingModule,
