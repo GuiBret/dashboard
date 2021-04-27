@@ -5,6 +5,12 @@ import { Observable } from 'rxjs';
 
 import { SpotifyPlayerService } from './spotify-player.service';
 
+enum RepeatState {
+  NO_REPEAT = 'off',
+  REPEAT_ONE = 'track',
+  REPEAT_ALL = 'context'
+};
+
 describe('SpotifyPlayerService', () => {
   let service: SpotifyPlayerService;
   let httpClientStub: Partial<HttpClient>;
@@ -174,6 +180,30 @@ describe('SpotifyPlayerService', () => {
       expect(service['playerID']).toEqual('123456');
     });
   });
+
+  describe('Get Repeat state string from Repeat mode value', () => {
+    it('should return "repeat" when passed an invalid value', () => {
+      const result = service.getRepeatStateStrFromRepeatModeValue(17);
+
+      expect(result).toEqual(RepeatState.NO_REPEAT);
+    });
+    it('should return "repeat" when passed 0', () => {
+      const result = service.getRepeatStateStrFromRepeatModeValue(0);
+
+      expect(result).toEqual(RepeatState.NO_REPEAT);
+    });
+
+    it('should return "repeat_on" when passed 1', () => {
+      const result = service.getRepeatStateStrFromRepeatModeValue(1);
+
+      expect(result).toEqual(RepeatState.REPEAT_ALL);
+    });
+    it('should return "repeat_one" when passed 2', () => {
+      const result = service.getRepeatStateStrFromRepeatModeValue(2);
+
+      expect(result).toEqual(RepeatState.REPEAT_ONE);
+    });
+  })
 
 
 });

@@ -143,16 +143,7 @@ export class SpotifyPlayerComponent implements OnInit {
     this.currPlayerStatus = !newPlaybackInfo.paused;
     this.shuffleMode = !newPlaybackInfo.shuffle;
 
-    switch(newPlaybackInfo.repeat_mode) {
-      case 0:
-        this.repeatMode = RepeatState.NO_REPEAT;
-      break;
-      case 1:
-        this.repeatMode = RepeatState.REPEAT_ALL;
-      break;
-      case 2:
-        this.repeatMode = RepeatState.REPEAT_ONE;
-    }
+    this.repeatMode = this.spotifyPlayerSvc.getRepeatStateStrFromRepeatModeValue(newPlaybackInfo.repeat_mode);
 
     this.pauseTriggered.next();
 

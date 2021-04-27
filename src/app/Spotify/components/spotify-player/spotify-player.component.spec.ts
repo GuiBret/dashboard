@@ -10,6 +10,12 @@ import { SpotifyService } from '../../services/spotify.service';
 
 import { SpotifyPlayerComponent } from './spotify-player.component';
 
+enum RepeatState {
+  NO_REPEAT = 'off',
+  REPEAT_ONE = 'track',
+  REPEAT_ALL = 'context'
+}
+
 describe('SpotifyPlayerComponent', () => {
   let component: SpotifyPlayerComponent;
   let fixture: ComponentFixture<SpotifyPlayerComponent>;
@@ -20,17 +26,21 @@ describe('SpotifyPlayerComponent', () => {
 
   const mockPlaySong = jasmine.createSpy().and.returnValue(new Observable());
   const mockPauseSong = jasmine.createSpy().and.returnValue(new Observable());
+  const mockGetInfoOnPlayback = jasmine.createSpy().and.returnValue(new Observable());
+  const mockToggleRepeat = jasmine.createSpy().and.returnValue(new Observable());
 
   spotifyPlayerSvcStub = {
-    getInfoOnPlayback: jasmine.createSpy().and.returnValue(new Observable()),
+    getInfoOnPlayback: mockGetInfoOnPlayback,
     goToPreviousSong: jasmine.createSpy().and.returnValue(new Observable()),
     goToNextSong: jasmine.createSpy().and.returnValue(new Observable()),
     onPlaybackMetadataChanged: new Observable(),
+    getRepeatStateStrFromRepeatModeValue: jasmine.createSpy().and.returnValue('repeat'),
     playSong: mockPlaySong,
     pauseSong: mockPauseSong,
-    setVolume: jasmine.createSpy()
+    setVolume: jasmine.createSpy(),
+    toggleRepeat: mockToggleRepeat
 
-  }
+  };
 
   spotifySvcStub = {
     onPlaybackChanged: new Observable()
@@ -38,7 +48,7 @@ describe('SpotifyPlayerComponent', () => {
 
   httpClientStub = {
     get: jasmine.createSpy().and.returnValue(new Observable())
-  }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -82,7 +92,7 @@ describe('SpotifyPlayerComponent', () => {
   describe('On click play pause', () => {
     it('should have subscribed to pauseSong since we are currently playing', () => {
 
-      component['playIntervalID'] = new Observable().subscribe(() => {});
+      component.playIntervalID = new Observable().subscribe(() => {});
       mockPlaySong.calls.reset();
       mockPauseSong.calls.reset();
 
@@ -91,7 +101,7 @@ describe('SpotifyPlayerComponent', () => {
 
 
       expect(mockPauseSong).toHaveBeenCalled();
-      expect(component['playIntervalID'].closed).toBe(false);
+      expect(component.playIntervalID.closed).toBe(false);
     });
 
     it('should have subscribed to playSong since we are currently on pause', () => {
@@ -124,20 +134,20 @@ describe('SpotifyPlayerComponent', () => {
         artist: 'My artist',
         album: 'My album',
         imageUrl: '',
-      }
+      };
       component.setCurrentSong(mockSong);
 
       expect(component.song).toEqual(mockSong);
-    })
+    });
   });
 
-  describe("Update playback metadata", () => {
+  describe('Update playback metadata', () => {
 
     it('should not have unsubscribed to the play interval ID and recalculated everything per the info', () => {
-      component['playIntervalID'] = null;
-      component['songDuration'] = 250;
-      component['currentSongPosition'] = 12;
-      component['currPlayerStatus'] = true;
+      component.playIntervalID = null;
+      component.songDuration = 250;
+      component.currentSongPosition = 12;
+      component.currPlayerStatus = true;
 
       const playbackInfo: PlaybackMetadata = {
         duration: 40000,
@@ -157,10 +167,10 @@ describe('SpotifyPlayerComponent', () => {
 
     it('should have recreated the play interval ID and recalculated everything per the info', () => {
       const mockPlayIntervalID = new Observable().subscribe(() => {});
-      component['playIntervalID'] = mockPlayIntervalID;
-      component['songDuration'] = 250;
-      component['currentSongPosition'] = 12;
-      component['currPlayerStatus'] = true;
+      component.playIntervalID = mockPlayIntervalID;
+      component.songDuration = 250;
+      component.currentSongPosition = 12;
+      component.currPlayerStatus = true;
 
       const playbackInfo: PlaybackMetadata = {
         duration: 40000,
@@ -172,7 +182,7 @@ describe('SpotifyPlayerComponent', () => {
 
       component.updatePlaybackMetadata(playbackInfo);
 
-      expect(component['playIntervalID']).not.toEqual(mockPlayIntervalID);
+      expect(component.playIntervalID).not.toEqual(mockPlayIntervalID);
       expect(component.songDuration).toEqual(40);
       expect(component.currentSongPosition).toEqual(2);
       expect(component.currPlayerStatus).toEqual(false);
@@ -182,7 +192,7 @@ describe('SpotifyPlayerComponent', () => {
 
   describe('Set volume', () => {
     it('should have called the service which will set the volume', () => {
-      component['volume'] = 27;
+      component.volume = 27;
 
       component.setVolume();
 
@@ -196,6 +206,7 @@ describe('SpotifyPlayerComponent', () => {
     it('should not do anything since the player is currently paused', () => {
       component.currPlayerStatus = false;
       component.currentSongPosition = 25;
+      // tslint:disable-next-line: no-string-literal
       component['updateTimer']();
 
       expect(component.currPlayerStatus).toEqual(false);
@@ -205,10 +216,50 @@ describe('SpotifyPlayerComponent', () => {
     it('should increment the position since the player is running', () => {
       component.currPlayerStatus = true;
       component.currentSongPosition = 25;
+      // tslint:disable-next-line: no-string-literal
       component['updateTimer']();
 
       expect(component.currPlayerStatus).toEqual(true);
       expect(component.currentSongPosition).toEqual(26);
-    })
+    });
+  });
+
+  describe('Get playback info', () => {
+    it('should call getInfoOnPlayback after 500 milliseconds', (done) => {
+      component.getPlaybackInfo();
+
+      setTimeout(() => {
+        expect(mockGetInfoOnPlayback).toHaveBeenCalled();
+        done();
+      }, 1000);
+    });
+  });
+
+
+  describe('Toggle repeat', () => {
+    it('should have called playerService.toggleRepeat with the required values', () => {
+
+      mockToggleRepeat.calls.reset();
+      // tslint:disable-next-line: no-string-literal
+      component['repeatMode'] = RepeatState.NO_REPEAT; // Should go to REPEAT_ALL
+      component.toggleRepeat();
+
+      expect(spotifyPlayerSvcStub.toggleRepeat).toHaveBeenCalledWith(RepeatState.REPEAT_ALL);
+
+
+      mockToggleRepeat.calls.reset();
+      // tslint:disable-next-line: no-string-literal
+      component['repeatMode'] = RepeatState.REPEAT_ALL; // Should go to REPEAT_ONE
+      component.toggleRepeat();
+
+      expect(spotifyPlayerSvcStub.toggleRepeat).toHaveBeenCalledWith(RepeatState.REPEAT_ONE);
+
+      mockToggleRepeat.calls.reset();
+      // tslint:disable-next-line: no-string-literal
+      component['repeatMode'] = RepeatState.REPEAT_ONE; // Should go to NO_REPEAT
+      component.toggleRepeat();
+
+      expect(spotifyPlayerSvcStub.toggleRepeat).toHaveBeenCalledWith(RepeatState.NO_REPEAT);
+    });
   });
 });

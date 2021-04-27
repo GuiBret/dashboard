@@ -4,6 +4,13 @@ import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+enum RepeatState {
+  NO_REPEAT = 'off',
+  REPEAT_ONE = 'track',
+  REPEAT_ALL = 'context'
+};
+
+
 /**
  * The service that handles all playback actions with Spotify
  */
@@ -55,6 +62,18 @@ export class SpotifyPlayerService {
   getInfoOnPlayback() {
     return this.http.get('https://api.spotify.com/v1/me/player/currently-playing', {observe: 'response'})
                     .pipe(map(this.onInfoOnPlaybackReceived.bind(this)));
+  }
+
+  // TODO: change function name
+  getRepeatStateStrFromRepeatModeValue(repeatModeValue : number) {
+    switch(repeatModeValue) {
+      case 1:
+        return RepeatState.REPEAT_ALL;
+      case 2:
+        return RepeatState.REPEAT_ONE;
+      default:
+        return RepeatState.NO_REPEAT;
+    }
   }
 
   onInfoOnPlaybackReceived(response: {status: number, body?: any}) {
