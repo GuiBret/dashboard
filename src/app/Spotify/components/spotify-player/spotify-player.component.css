@@ -44,3 +44,13 @@
 #song-duration-label {
   font-size: 0.85rem;
 }
+
+
+#control-icons {
+  display:flex;
+  justify-content: space-around;
+}
+
+#control-icons > * {
+  cursor: pointer;
+}

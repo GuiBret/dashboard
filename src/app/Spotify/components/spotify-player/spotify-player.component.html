@@ -48,7 +48,11 @@
 
       <div id="volume_and_change_device">
         <mat-slider min="0" max="100" step="1" value="volume"  [(ngModel)]="volume" (change)="setVolume()"></mat-slider>
-        <!-- <mat-select></mat-select> -->
+        <div id="control-icons">
+          <mat-icon (click)="toggleShuffle()">{{shuffleMode === true ? 'shuffle_on' : 'shuffle'}}</mat-icon>
+          <mat-icon>repeat</mat-icon>
+
+        </div>
       </div>
 
     </div>
