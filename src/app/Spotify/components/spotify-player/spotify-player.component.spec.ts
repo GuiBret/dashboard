@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Song } from 'src/app/Spotify/services/song';
 import { PlaybackMetadata } from '../../interfaces/playback-metadata.interface';
 import { DurationPipe } from '../../pipes/duration.pipe';
+import { RepeatModeIconPipe } from '../../pipes/repeat-mode-icon.pipe';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
 import { SpotifyService } from '../../services/spotify.service';
 
@@ -41,7 +42,7 @@ describe('SpotifyPlayerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SpotifyPlayerComponent, DurationPipe ],
+      declarations: [ SpotifyPlayerComponent, DurationPipe, RepeatModeIconPipe ],
       providers: [
         {useValue: httpClientStub, provide: HttpClient},
         {useValue: spotifyPlayerSvcStub, provide: SpotifyPlayerService},
