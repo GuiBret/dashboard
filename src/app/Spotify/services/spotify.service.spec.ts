@@ -34,22 +34,22 @@ describe('SpotifyService', () => {
       getSpyObj.calls.reset();
       service.fetchAutocomplete('test', {albums: true, songs: false, artists: false});
 
-      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=album');
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/search/test?type=album');
 
       getSpyObj.calls.reset();
       service.fetchAutocomplete('test', {albums: true, songs: true, artists: false});
 
-      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=album,track');
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/search/test?type=album,track');
 
       getSpyObj.calls.reset();
       service.fetchAutocomplete('test', {albums: true, songs: false, artists: true});
 
-      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=album,artist');
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/search/test?type=album,artist');
 
       getSpyObj.calls.reset();
       service.fetchAutocomplete('test', {albums: true, songs: true, artists: true});
 
-      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/autocomp/test?type=album,artist,track');
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/search/test?type=album,artist,track');
     });
   });
 

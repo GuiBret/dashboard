@@ -70,7 +70,7 @@ describe('HttpService', () => {
       getSpy.calls.reset();
       service.refreshSpotifyToken('mycustomtoken');
 
-      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/refresh-token/mycustomtoken');
+      expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/auth/refresh/mycustomtoken');
     });
   });
 
