@@ -53,41 +53,4 @@ describe('TodoDataResolverService', () => {
     expect(getTodoListSpy).not.toHaveBeenCalled();
   });
 
-  // it('should return the required todo since there are some in the list', () => {
-  //   TestBed.overrideProvider(ActivatedRoute, {
-  //     useValue: {snapshot: {paramMap: convertToParamMap({id: 'abcd'})}}
-  //   });
-
-  //   getTodoSpy.calls.reset();
-  //   getTodoListSpy.calls.reset();
-
-  //   // tslint:disable-next-line: no-string-literal
-  //   todoSvcStub['todos'] = [
-  //     {
-  //       _id: 'abc',
-  //       title: 'TItle 1',
-  //       content: 'My content',
-  //       status: false,
-  //       __v: 1
-  //     },
-  //     {
-  //       _id: 'abcd',
-  //       title: 'TItle 2',
-  //       content: 'My content 2',
-  //       status: false,
-  //       __v: 1
-  //     },
-  //   ];
-  //   const route = TestBed.inject(ActivatedRoute);
-
-  //   console.log(route.snapshot.paramMap.get('id'));
-  //   service.resolve(route.snapshot, null);
-
-  //   expect(getTodoListSpy).not.toHaveBeenCalled();
-  //   expect(getTodoSpy).toHaveBeenCalledWith('abcd');
-
-
-  //   // todoSvcStub[''];
-
-  // });
 });

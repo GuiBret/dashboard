@@ -136,7 +136,6 @@ export class SpotifyPlayerComponent implements OnInit {
 
   updatePlaybackMetadata(newPlaybackInfo: PlaybackMetadata) {
 
-    console.log('Playback metadata updated');
     this.songDuration = newPlaybackInfo.duration / 1000;
     this.currentSongPosition = Math.floor(newPlaybackInfo.position / 1000);
     this.currPlayerStatus = !newPlaybackInfo.paused;
@@ -167,8 +166,6 @@ export class SpotifyPlayerComponent implements OnInit {
   toggleShuffle() {
 
     this.spotifyPlayerSvc.toggleShuffle(!this.shuffleMode).subscribe(() => {
-      console.log("Shuffle mode changed");
-      console.log(this.shuffleMode);
       this.shuffleMode = !this.shuffleMode;
     });
   }
