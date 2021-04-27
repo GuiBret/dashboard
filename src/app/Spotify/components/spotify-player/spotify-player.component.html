@@ -50,7 +50,7 @@
         <mat-slider min="0" max="100" step="1" value="volume"  [(ngModel)]="volume" (change)="setVolume()"></mat-slider>
         <div id="control-icons">
           <mat-icon (click)="toggleShuffle()">{{shuffleMode === true ? 'shuffle_on' : 'shuffle'}}</mat-icon>
-          <mat-icon>repeat</mat-icon>
+          <mat-icon (click)="toggleRepeat()">{{repeatMode | repeatModeIcon }}</mat-icon>
 
         </div>
       </div>
