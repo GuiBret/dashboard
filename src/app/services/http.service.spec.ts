@@ -155,4 +155,28 @@ describe('HttpService', () => {
       expect(postSpy).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages/batchModify', mockPayload, jasmine.any(Object));
     });
   });
+
+  describe('Check spotify status', () => {
+
+    it('should make a GET call', () => {
+      getSpy.calls.reset();
+
+      service.checkSpotifyStatus();
+
+      expect(getSpy).toHaveBeenCalledWith(environment.serverRoot + '/spotify/auth/precheck');
+
+    });
+  });
+
+  describe('Get Spotify URL', () => {
+
+    it('should make a GET call returning the URL to spotify\'s auth', () => {
+      getSpy.calls.reset();
+
+      service.getSpotifyAuthUrl();
+
+      expect(getSpy).toHaveBeenCalledWith(environment.serverRoot + '/spotify/auth/url');
+
+    });
+  });
 });
