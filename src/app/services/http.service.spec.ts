@@ -179,4 +179,60 @@ describe('HttpService', () => {
 
     });
   });
+
+  describe('Delete multiple emails', () => {
+    it('should have called Gmail API with the token and the provided ids', () => {
+
+      postSpy.calls.reset();
+      localStorage.setItem('gmailToken', 'mytoken');
+      const mockPayload = {
+        ids: ['123456', '789012', '345678']
+      };
+
+      service.deleteMultipleEmails(mockPayload);
+
+      expect(postSpy).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages/batchDelete', mockPayload, jasmine.any(Object));
+    });
+  });
+
+  describe('Modify email', () => {
+    it('should have called Gmail API with the token and the provided id', () => {
+
+      postSpy.calls.reset();
+      localStorage.setItem('gmailToken', 'mytoken');
+      const mockPayload = {
+        removeLabelIds: [
+          'UNREAD'
+        ]
+      };
+      service.modifyEmail('123456', mockPayload);
+
+      expect(postSpy).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages/123456/modify',
+                                           mockPayload,
+                                           jasmine.any(Object)
+                                           );
+    });
+  });
+
+  describe('Get gmail auth URL', () => {
+    it('should have called the backend which will return the authentication URL', () => {
+      getSpy.calls.reset();
+
+      service.getGmailAuthUrl();
+
+      expect(getSpy).toHaveBeenCalledWith(environment.serverRoot + '/gmail/auth/url', jasmine.any(Object));
+
+    });
+  });
+
+  describe('Get individual email info', () => {
+    it('should have called Gmail API to get an individual email info', () => {
+
+      getSpy.calls.reset();
+
+      service.getIndividualEmailInfo('123456');
+
+      expect(getSpy).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages/123456', jasmine.any(Object));
+    });
+  });
 });
