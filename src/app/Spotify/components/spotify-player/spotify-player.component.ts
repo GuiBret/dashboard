@@ -10,7 +10,7 @@ enum RepeatState {
   NO_REPEAT = 'off',
   REPEAT_ONE = 'track',
   REPEAT_ALL = 'context'
-};
+}
 
 @Component({
   selector: 'app-spotify-player',
@@ -27,7 +27,7 @@ export class SpotifyPlayerComponent implements OnInit {
     imageUrl: ''
   };
 
-  playbackChanged : Subscription;
+  playbackChanged: Subscription;
 
   playbackMetadataChanged: Subscription;
 
@@ -39,15 +39,15 @@ export class SpotifyPlayerComponent implements OnInit {
 
   shuffleMode = false;
 
-  repeatMode : RepeatState = RepeatState.NO_REPEAT;
+  repeatMode: RepeatState = RepeatState.NO_REPEAT;
 
   // TODO : handle song duration
-  songDuration: number = 1000;
+  songDuration = 1000;
 
   currentSongPosition = 0;
 
 
-  volume: number = 20;
+  volume = 20;
 
   currPlayerStatus = true;
   constructor(private spotifySvc: SpotifyService, private spotifyPlayerSvc: SpotifyPlayerService, private cdr: ChangeDetectorRef) { }
@@ -89,9 +89,9 @@ export class SpotifyPlayerComponent implements OnInit {
    */
   onClickPlayPause() {
 
-    let obs : Observable<any>;
+    let obs: Observable<any>;
     // If the current status is "Play", we'll pause the playback
-    if(this.currPlayerStatus) {
+    if (this.currPlayerStatus) {
       obs = this.spotifyPlayerSvc.pauseSong();
 
       this.pauseTriggered.next();
@@ -154,7 +154,7 @@ export class SpotifyPlayerComponent implements OnInit {
 
   private updateTimer() {
 
-    if(this.currPlayerStatus) {
+    if (this.currPlayerStatus) {
 
       // Tweak to force detection change
       const newSongPosition = this.currentSongPosition + 1;
@@ -179,13 +179,13 @@ export class SpotifyPlayerComponent implements OnInit {
 
     let newRepeatMode = RepeatState.NO_REPEAT;
     // TODO : rewrite that
-    switch(this.repeatMode) {
+    switch (this.repeatMode) {
       case RepeatState.NO_REPEAT:
         newRepeatMode = RepeatState.REPEAT_ALL;
-      break;
+        break;
       case RepeatState.REPEAT_ALL:
         newRepeatMode = RepeatState.REPEAT_ONE;
-      break;
+        break;
       case RepeatState.REPEAT_ONE:
         newRepeatMode = RepeatState.NO_REPEAT;
 
@@ -194,7 +194,7 @@ export class SpotifyPlayerComponent implements OnInit {
 
     this.spotifyPlayerSvc.toggleRepeat(newRepeatMode).subscribe(() => {
       this.repeatMode = newRepeatMode;
-    })
+    });
   }
 
 }
