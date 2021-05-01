@@ -21,7 +21,7 @@ export class SpotifyInternalPlayerComponent implements OnInit {
   }
   private onSpotifyWebPlaybackSDKReady() {
     // We connect to the Playback SDK only if we are connected to Spotify
-    if(this.spotifySvc.checkSpotifyStatus()) {
+    if (this.spotifySvc.checkSpotifyStatus()) {
       const token = localStorage.getItem('spotifyToken');
       this.player = new window.Spotify.Player({
         name: 'Dashboard Player',
@@ -30,10 +30,10 @@ export class SpotifyInternalPlayerComponent implements OnInit {
 
 
       // TODO: improve error handling
-      this.player.addListener('initialization_error', this.triggerErrorMessage.bind(this, "Initialization error"));
-      this.player.addListener('authentication_error', this.triggerErrorMessage.bind(this, "Authentication error"));
-      this.player.addListener('account_error', this.triggerErrorMessage.bind(this, "Account error"));
-      this.player.addListener('playback_error', this.triggerErrorMessage.bind(this, "Playback error"));
+      this.player.addListener('initialization_error', this.triggerErrorMessage.bind(this, 'Initialization error'));
+      this.player.addListener('authentication_error', this.triggerErrorMessage.bind(this, 'Authentication error'));
+      this.player.addListener('account_error', this.triggerErrorMessage.bind(this, 'Account error'));
+      this.player.addListener('playback_error', this.triggerErrorMessage.bind(this, 'Playback error'));
 
       // Playback status updates
       this.player.addListener('player_state_changed', state => { this.spotifyPlayerSvc.pushPlaybackMetadataChanged(state); });
@@ -61,7 +61,7 @@ export class SpotifyInternalPlayerComponent implements OnInit {
     // Change position in song
     this.spotifyPlayerSvc.onSeekPositionRequested.subscribe(position => {
       this.player.seek(position);
-    })
+    });
   }
 
 

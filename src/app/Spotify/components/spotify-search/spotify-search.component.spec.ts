@@ -10,7 +10,7 @@ import { SpotifySearchComponent } from './spotify-search.component';
 describe('SpotifySearchComponent', () => {
   let component: SpotifySearchComponent;
   let fixture: ComponentFixture<SpotifySearchComponent>;
-  let httpClientStub: Partial<HttpClient>;
+  const httpClientStub: Partial<HttpClient> = {};
   let spotifySvcStub: Partial<SpotifyService>;
 
 
@@ -96,7 +96,7 @@ describe('SpotifySearchComponent', () => {
       component.onOptionsChanged({albums: false, songs: false, artists: false});
 
       expect(component.formGroupOptions.value).toEqual({albums: true, songs: true, artists: true});
-    })
+    });
   });
 
   it('should not have done anything since at least one checkbox is checked', () => {
@@ -106,5 +106,5 @@ describe('SpotifySearchComponent', () => {
     component.onOptionsChanged({albums: false, songs: false, artists: true});
 
     expect(component.formGroupOptions.value).toEqual({albums: true, songs: false, artists: false});
-  })
+  });
 });

@@ -314,7 +314,18 @@ describe('GmailService', () => {
       // tslint:disable-next-line: no-string-literal
       service['messageBox'] = [];
 
-      spyOn(service, 'filterEmailInfo').and.returnValue({id: 'a', internalDate: 1234, snippet: 'Hello', isRead: true, from: 'a@abc.com', subject: '', htmlContent: '<p></p>', selected: false, important: true});
+      spyOn(service, 'filterEmailInfo').and.returnValue(
+        {
+          id: 'a',
+          internalDate: 1234,
+          snippet: 'Hello',
+          isRead: true,
+          from: 'a@abc.com',
+          subject: '',
+          htmlContent: '<p></p>',
+          selected: false,
+          important: true
+        });
 
       // tslint:disable-next-line: no-string-literal
       service['parseEmail'](mockEmail);

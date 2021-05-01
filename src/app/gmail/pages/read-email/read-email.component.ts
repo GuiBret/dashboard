@@ -15,7 +15,11 @@ export class ReadEmailComponent implements OnInit, OnDestroy {
   emailContent: any;
 
   timeoutMarkEmailAsReadId: any;
-  constructor(private gmailService: GmailService, private route: ActivatedRoute, private sanitizer: DomSanitizer, private snackbar: MatSnackBar) { }
+
+  constructor(private gmailService: GmailService,
+              private route: ActivatedRoute,
+              private sanitizer: DomSanitizer,
+              private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
 

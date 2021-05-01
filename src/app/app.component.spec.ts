@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { componentFactoryName } from '@angular/compiler';
-import { TestBed, async } from '@angular/core/testing';
-import { NavigationEnd, Router } from '@angular/router';
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { AppComponent } from './app.component';
@@ -34,7 +32,7 @@ describe('AppComponent', () => {
 
 
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule

@@ -22,7 +22,7 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
   /**
    * The element of the autocomplete input
    */
-  currElement = {name: ""};
+  currElement = {name: ''};
 
   /**
    * The options for the autocomplete input
@@ -34,8 +34,8 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
     this.formGroupOptions.valueChanges.subscribe(this.onOptionsChanged.bind(this));
   }
 
-  onSearchTextChanged(newValue : string) {
-    if(newValue.length >= 3) {
+  onSearchTextChanged(newValue: string) {
+    if (newValue.length >= 3) {
       this.spotifyService.fetchAutocomplete(newValue, this.formGroupOptions.value).subscribe(this.populateOptions.bind(this));
     } else {
       this.options = [];
@@ -43,7 +43,7 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.currElement = {name: ""};
+    this.currElement = {name: ''};
     this.options = [];
   }
 
@@ -54,7 +54,7 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
   }
 
   displayName(element: any) {
-    if(element) {
+    if (element) {
 
       return element.name;
     }
@@ -65,13 +65,13 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
   }
 
   onOptionsChanged(newFormValue: {albums: boolean, artists: boolean, songs: boolean}) {
-    if(!newFormValue.albums && !newFormValue.artists && !newFormValue.songs) {
+    if (!newFormValue.albums && !newFormValue.artists && !newFormValue.songs) {
 
       this.formGroupOptions.setValue({
         albums: true,
         songs: true,
         artists: true
-      })
+      });
     }
   }
 

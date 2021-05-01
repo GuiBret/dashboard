@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { HttpService } from '../services/http.service';
 
@@ -13,7 +13,7 @@ describe('GmailComponent', () => {
     getEmailList: jasmine.createSpy().and.returnValue(new Observable())
   };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ GmailComponent ],
       providers: [

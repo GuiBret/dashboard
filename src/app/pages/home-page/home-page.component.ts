@@ -16,6 +16,6 @@ export class HomePageComponent {
    * @param titleSvc The title service, to change the window title
    */
   constructor(private titleSvc: Title) {
-    this.titleSvc.setTitle('Dashboard - Home Page')
+    this.titleSvc.setTitle('Dashboard - Home Page');
   }
 }

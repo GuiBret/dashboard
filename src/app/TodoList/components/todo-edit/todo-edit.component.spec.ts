@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +13,7 @@ describe('TodoEditComponent', () => {
   let component: TodoEditComponent;
   let fixture: ComponentFixture<TodoEditComponent>;
   let httpClientStub: Partial<HttpClient>;
-  let matSnackbarModule: Partial<MatSnackBar>;
+  const matSnackbarModule: Partial<MatSnackBar> = {};
   let actRouteStub: Partial<ActivatedRoute>;
   let routerStub: Partial<Router>;
   let todoSvcStub: Partial<TodoListService>;
@@ -26,9 +26,9 @@ describe('TodoEditComponent', () => {
   actRouteStub = {
     data: of({
       todo: {
-        _id: "1234",
-        title: "My title",
-        content: "My content",
+        _id: '1234',
+        title: 'My title',
+        content: 'My content',
         status: false,
         __v: 1234
       }
@@ -61,7 +61,7 @@ describe('TodoEditComponent', () => {
   };
 
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TodoEditComponent ],
       providers: [
@@ -91,8 +91,11 @@ describe('TodoEditComponent', () => {
 
       component.handleRoute(mockTodoData);
 
+      // tslint:disable-next-line: no-string-literal
       expect(component['currId']).toEqual('1234');
+      // tslint:disable-next-line: no-string-literal
       expect(component['currTodo']).toEqual(mockTodoData.todo);
+      // tslint:disable-next-line: no-string-literal
       expect(component['editMode']).toEqual(true);
     });
 
@@ -109,9 +112,9 @@ describe('TodoEditComponent', () => {
 
       // See actRouteStub.todo
       expect(todoSvcStub.editTodo).toHaveBeenCalledWith({
-        _id: "1234",
-        title: "My title",
-        content: "My content",
+        _id: '1234',
+        title: 'My title',
+        content: 'My content',
         status: false,
         __v: 1234
       });
@@ -128,9 +131,9 @@ describe('TodoEditComponent', () => {
 
       expect(todoSvcStub.editTodo).not.toHaveBeenCalled();
       expect(todoSvcStub.addTodo).toHaveBeenCalledWith({
-        _id: "1234",
-        title: "My title",
-        content: "My content",
+        _id: '1234',
+        title: 'My title',
+        content: 'My content',
         status: false,
         __v: 1234
       });
@@ -164,6 +167,6 @@ describe('TodoEditComponent', () => {
     // TODO : handle that
     it('should have displayed an error', () => {
       component.onTodoAdded({status: 'KO'});
-    })
+    });
   });
 });

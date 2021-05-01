@@ -1,9 +1,7 @@
-import { ObserversModule } from '@angular/cdk/observers';
 import { HttpClient } from '@angular/common/http';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, Subject } from 'rxjs';
-import { observeOn } from 'rxjs/operators';
 import { Todo } from '../../models/todo';
 import { TodoListService } from '../../services/todo-list.service';
 
@@ -11,30 +9,30 @@ import { TodoListComponent } from './todo-list.component';
 
 const mockTodoList: Array<Todo> = [
   {
-    _id: "a",
-    title: "My title 1",
-    content: "My content 1",
+    _id: 'a',
+    title: 'My title 1',
+    content: 'My content 1',
     status: false,
     __v: 1234
   },
   {
-    _id: "b",
-    title: "My title 1",
-    content: "My content 1",
+    _id: 'b',
+    title: 'My title 1',
+    content: 'My content 1',
     status: false,
     __v: 1234
   },
   {
-    _id: "c",
-    title: "My title 1",
-    content: "My content 1",
+    _id: 'c',
+    title: 'My title 1',
+    content: 'My content 1',
     status: false,
     __v: 1234
   },
   {
-    _id: "d",
-    title: "My title 1",
-    content: "My content 1",
+    _id: 'd',
+    title: 'My title 1',
+    content: 'My content 1',
     status: false,
     __v: 1234
   },
@@ -50,11 +48,11 @@ describe('TodoListComponent', () => {
     get: jasmine.createSpy().and.returnValue(new Observable()),
     post: jasmine.createSpy().and.returnValue(new Observable()),
 
-  }
+  };
 
   matSnackbarStub = {
     open: jasmine.createSpy()
-  }
+  };
 
   todoSvcStub = {
     saveTodoList: jasmine.createSpy().and.returnValue(new Observable((observer) => {
@@ -63,9 +61,9 @@ describe('TodoListComponent', () => {
     fetchTodosAndThemes: jasmine.createSpy(),
     todoListChanged: new Subject(),
     deleteTodo: jasmine.createSpy()
-  }
+  };
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ TodoListComponent ],
       providers: [
@@ -114,9 +112,9 @@ describe('TodoListComponent', () => {
 
   describe('Delete todo', () => {
     it('should have called deleteTodo with the provided todo ID', () => {
-      component.deleteTodo("abc1234");
+      component.deleteTodo('abc1234');
 
-      expect(todoSvcStub.deleteTodo).toHaveBeenCalledWith("abc1234");
-    })
-  })
+      expect(todoSvcStub.deleteTodo).toHaveBeenCalledWith('abc1234');
+    });
+  });
 });
