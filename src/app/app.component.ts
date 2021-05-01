@@ -16,7 +16,12 @@ export class AppComponent implements AfterViewInit, OnInit {
   isLoggedOnGmail = false;
   isSmallScreen = false;
   color = 'black';
-  constructor(private bpObserver: BreakpointObserver, private gmailSvc: GmailService, private spotifySvc: SpotifyService, private http: HttpService, private router: Router) {
+  constructor(
+    private bpObserver: BreakpointObserver,
+    private gmailSvc: GmailService,
+    private spotifySvc: SpotifyService,
+    private http: HttpService,
+    private router: Router) {
 
     this.router.events.subscribe(this.onRouterEventReceived.bind(this));
   }

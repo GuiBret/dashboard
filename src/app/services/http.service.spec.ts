@@ -138,7 +138,10 @@ describe('HttpService', () => {
 
       service.getEmailList(50, null, 'myquery');
 
-      expect(httpClientStub.get).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages?max_results=50&q=myquery&labelIds=INBOX', jasmine.any(Object));
+      expect(httpClientStub.get).toHaveBeenCalledWith(
+        'https://gmail.googleapis.com/gmail/v1/users/me/messages?max_results=50&q=myquery&labelIds=INBOX',
+        jasmine.any(Object)
+      );
     });
   });
 
@@ -152,7 +155,11 @@ describe('HttpService', () => {
 
       service.batchModifyEmails(mockPayload);
 
-      expect(postSpy).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages/batchModify', mockPayload, jasmine.any(Object));
+      expect(postSpy).toHaveBeenCalledWith(
+                        'https://gmail.googleapis.com/gmail/v1/users/me/messages/batchModify',
+                        mockPayload,
+                        jasmine.any(Object)
+      );
     });
   });
 
@@ -191,7 +198,11 @@ describe('HttpService', () => {
 
       service.deleteMultipleEmails(mockPayload);
 
-      expect(postSpy).toHaveBeenCalledWith('https://gmail.googleapis.com/gmail/v1/users/me/messages/batchDelete', mockPayload, jasmine.any(Object));
+      expect(postSpy).toHaveBeenCalledWith(
+        'https://gmail.googleapis.com/gmail/v1/users/me/messages/batchDelete',
+        mockPayload,
+        jasmine.any(Object)
+      );
     });
   });
 

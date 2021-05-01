@@ -22,7 +22,7 @@ export class TodoListService {
 
       this.todoListChanged.next([...this.todos]);
 
-    })
+    });
   }
 
   getTodo(id: string) {
@@ -74,8 +74,8 @@ export class TodoListService {
     this.http.deleteTodoElement(idTodo).subscribe(this.onTodoElementDeleted.bind(this));
   }
 
-  onTodoElementDeleted(response:  {status: string, newList?: Array<Todo>}) {
-    if(response.status === 'OK') {
+  onTodoElementDeleted(response: {status: string, newList?: Array<Todo>}) {
+    if (response.status === 'OK') {
       this.todos = response.newList;
       this.todoListChanged.next([...this.todos]);
       this.displaySnackbar('Todo succesfully deleted');

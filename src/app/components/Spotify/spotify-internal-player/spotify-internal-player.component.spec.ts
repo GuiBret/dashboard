@@ -52,11 +52,12 @@ describe('SpotifyInternalPlayerComponent', () => {
 
   describe('On player ready', () => {
     it('should have define the passed deviceID to the service', () => {
-      spyOn(spotifyPlayerSvcStub, "setPlayerID");
+      spyOn(spotifyPlayerSvcStub, 'setPlayerID');
 
+      // tslint:disable-next-line: no-string-literal
       component['onPlayerReady']({device_id: 'abcdef'});
 
       expect(spotifyPlayerSvcStub.setPlayerID).toHaveBeenCalledWith('abcdef');
     });
-  })
+  });
 });

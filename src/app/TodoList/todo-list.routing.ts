@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TodoEditComponent } from './components/todo-edit/todo-edit.component';
 import { TodoListComponent } from './pages/todo-list/todo-list.component';

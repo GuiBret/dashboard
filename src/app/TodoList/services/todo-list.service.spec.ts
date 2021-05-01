@@ -19,33 +19,33 @@ describe('TodoListService', () => {
     getTodoList: jasmine.createSpy().and.returnValue(new Observable()),
     deleteTodoElement: jasmine.createSpy().and.returnValue(new Observable()),
     addNewTodo: jasmine.createSpy()
-  }
+  };
   const mockTodoList: Array<Todo> = [
     {
-      _id: "a",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'a',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     },
     {
-      _id: "b",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'b',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     },
     {
-      _id: "c",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'c',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     },
     {
-      _id: "d",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'd',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     },
@@ -53,16 +53,16 @@ describe('TodoListService', () => {
 
   const mockTodoList2: Array<Todo> = [
     {
-      _id: "e",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'e',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     },
     {
-      _id: "b",
-      title: "My title 1",
-      content: "My content 1",
+      _id: 'b',
+      title: 'My title 1',
+      content: 'My content 1',
       status: false,
       __v: 1234
     }
@@ -70,7 +70,7 @@ describe('TodoListService', () => {
 
   matSnackbarStub = {
     open: jasmine.createSpy('snackbarOpen')
-  }
+  };
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -91,31 +91,33 @@ describe('TodoListService', () => {
       service.displaySnackbar('Random message');
 
       expect(matSnackbarStub.open).toHaveBeenCalledWith('Random message', null, {duration: 2000});
-    })
+    });
   });
 
   describe('Save todo list', () => {
     it('should have called the http service with the provided todo list', () => {
+      // tslint:disable-next-line: no-string-literal
       service['todos'] = mockTodoList;
       service.saveTodoList();
 
       expect(httpServiceStub.saveTodoList).toHaveBeenCalledWith(mockTodoList);
-    })
+    });
   });
 
   describe('Get todo', () => {
     it('should return a valid todo since it exists', () => {
+      // tslint:disable-next-line: no-string-literal
       service['todos'] = mockTodoList;
-      const todoReturned = service.getTodo("a");
+      const todoReturned = service.getTodo('a');
 
       expect(todoReturned.title).toEqual('My title 1');
     });
 
     it('should return undefined since we found no existing todo', () => {
-      const todoReturned = service.getTodo("e");
+      const todoReturned = service.getTodo('e');
 
       expect(todoReturned).toEqual(undefined);
-    })
+    });
   });
 
   describe('Fetch todo list', () => {
@@ -124,16 +126,16 @@ describe('TodoListService', () => {
       service.fetchTodoList();
       expect(httpServiceStub.getTodoList).toHaveBeenCalled();
     });
-  })
+  });
 
   describe('Edit todo', () => {
     it('should call the httpService with correct parameters', () => {
       const todoToEdit = mockTodoList[0];
-    const idTodoToEdit = todoToEdit._id;
+      const idTodoToEdit = todoToEdit._id;
 
-    service.editTodo(todoToEdit);
+      service.editTodo(todoToEdit);
 
-    expect(httpServiceStub.editTodo).toHaveBeenCalledWith(idTodoToEdit, todoToEdit);
+      expect(httpServiceStub.editTodo).toHaveBeenCalledWith(idTodoToEdit, todoToEdit);
 
     });
 
@@ -141,19 +143,23 @@ describe('TodoListService', () => {
 
   describe('On todolist fetched', () => {
     it('should have called todoListChanged.next since the response was valid', () => {
+      // tslint:disable-next-line: no-string-literal
       service['todoListChanged'] = new Subject();
       spyOn(service.todoListChanged, 'next');
       service.onTodoListFetched({status: 'OK', todos: mockTodoList});
 
+      // tslint:disable-next-line: no-string-literal
       expect(service['todoListChanged'].next).toHaveBeenCalledWith(mockTodoList);
     });
 
     it('should not have done anything since the response was not valid', () => {
+      // tslint:disable-next-line: no-string-literal
       service['todoListChanged'] = new Subject();
-        spyOn(service.todoListChanged, 'next');
-        service.onTodoListFetched({status: 'KO'});
+      spyOn(service.todoListChanged, 'next');
+      service.onTodoListFetched({status: 'KO'});
 
-        expect(service['todoListChanged'].next).not.toHaveBeenCalled();
+      // tslint:disable-next-line: no-string-literal
+      expect(service['todoListChanged'].next).not.toHaveBeenCalled();
     });
   });
 
@@ -168,10 +174,12 @@ describe('TodoListService', () => {
   describe('On todo element deleted', () => {
     it('should have set the new list and displayed a success message since the response is valid', () => {
 
+      // tslint:disable-next-line: no-string-literal
       service['todoListChanged'] = new Subject();
       spyOn(service.todoListChanged, 'next');
 
 
+      // tslint:disable-next-line: no-string-literal
       service['todos'] = mockTodoList;
       spyOn(service, 'displaySnackbar');
 
@@ -183,10 +191,12 @@ describe('TodoListService', () => {
     });
 
     it('should have displayed an error message since the response is not valid', () => {
+      // tslint:disable-next-line: no-string-literal
       service['todoListChanged'] = new Subject();
       spyOn(service.todoListChanged, 'next');
 
 
+      // tslint:disable-next-line: no-string-literal
       service['todos'] = mockTodoList;
       spyOn(service, 'displaySnackbar');
 
@@ -203,7 +213,7 @@ describe('TodoListService', () => {
       service.addTodo(mockTodoList[0]);
 
       expect(httpServiceStub.addNewTodo).toHaveBeenCalledWith(mockTodoList[0]);
-    })
+    });
   });
 
 
