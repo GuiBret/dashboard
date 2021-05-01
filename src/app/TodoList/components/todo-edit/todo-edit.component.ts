@@ -12,8 +12,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./todo-edit.component.css']
 })
 export class TodoEditComponent implements OnInit {
-  componentTitle: string = "Edit an element";
-  currId: string = '';
+  componentTitle = 'Edit an element';
+  currId = '';
   editMode = false;
   currTodo: Todo;
 
@@ -24,7 +24,7 @@ export class TodoEditComponent implements OnInit {
     _id: new FormControl(''),
     status: new FormControl(false),
     __v: new FormControl('')
-  })
+  });
 
   constructor(private todoSvc: TodoListService, private route: ActivatedRoute, private titleSvc: Title, private router: Router) {
     this.titleSvc.setTitle('Todo List - Edit a todo');
@@ -37,7 +37,7 @@ export class TodoEditComponent implements OnInit {
 
   handleRoute(data: {todo: Todo }) {
 
-      if(data.todo._id != null) {
+      if (data.todo._id != null) {
         this.editMode = true;
       }
 
@@ -48,7 +48,7 @@ export class TodoEditComponent implements OnInit {
   }
 
   onSubmitForm() {
-    if(this.editMode) {
+    if (this.editMode) {
       this.todoSvc.editTodo(this.form.value).subscribe(this.onTodoEdited.bind(this));
 
     } else {
@@ -61,7 +61,7 @@ export class TodoEditComponent implements OnInit {
    * @param response Contains OK or KO, depending on server response
    */
   onTodoEdited(response: {status: string}) {
-    if(response.status === 'OK') {
+    if (response.status === 'OK') {
       this.todoSvc.displaySnackbar('Todo succesfully edited.');
 
       this.router.navigate(['/todolist']);

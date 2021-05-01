@@ -8,7 +8,7 @@ enum RepeatState {
   NO_REPEAT = 'off',
   REPEAT_ONE = 'track',
   REPEAT_ALL = 'context'
-};
+}
 
 
 /**
@@ -19,7 +19,7 @@ enum RepeatState {
 })
 export class SpotifyPlayerService {
 
-  private playerID: string = "";
+  private playerID = '';
 
   private playbackMetadataChangedSource = new Subject();
 
@@ -33,29 +33,29 @@ export class SpotifyPlayerService {
 
   /**
    * Pauses the playback
-   * @param with_device The device ID that we want to perform the request with
+   * @param withDevice The device ID that we want to perform the request with
    */
-  pauseSong(with_device: string = '') {
+  pauseSong(withDevice: string = '') {
     return this.http.put('https://api.spotify.com/v1/me/player/pause', {});
   }
 
   /**
    * Plays the playback
-   * @param with_device The device ID that we want to perform the request with
+   * @param withDevice The device ID that we want to perform the request with
    */
-  playSong(with_device: string = '') {
+  playSong(withDevice: string = '') {
     return this.http.put('https://api.spotify.com/v1/me/player/play', {});
   }
 
   /**
    * Goes to the next song
-   * @param with_device The device ID that we want to perform the request with
+   * @param withDevice The device ID that we want to perform the request with
    */
-  goToNextSong(with_device: string = '') {
+  goToNextSong(withDevice: string = '') {
     return this.http.post('https://api.spotify.com/v1/me/player/next', {});
   }
 
-  goToPreviousSong(with_device: string = '') {
+  goToPreviousSong(withDevice: string = '') {
     return this.http.post('https://api.spotify.com/v1/me/player/previous', {});
   }
 
@@ -65,8 +65,8 @@ export class SpotifyPlayerService {
   }
 
   // TODO: change function name
-  getRepeatStateStrFromRepeatModeValue(repeatModeValue : number) {
-    switch(repeatModeValue) {
+  getRepeatStateStrFromRepeatModeValue(repeatModeValue: number) {
+    switch (repeatModeValue) {
       case 1:
         return RepeatState.REPEAT_ALL;
       case 2:
@@ -77,7 +77,7 @@ export class SpotifyPlayerService {
   }
 
   onInfoOnPlaybackReceived(response: {status: number, body?: any}) {
-    if(response.status === 200) {
+    if (response.status === 200) {
       const item = response.body.item;
 
       return {
@@ -104,7 +104,7 @@ export class SpotifyPlayerService {
     this.playerID = newPlayerID;
   }
 
-  getPlayerID() : string {
+  getPlayerID(): string {
     return this.playerID;
   }
 

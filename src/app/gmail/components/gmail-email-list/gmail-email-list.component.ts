@@ -2,7 +2,6 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ifError } from 'assert';
 import { GmailCustomEmail } from '../../interfaces/gmail-custom-email.interface';
 import { GmailService } from '../../services/gmail.service';
 
@@ -67,7 +66,7 @@ export class GmailEmailListComponent implements OnInit, OnDestroy {
   // TODO: Group the next 2 functions
   /**
    * Triggered when changing page or elements per page, records the info and performs a search
-   * @param event
+   * @param event The event
    */
   loadNewList(event: any) {
     this.prepareInterfaceForSearch();

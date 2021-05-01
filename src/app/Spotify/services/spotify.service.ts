@@ -21,21 +21,21 @@ export class SpotifyService {
    * 2. This token is still valid (expDate > new Date().getTime())
    */
   checkSpotifyStatus() {
-    return localStorage.getItem('spotifyToken') != null && parseInt(localStorage.getItem('spotifyExp')) > (new Date().getTime());
+    return localStorage.getItem('spotifyToken') != null && parseInt(localStorage.getItem('spotifyExp'), 10) > (new Date().getTime());
   }
 
   fetchAutocomplete(query: string, filterParams: {albums: boolean, songs: boolean, artists: boolean}) {
     // TODO : rewrite that
-    let params = [];
-    if(filterParams.albums) {
+    const params = [];
+    if (filterParams.albums) {
       params.push('album');
     }
 
-    if(filterParams.artists) {
+    if (filterParams.artists) {
       params.push('artist');
     }
 
-    if(filterParams.songs) {
+    if (filterParams.songs) {
       params.push('track');
     }
 
@@ -46,9 +46,9 @@ export class SpotifyService {
   playElement(uri: string, type: string, playerID: string) {
 
     // Will change depending on if we try to play a track or an album / an artist
-    let form: {uris?: Array<string>, context_uri?: string} = {};
+    const form: {uris?: Array<string>, context_uri?: string} = {};
 
-    if(type === 'track') {
+    if (type === 'track') {
       form.uris = [uri];
     } else {
       form.context_uri = uri;

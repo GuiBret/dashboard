@@ -12,7 +12,7 @@ export class SpotifyStoreTokenComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
 
-      if(params.token && params.refresh) {
+      if (params.token && params.refresh) {
         localStorage.setItem('spotifyToken', params.token);
         localStorage.setItem('spotifyRefresh', params.refresh);
         localStorage.setItem('spotifyExp', (new Date().getTime() + (3600 * 1000)).toString());
@@ -20,7 +20,7 @@ export class SpotifyStoreTokenComponent implements OnInit {
         this.router.navigate(['spotify/logged']);
       }
 
-    })
+    });
   }
 
 }

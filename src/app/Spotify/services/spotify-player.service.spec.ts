@@ -9,7 +9,7 @@ enum RepeatState {
   NO_REPEAT = 'off',
   REPEAT_ONE = 'track',
   REPEAT_ALL = 'context'
-};
+}
 
 describe('SpotifyPlayerService', () => {
   let service: SpotifyPlayerService;
@@ -174,9 +174,11 @@ describe('SpotifyPlayerService', () => {
 
   describe('Set player ID', () => {
     it('should define the new player ID', () => {
+      // tslint:disable-next-line: no-string-literal
       service['playerID'] = 'abcdef';
       service.setPlayerID('123456');
 
+      // tslint:disable-next-line: no-string-literal
       expect(service['playerID']).toEqual('123456');
     });
   });
@@ -203,7 +205,7 @@ describe('SpotifyPlayerService', () => {
 
       expect(result).toEqual(RepeatState.REPEAT_ONE);
     });
-  })
+  });
 
 
 });

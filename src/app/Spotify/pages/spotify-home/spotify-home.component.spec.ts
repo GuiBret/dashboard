@@ -11,7 +11,7 @@ describe('SpotifyHomeComponent', () => {
 
   httpClientStub = {
     get: jasmine.createSpy().and.returnValue(new Observable())
-  }
+  };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ SpotifyHomeComponent ],
@@ -50,5 +50,5 @@ describe('SpotifyHomeComponent', () => {
       expect(component.spotifyOK).toEqual(false);
       expect(component.spotifyAuthUrl).toEqual('https://myurl');
     });
-  })
+  });
 });

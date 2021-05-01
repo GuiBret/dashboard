@@ -12,7 +12,7 @@ describe('GmailstoretokenComponent', () => {
 
     })
   };
-  const routerStub : Partial<Router> = {
+  const routerStub: Partial<Router> = {
     navigate: jasmine.createSpy()
   };
   beforeEach(async () => {

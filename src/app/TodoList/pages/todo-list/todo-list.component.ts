@@ -45,11 +45,11 @@ export class TodoListComponent implements OnInit, OnDestroy {
    *
    * @param titleService The title service, used to define the title
    * @param todoSvc The TodoService, used to perform operations
-   * @param _snackbar The snackbar
+   * @param snackbar The snackbar
    */
   constructor(private titleService: Title,
               private todoSvc: TodoListService,
-              private _snackbar: MatSnackBar) { }
+              private snackbar: MatSnackBar) { }
 
   /**
    * On init, sets the title and fetches the todos
@@ -67,7 +67,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
       this.requestMade = true;
       this.todos = newTodoList;
 
-    })
+    });
   }
 
   /**
@@ -87,8 +87,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   onTodoListSaved(response: { status: string}) {
-    if(response.status === 'OK') {
-      this._snackbar.open('Todo List saved succesfully.', '', {
+    if (response.status === 'OK') {
+      this.snackbar.open('Todo List saved succesfully.', '', {
         duration: 2000
       });
     } else {

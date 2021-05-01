@@ -11,7 +11,7 @@ describe('SpotifyStoreTokenComponent', () => {
   let routerStub: Partial<Router>;
 
   const mockParamsSubject = new Subject<any>();
-  const paramsObs = mockParamsSubject.asObservable()
+  const paramsObs = mockParamsSubject.asObservable();
   const routerNavigateSpy = jasmine.createSpy();
 
   actRouteStub = {
@@ -20,7 +20,7 @@ describe('SpotifyStoreTokenComponent', () => {
 
   routerStub = {
     navigate: routerNavigateSpy
-  }
+  };
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ SpotifyStoreTokenComponent ],
@@ -34,7 +34,7 @@ describe('SpotifyStoreTokenComponent', () => {
 
   beforeEach(() => {
 
-    let store = {};
+    const store = {};
     spyOn(localStorage, 'getItem').and.callFake((key) => {
       return store[key];
     });
@@ -89,5 +89,5 @@ describe('SpotifyStoreTokenComponent', () => {
 
 
     });
-  })
+  });
 });

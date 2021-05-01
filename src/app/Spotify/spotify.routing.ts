@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SpotifyTokenGuard } from './guards/spotify-token.guard';
 import { SpotifyHomeComponent } from './pages/spotify-home/spotify-home.component';
@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'spotify/store-token/:token/:refresh', component: SpotifyStoreTokenComponent
   }
-]
+];
 
 @NgModule({
 

@@ -10,7 +10,7 @@ export class SpotifyTokenGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const token = localStorage.getItem('spotifyToken');
+    const token = localStorage.getItem('spotifyToken');
     return true;
   }
 

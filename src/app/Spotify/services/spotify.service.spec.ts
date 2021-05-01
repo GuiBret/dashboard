@@ -63,7 +63,10 @@ describe('SpotifyService', () => {
     it('should have made PUT request with an attribute "context_uri" since we are trying to play an album (same for an album)', () => {
       putSpyObj.calls.reset();
       service.playElement('randomuri', 'album', 'abc');
-      expect(httpClientStub.put).toHaveBeenCalledWith('https://api.spotify.com/v1/me/player/play?device_id=abc', {context_uri: 'randomuri'});
+      expect(httpClientStub.put).toHaveBeenCalledWith(
+        'https://api.spotify.com/v1/me/player/play?device_id=abc',
+        {context_uri: 'randomuri'}
+      );
     });
   });
 

@@ -15,7 +15,7 @@ describe('TodoDataResolverService', () => {
 
   let service: TodoDataResolverService;
   let httpServiceStub: Partial<HttpService>;
-  let matSnackbarStub: Partial<MatSnackBar>;
+  const matSnackbarStub: Partial<MatSnackBar> = {};
   let todoSvcStub: Partial<TodoListService>;
 
   httpServiceStub = {
