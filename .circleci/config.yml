@@ -41,6 +41,9 @@ jobs:
 workflows:
     version: 2
     # the test workflow
+    lint_workflow:
+        jobs:
+            - lint
     test_workflow:
         jobs:
             - test
