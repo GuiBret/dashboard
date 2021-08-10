@@ -32,22 +32,22 @@ describe('SpotifyService', () => {
   describe('Make autocomplete', () => {
     it('should pass all cases', () => {
       getSpyObj.calls.reset();
-      service.fetchAutocomplete('test', {albums: true, songs: false, artists: false});
+      service.fetchAutocomplete('test', {albums: true, songs: false, artists: false, shows: false});
 
       expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/search/test?type=album');
 
       getSpyObj.calls.reset();
-      service.fetchAutocomplete('test', {albums: true, songs: true, artists: false});
+      service.fetchAutocomplete('test', {albums: true, songs: true, artists: false, shows: false});
 
       expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/search/test?type=album,track');
 
       getSpyObj.calls.reset();
-      service.fetchAutocomplete('test', {albums: true, songs: false, artists: true});
+      service.fetchAutocomplete('test', {albums: true, songs: false, artists: true, shows: false});
 
       expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/search/test?type=album,artist');
 
       getSpyObj.calls.reset();
-      service.fetchAutocomplete('test', {albums: true, songs: true, artists: true});
+      service.fetchAutocomplete('test', {albums: true, songs: true, artists: true, shows: false});
 
       expect(httpClientStub.get).toHaveBeenCalledWith(environment.serverRoot + '/spotify/search/test?type=album,artist,track');
     });
