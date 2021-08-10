@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, Subscription, Subject } from 'rxjs';
+import { SpotifySearchCheckboxesInterface } from '../interfaces/search-interface.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class SpotifyService {
     return localStorage.getItem('spotifyToken') != null && parseInt(localStorage.getItem('spotifyExp'), 10) > (new Date().getTime());
   }
 
-  fetchAutocomplete(query: string, filterParams: {albums: boolean, songs: boolean, artists: boolean}) {
+  fetchAutocomplete(query: string, filterParams: SpotifySearchCheckboxesInterface) {
     // TODO : rewrite that
     const params = [];
     if (filterParams.albums) {
@@ -37,6 +38,9 @@ export class SpotifyService {
 
     if (filterParams.songs) {
       params.push('track');
+    }
+    if (filterParams.shows) {
+      params.push('show');
     }
 
     // TODO: Rewrite that properly
