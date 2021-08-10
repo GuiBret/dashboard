@@ -136,19 +136,23 @@ export class SpotifyPlayerComponent implements OnInit {
 
   updatePlaybackMetadata(newPlaybackInfo: PlaybackMetadata) {
 
+    if (newPlaybackInfo) {
+
+      this.songDuration = newPlaybackInfo.duration / 1000;
+      this.currentSongPosition = Math.floor(newPlaybackInfo.position / 1000);
+      this.currPlayerStatus = !newPlaybackInfo.paused;
+      this.shuffleMode = !newPlaybackInfo.shuffle;
+
+      this.repeatMode = this.spotifyPlayerSvc.getRepeatStateStrFromRepeatModeValue(newPlaybackInfo.repeat_mode);
+
+      this.pauseTriggered.next();
+
+      this.playIntervalID = interval(1000).pipe(takeUntil(this.pauseTriggered)).subscribe(this.updateTimer.bind(this));
+      this.cdr.detectChanges();
+
+    }
 
 
-    this.songDuration = newPlaybackInfo.duration / 1000;
-    this.currentSongPosition = Math.floor(newPlaybackInfo.position / 1000);
-    this.currPlayerStatus = !newPlaybackInfo.paused;
-    this.shuffleMode = !newPlaybackInfo.shuffle;
-
-    this.repeatMode = this.spotifyPlayerSvc.getRepeatStateStrFromRepeatModeValue(newPlaybackInfo.repeat_mode);
-
-    this.pauseTriggered.next();
-
-    this.playIntervalID = interval(1000).pipe(takeUntil(this.pauseTriggered)).subscribe(this.updateTimer.bind(this));
-    this.cdr.detectChanges();
 
   }
 
