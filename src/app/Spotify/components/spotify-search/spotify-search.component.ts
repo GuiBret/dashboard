@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SpotifyPlayerService } from '../../services/spotify-player.service';
+import { SpotifySearchCheckboxesInterface } from '../../interfaces/search-interface.interface';
 
 @Component({
   selector: 'app-spotify-search',
@@ -13,9 +14,10 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
 
   formControl = new FormControl();
   formGroupOptions = new FormGroup({
+    artists: new FormControl(true),
     albums: new FormControl(false),
     songs: new FormControl(false),
-    artists: new FormControl(true),
+    shows: new FormControl(false),
   });
   constructor(private spotifyService: SpotifyService, private spotifyPlayerService: SpotifyPlayerService) { }
 
@@ -36,7 +38,9 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
 
   onSearchTextChanged(newValue: string) {
     if (newValue.length >= 3) {
-      this.spotifyService.fetchAutocomplete(newValue, this.formGroupOptions.value).subscribe(this.populateOptions.bind(this));
+      this.spotifyService
+          .fetchAutocomplete(newValue, this.formGroupOptions.value)
+          .subscribe(this.populateOptions.bind(this));
     } else {
       this.options = [];
     }
@@ -64,13 +68,14 @@ export class SpotifySearchComponent implements OnInit, OnDestroy {
     this.spotifyService.playElement(selectedOption.uri, selectedOption.type, this.spotifyPlayerService.getPlayerID());
   }
 
-  onOptionsChanged(newFormValue: {albums: boolean, artists: boolean, songs: boolean}) {
-    if (!newFormValue.albums && !newFormValue.artists && !newFormValue.songs) {
+  onOptionsChanged(newFormValue: SpotifySearchCheckboxesInterface) {
+    if (!newFormValue.albums && !newFormValue.artists && !newFormValue.songs && !newFormValue.shows) {
 
       this.formGroupOptions.setValue({
         albums: true,
         songs: true,
-        artists: true
+        artists: true,
+        shows: true
       });
     }
   }

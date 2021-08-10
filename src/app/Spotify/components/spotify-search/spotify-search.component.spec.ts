@@ -68,10 +68,10 @@ describe('SpotifySearchComponent', () => {
     it('should have called fetchAutocomplete since the string is longer than 3 characters', () => {
       mockFetchAutocomp.calls.reset();
 
-      component.formGroupOptions.setValue({artists: false, albums: true, songs: false});
+      component.formGroupOptions.setValue({artists: false, albums: true, songs: false, shows: false});
       component.onSearchTextChanged('abcd');
 
-      expect(spotifySvcStub.fetchAutocomplete).toHaveBeenCalledWith('abcd', {artists: false, albums: true, songs: false});
+      expect(spotifySvcStub.fetchAutocomplete).toHaveBeenCalledWith('abcd', {artists: false, albums: true, songs: false, shows: false});
 
     });
   });
@@ -91,20 +91,20 @@ describe('SpotifySearchComponent', () => {
   describe('On checkbox clicked', () => {
     it('should have rechecked all checkboxes if they are all unchecked', () => {
       component.formGroupOptions.setValue({
-        albums: true, songs: false, artists: false
+        albums: true, songs: false, artists: false, shows: false
       });
-      component.onOptionsChanged({albums: false, songs: false, artists: false});
+      component.onOptionsChanged({albums: false, songs: false, artists: false, shows: false});
 
-      expect(component.formGroupOptions.value).toEqual({albums: true, songs: true, artists: true});
+      expect(component.formGroupOptions.value).toEqual({albums: true, songs: true, artists: true, shows: true});
     });
   });
 
   it('should not have done anything since at least one checkbox is checked', () => {
     component.formGroupOptions.setValue({
-      albums: true, songs: false, artists: false
+      albums: true, songs: false, artists: false, shows: false
     });
-    component.onOptionsChanged({albums: false, songs: false, artists: true});
+    component.onOptionsChanged({albums: false, songs: false, artists: true, shows: false});
 
-    expect(component.formGroupOptions.value).toEqual({albums: true, songs: false, artists: false});
+    expect(component.formGroupOptions.value).toEqual({albums: true, songs: false, artists: false, shows: false});
   });
 });
