@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,13 +17,17 @@ import { SpotifyPlayerComponent } from './components/spotify-player/spotify-play
 import { SpotifySearchComponent } from './components/spotify-search/spotify-search.component';
 import { SpotifyRoutingModule } from './spotify.routing';
 import { SharedModule } from '../shared/shared.module';
+import { SpotifyPlayerSdkComponent } from './components/spotify-player-sdk/spotify-player-sdk.component';
+import { SpotifyControlsComponent } from './components/spotify-player/components/spotify-controls/spotify-controls.component';
 
 @NgModule({
   declarations: [
     SpotifyHomeComponent,
     SpotifySearchComponent,
     SpotifyStoreTokenComponent,
-    SpotifyPlayerComponent
+    SpotifyPlayerComponent,
+    SpotifyPlayerSdkComponent,
+    SpotifyControlsComponent,
   ],
   imports: [
     SpotifyRoutingModule,
@@ -38,18 +42,21 @@ import { SharedModule } from '../shared/shared.module';
     MatCardModule,
     MatAutocompleteModule,
     MatButtonModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [
     SpotifyHomeComponent,
     SpotifySearchComponent,
     SpotifyStoreTokenComponent,
-    SpotifyPlayerComponent
+    SpotifyPlayerComponent,
+    SpotifyPlayerSdkComponent,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: SpotifyInterceptor,
-    multi: true
-  }],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpotifyInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class SpotifyModule {}
