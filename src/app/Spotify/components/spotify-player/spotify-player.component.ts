@@ -57,6 +57,7 @@ export class SpotifyPlayerComponent implements OnInit {
       this.spotifyPlayerSvc
         .getInfoOnPlayback()
         .subscribe(this.setCurrentSong.bind(this));
+      this.currPlayerStatus = true;
     }, 500);
   }
 
@@ -112,5 +113,7 @@ export class SpotifyPlayerComponent implements OnInit {
   setPlayerReady(deviceId: string) {
     this.isPlayerReady = true;
     this.deviceId = deviceId;
+
+    this.spotifyPlayerSvc.transferPlayback(this.deviceId);
   }
 }

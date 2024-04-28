@@ -98,13 +98,13 @@ export class SpotifyPlayerSdkComponent implements OnInit {
 
   getAvailableDevices() {}
 
-  ready(deviceId: string) {
-    this.deviceId = deviceId;
-    this.onPlayerReady.emit(deviceId);
+  ready(result: { device_id: string }) {
+    this.deviceId = result.device_id;
+    this.onPlayerReady.emit(this.deviceId);
   }
 
-  notReady(deviceId: string) {
-    this.deviceId = deviceId;
+  notReady(result: { device_id: string }) {
+    this.deviceId = result.device_id;
     console.log('Player is not ready');
   }
 }
