@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as internal from 'events';
 
@@ -13,6 +13,9 @@ export class SpotifyPlayerSdkComponent implements OnInit {
   constructor(private readonly fb: FormBuilder) {}
 
   loadAPI: Promise<void>;
+
+  @Output()
+  onPlayerReady = new EventEmitter<string>();
 
   playerStateInterval: any;
   deviceId: string;
@@ -97,7 +100,7 @@ export class SpotifyPlayerSdkComponent implements OnInit {
 
   ready(deviceId: string) {
     this.deviceId = deviceId;
-    console.log('Player is ready');
+    this.onPlayerReady.emit(deviceId);
   }
 
   notReady(deviceId: string) {
