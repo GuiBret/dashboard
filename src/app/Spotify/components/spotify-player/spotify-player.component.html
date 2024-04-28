@@ -1,32 +1,33 @@
-<mat-card class="mat-elevation-z4" *ngIf="song">
+<mat-card class="mat-elevation-z4">
   <mat-card-content>
     <div id="spotify_player_content">
-      <div id="song_info_container">
-
-
-
+      <div id="song_info_container" *ngIf="song; else noPlayerRunning">
         <div id="song_container">
-
           <div id="song_img_container">
-            <img src="{{song.imageUrl}}" />
+            <img src="{{ song.imageUrl }}" />
           </div>
 
           <div id="song_title_container">
-            <span class="mat-caption">{{song.title}}</span>
-            <span class="mat-caption">{{song.artist}}</span>
-            <span class="mat-caption">{{song.album}}</span>
-
+            <span class="mat-caption">{{ song.title }}</span>
+            <span class="mat-caption">{{ song.artist }}</span>
+            <span class="mat-caption">{{ song.album }}</span>
           </div>
-
         </div>
-
       </div>
-      <div id="controls">
+
+      <ng-template #noPlayerRunning>
+        <div id="song_title_container">
+          <span class="mat-caption">No song running</span>
+          <span class="mat-caption"></span>
+          <span class="mat-caption"></span>
+        </div>
+      </ng-template>
+      <div id="controls" *ngIf="song">
         <button mat-mini-fab (click)="goToPreviousSong()">
           <mat-icon>skip_previous</mat-icon>
         </button>
         <button mat-fab color="primary" (click)="onClickPlayPause()">
-          <mat-icon>{{currPlayerStatus ? 'pause' : 'play_arrow'}}</mat-icon>
+          <mat-icon>{{ currPlayerStatus ? "pause" : "play_arrow" }}</mat-icon>
         </button>
         <button mat-mini-fab (click)="goToNextSong()">
           <mat-icon>skip_next</mat-icon>
@@ -34,10 +35,20 @@
       </div>
 
       <div id="volume_and_change_device">
-        <mat-slider min="0" max="100" step="1" value="volume"  [(ngModel)]="volume" (change)="setVolume()"></mat-slider>
+        <mat-slider
+          min="0"
+          max="100"
+          step="1"
+          value="volume"
+          [(ngModel)]="volume"
+          (change)="setVolume()"
+        ></mat-slider>
         <!-- <mat-select></mat-select> -->
       </div>
-
     </div>
   </mat-card-content>
 </mat-card>
+
+<app-spotify-player-sdk
+  (onPlayerReady)="setPlayerReady($event)"
+></app-spotify-player-sdk>
