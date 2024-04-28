@@ -12,11 +12,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { GithubComponent } from './pages/github/github.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
-import {MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { SpotifyModule } from './Spotify/spotify.module';
 import { TodoListModule } from './TodoList/todo-list.module';
@@ -24,12 +24,7 @@ import { SharedModule } from './shared/shared.module';
 import { GmailModule } from './gmail/gmail.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomePageComponent,
-    GithubComponent,
-
-  ],
+  declarations: [AppComponent, HomePageComponent, GithubComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -49,10 +44,9 @@ import { GmailModule } from './gmail/gmail.module';
     SpotifyModule,
     TodoListModule,
     SharedModule,
-    GmailModule
-
+    GmailModule,
   ],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
